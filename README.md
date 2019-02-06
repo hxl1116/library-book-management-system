@@ -4,6 +4,6 @@ Tasked with the responsibility to design and implement the Library Book Manageme
 Names:
 * Jimmy Dugan
 * Austin Heisey
-* Name
+* Wil Clancy
 * Name
 * Name
