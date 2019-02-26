@@ -1,5 +1,6 @@
 package java;
 
+import java.awt.print.Book;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,13 +15,23 @@ public class BookCatalog {
 
     }
 
-    public void makeAvailable(String bookName){
+    public void makeAvailable(Book book, int copies){
+        available.put(book, available.get(book) + copies);
 
     }
 
-    public void makeUnavailable(String bookName){
+    public void addNewBook(Book book, int copies) {
+        available.put(book, copies);
+    }
 
+    public void makeUnavailable(Book book){
+        available.put(book, available.get(book) - 1);
+        unavailable.put(book, unavailable.get(book) + 1);
 
+    }
+
+    public boolean isAvailable(Book book) {
+        return available.get(book) > 0;
     }
 
 
