@@ -1,3 +1,5 @@
+package Model;
+
 public class Visitor {
     private int id;
     private String firstName;
