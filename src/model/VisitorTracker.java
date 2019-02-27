@@ -1,17 +1,19 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 public class VisitorTracker {
 
     private HashMap<String,Visitor> visitorAccounts = new HashMap<String,Visitor>();
-    private List<Visitor> visitors;
-    private List<Visit> visits;
+    private ArrayList<Visit> visitList = new ArrayList<Visit>();
+    private Visitor visitor;
 
 
-    public VisitorTracker(Visitor visitor, HashMap visitorAccounts){
+    public VisitorTracker(ArrayList visitList, Visitor visitor, HashMap visitorAccounts){
         this.visitorAccounts = visitorAccounts;
+        this.visitList = visitList;
+        this.visitor = visitor;
 
     }
 
@@ -23,6 +25,13 @@ public class VisitorTracker {
             System.out.println("You successfully created an account");
         }
     }
+
+    public void addVisit(ArrayList visitList,Visit visit){
+        visitList.add(visit);
+
+    }
+
+
 
 
 
