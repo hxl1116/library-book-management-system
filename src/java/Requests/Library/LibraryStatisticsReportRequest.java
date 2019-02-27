@@ -1,4 +1,4 @@
-package Requests.Library;
+package java.Requests.Library;
 
 public class LibraryStatisticsReportRequest {
 }

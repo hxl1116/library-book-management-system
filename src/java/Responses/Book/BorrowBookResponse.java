@@ -1,4 +1,4 @@
-package Responses.Book;
+package java.Responses.Book;
 
 public class BorrowBookResponse {
 }

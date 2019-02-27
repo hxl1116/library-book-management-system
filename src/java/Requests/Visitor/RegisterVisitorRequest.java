@@ -1,4 +1,4 @@
-package Requests.Visitor;
+package java.Requests.Visitor;
 
 public class RegisterVisitorRequest {
     private String firstName;

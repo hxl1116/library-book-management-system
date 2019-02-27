@@ -1,4 +1,5 @@
-package Requests.Book;
+package java.Requests.Book;
 
 public class BookPurchaseRequest {
+
 }

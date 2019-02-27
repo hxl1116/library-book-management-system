@@ -1,4 +1,4 @@
-package Responses.Visitor;
+package java.Responses.Visitor;
 
 public class EndVisitResponse {
 }
