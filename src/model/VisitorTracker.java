@@ -10,9 +10,7 @@ public class VisitorTracker {
     private List<Visit> visits;
 
 
-    public VisitorTracker(Visit visit, Visitor visitor, HashMap visitorAccounts){
-        this.visitors.add(visitor);
-        this.visits.add(visit);
+    public VisitorTracker(Visitor visitor, HashMap visitorAccounts){
         this.visitorAccounts = visitorAccounts;
 
     }
@@ -24,7 +22,6 @@ public class VisitorTracker {
             visitorAccounts.put(id,mVisitor);
             System.out.println("You successfully created an account");
         }
-
     }
 
 
