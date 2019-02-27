@@ -1,28 +1,27 @@
 package java.Responses.Book;
 
 import java.Model.Book;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Purchases one or more books returned from the last book store search. Purchased books are added to the library's
- * collection. If the books already exist in the collection, the available quantity of each book is updated to reflect
- * the newly purchased books. For the purpose of this simulation it should be assumed that infinite quantities of each
- * book are available for purchase.
+ * Searches for books that may be purchased by the library and added to its collection. The books included in the search
+ * results should be determined by the contents of books.txt. A "*" may be specified in place of any search parameter;
+ * any such parameter should be ignored for the purpose of query matching. For example: search,*, {J.K. Rowling} should
+ * return any books written by J.K. Rowling, regardless of the title of the book.
  *
  * @author Henry Larson
  */
-public class BookPurchaseResponse {
-    private boolean success;
+public class BookStoreSearchResponse {
+    private int numberOfBooks;
     private List<Book> books;
 
-    public BookPurchaseResponse(boolean success, List<Book> books) {
-        this.success = success;
-        this.books = success ? books : new ArrayList<>();
+    public BookStoreSearchResponse(int numberOfBooks, List<Book> books) {
+        this.numberOfBooks = numberOfBooks;
+        this.books = books;
     }
 
-    public boolean isSuccess() {
-        return success;
+    public int getNumberOfBooks() {
+        return numberOfBooks;
     }
 
     @SuppressWarnings("Duplicates")
