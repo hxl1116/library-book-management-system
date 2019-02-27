@@ -27,11 +27,11 @@ public class Visit {
      *Constructor for visit
      *
      * @param visitor
-     * @param TimeIn
+     * @param timeIn
      * @param timeOut
      * @param date
      */
-    public Visit(Visitor visitor,int TimeIn,
+    public Visit(Visitor visitor,int timeIn,
                   int timeOut, String date){
         this.visitor = visitor;
         this.timeIn = timeIn;

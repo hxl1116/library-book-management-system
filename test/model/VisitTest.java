@@ -24,7 +24,7 @@ public class VisitTest {
 
     @Test
     public void getTimeIn() {
-        assertEquals(2,visit.getTimeIn());
+        assertEquals(1,visit.getTimeIn());
     }
 
     @Test
