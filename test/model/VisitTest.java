@@ -6,9 +6,15 @@ import static org.junit.Assert.*;
 
 public class VisitTest {
 
+    Visitor visitor1 = new Visitor("Ryan11","Ryan","Doe",
+            "Global Village","000000000",0);
+
+
+    private Visit visit = new Visit(visitor1,1,2,"02/28/2019");
+
     @Test
     public void getVisitor() {
-        fail();
+        assertEquals("Ryan",visit.getVisitor().getFirstName());
     }
 
     @Test
@@ -18,31 +24,34 @@ public class VisitTest {
 
     @Test
     public void getTimeIn() {
-        fail();
+        assertEquals(2,visit.getTimeIn());
     }
 
     @Test
     public void setTimeIn() {
-        fail();
+        visit.setTimeIn(3);
+        assertEquals(3,visit.getTimeIn());
     }
 
     @Test
     public void getTimeOut() {
-        fail();
+        assertEquals(2,visit.getTimeOut());
     }
 
     @Test
     public void setTimeOut() {
-        fail();
+        visit.setTimeOut(6);
+        assertEquals(6,visit.getTimeOut());
     }
 
     @Test
     public void getDate() {
-        fail();
+        assertEquals("02/28/2019",visit.getDate());
     }
 
     @Test
     public void setDate() {
-        fail();
+        visit.setDate("03/01/2019");
+        assertEquals("03/01/2019",visit.getDate());
     }
 }
