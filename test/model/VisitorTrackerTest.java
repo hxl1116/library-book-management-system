@@ -31,11 +31,14 @@ public class VisitorTrackerTest {
     @Test
     public void newAccount() {
         visTrack.newAccount(visAccounts,visitor1.getId(),visitor1);
+        assertEquals(1,visAccounts.size());
         visTrack.newAccount(visAccounts,visitor2.getId(),visitor2);
+        assertEquals(1,visAccounts.size());
     }
 
     @Test
     public void addVisit(){
         visTrack.addVisit(visitList,visit);
+        assertEquals(1,visitList.size());
     }
 }
