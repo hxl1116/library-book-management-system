@@ -2,5 +2,19 @@ package java;
 
 public class Visit {
     private Visitor visitor;
-    // TODO - data members for time in, time out,date
+    private int timeIn;
+    private int timeOut;
+    private String date;
+
+
+
+    public Visit (Visitor visitor,int TimeIn,
+                  int timeOut, String date){
+        this.visitor = visitor;
+        this.timeIn = timeIn;
+        this.timeOut = timeOut;
+        this.date = date;
+
+
+    }
 }
