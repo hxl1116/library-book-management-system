@@ -1,5 +1,10 @@
 package java.Requests.Visitor;
 
+/**
+ * Registers a new visitor so that they can access the library. Visitors are assigned a unique, 10-digit ID by the LBMS.
+ *
+ * @author Henry Larson
+ */
 public class RegisterVisitorRequest {
     private String firstName;
     private String lastName;
