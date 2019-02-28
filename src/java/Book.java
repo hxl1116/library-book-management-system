@@ -8,4 +8,8 @@ public class Book {
     private String publisher;
     private String datePublished;
     private int pageCount;
+
+    public String toStringBorrowed() {
+      return Integer.toString(isbn) + "," + title;
+    }
 }

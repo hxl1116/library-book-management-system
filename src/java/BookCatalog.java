@@ -1,6 +1,6 @@
 package java;
 
-import java.awt.print.Book;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,8 +10,8 @@ public class BookCatalog {
     HashMap<Book,Integer> unavailable = new HashMap<>();
     private List<Book> books;
 
-    public BookCatalog(List<Book> books){
-        this.books = books;
+    public BookCatalog(){
+        this.books = new ArrayList<Book>();
 
     }
 
