@@ -1,6 +1,4 @@
-package model;
-
-import java.util.ArrayList;
+package java;
 
 public class Visitor {
 

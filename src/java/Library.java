@@ -1,4 +1,4 @@
-package model;
+package java;
 
 public class Library {
 
