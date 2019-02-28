@@ -23,7 +23,19 @@ public class Fine {
     private String currentDate;
 
 
+    /**
+     * gets the current date
+     * @return
+     */
+    public String getCurrentDate() {
+        return currentDate;
+    }
 
-
-
+    /**
+     * sets the current date
+     * @param currentDate
+     */
+    public void setCurrentDate(String currentDate) {
+        this.currentDate = currentDate;
+    }
 }
