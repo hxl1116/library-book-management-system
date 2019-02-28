@@ -9,6 +9,9 @@ public class VisitTest {
     Visitor visitor1 = new Visitor("Ryan11","Ryan","Doe",
             "Global Village","000000000",0);
 
+    Visitor visitor2 = new Visitor("Ryan11","John","Apple",
+            "UC","111111111",2);
+
 
     private Visit visit = new Visit(visitor1,1,2,"02/28/2019");
 
@@ -17,10 +20,6 @@ public class VisitTest {
         assertEquals("Ryan",visit.getVisitor().getFirstName());
     }
 
-    @Test
-    public void setVisitor() {
-        fail();
-    }
 
     @Test
     public void getTimeIn() {
@@ -53,5 +52,11 @@ public class VisitTest {
     public void setDate() {
         visit.setDate("03/01/2019");
         assertEquals("03/01/2019",visit.getDate());
+    }
+
+    @Test
+    public void setVisitor() {
+        visit.setVisitor(visitor2);
+        assertEquals("John",visit.getVisitor().getFirstName());
     }
 }

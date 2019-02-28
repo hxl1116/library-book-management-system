@@ -6,16 +6,16 @@ import java.util.List;
 public class VisitorTracker {
 
     /**
-     * Hashmap to hold visitors
+     * HashMap to hold visitors
      * key is String
      * object is Visitor
      */
-    private HashMap<String,Visitor> visitorAccounts = new HashMap<String,Visitor>();
+    private HashMap<String,Visitor> visitorAccounts;
 
     /**
      * Arraylist to hold visits
      */
-    private ArrayList<Visit> visitList = new ArrayList<Visit>();
+    private ArrayList<Visit> visitList;
 
     /**
      * visitor
