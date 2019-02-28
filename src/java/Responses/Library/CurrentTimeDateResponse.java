@@ -1,17 +1,11 @@
-package java.Responses.Library;
+package Responses.Library;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  *
  */
 public class CurrentTimeDateResponse {
-    // YYYY/MM/DD format
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
-    // HH:MM:SS
-    private static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm:ss");
-
     private Date date;
     private Date time;
 

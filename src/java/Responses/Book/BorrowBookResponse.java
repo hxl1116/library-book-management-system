@@ -1,4 +1,6 @@
-package java.Responses.Book;
+package Responses.Book;
+
+import Responses.LibraryResponse;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,7 +11,7 @@ import java.util.Date;
  *
  * @author Henry Larson
  */
-public class BorrowBookResponse {
+public class BorrowBookResponse extends LibraryResponse {
     // YYYY/MM/DD format
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
     private Date dueDate;
@@ -18,12 +20,7 @@ public class BorrowBookResponse {
         this.dueDate = dueDate;
     }
 
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    // TODO - create response format
     public String toString() {
-        return "";
+        return String.format("borrow,%s", DATE_FORMAT.format(dueDate));
     }
 }

@@ -1,4 +1,6 @@
-package java.Requests.Book;
+package Requests.Book;
+
+import Requests.LibraryRequest;
 
 /**
  * Borrows a book for a visitor;
@@ -6,7 +8,7 @@ package java.Requests.Book;
  *
  * @author Henry Larson
  */
-public class BorrowBookRequest {
+public class BorrowBookRequest extends LibraryRequest {
     private int visitorID;
     private int[] ids;
 

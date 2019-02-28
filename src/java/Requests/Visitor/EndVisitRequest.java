@@ -1,11 +1,11 @@
-package java.Requests.Visitor;
+package Requests.Visitor;
 
 /**
- * 	Ends a visit in progress.
+ * Ends a visit in progress.
  *
  * @author Henry Larson
  */
-public class EndVisitRequest extends VisitRequest{
+public class EndVisitRequest extends VisitRequest {
     public EndVisitRequest(int visitorID) {
         super(visitorID);
     }

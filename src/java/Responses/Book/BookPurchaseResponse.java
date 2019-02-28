@@ -1,8 +1,10 @@
-package java.Responses.Book;
+package Responses.Book;
 
-import java.Model.Book;
-import java.util.ArrayList;
-import java.util.List;
+import Model.Book;
+import Responses.LibraryResponse;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Purchases one or more books returned from the last book store search. Purchased books are added to the library's
@@ -12,36 +14,19 @@ import java.util.List;
  *
  * @author Henry Larson
  */
-public class BookPurchaseResponse {
-    private boolean success;
-    private List<Book> books;
+public class BookPurchaseResponse extends LibraryResponse {
+    private HashMap<Book, Integer> books;
 
-    public BookPurchaseResponse(boolean success, List<Book> books) {
-        this.success = success;
-        this.books = success ? books : new ArrayList<>();
+    public BookPurchaseResponse(HashMap<Book, Integer> books) {
+        this.books = books;
     }
 
-    public boolean isSuccess() {
-        return success;
-    }
-
-    @SuppressWarnings("Duplicates")
-    public String getBooks() {
-        StringBuilder bookList = new StringBuilder();
-        for (Book book : books) {
-            // ISBN, Title, Authors, Publish-Date, Quantity
-            bookList.append(book.getIsbn()).append(",")
-                    .append(book.getTitle()).append(",")
-                    .append(book.getAuthorsAsString()).append(",")
-                    .append(book.getDatePublished()).append(",")
-                    .append(books.size()).append("\n");
+    public String toString() {
+        StringBuilder purchasedBooks = new StringBuilder();
+        for (Map.Entry<Book, Integer> entry : books.entrySet()) {
+            purchasedBooks.append(entry.getKey().purchaseFormat()).append(",").append(entry.getValue()).append("\n");
         }
 
-        return bookList.toString();
-    }
-
-    // TODO - create response format
-    public String toString() {
-        return "";
+        return String.format("buy,success,%d,%s", books.size(), purchasedBooks.toString());
     }
 }

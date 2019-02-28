@@ -1,4 +1,6 @@
-package java.Requests.Library;
+package Requests.Library;
+
+import Requests.LibraryRequest;
 
 /**
  * Displays the current date and time in the simulation. This should include any days that have been added to the
@@ -6,6 +8,6 @@ package java.Requests.Library;
  *
  * @author Henry Larson
  */
-public class CurrentDateTimeRequest {
+public class CurrentDateTimeRequest extends LibraryRequest {
 
 }

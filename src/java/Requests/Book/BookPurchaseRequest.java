@@ -1,4 +1,6 @@
-package java.Requests.Book;
+package Requests.Book;
+
+import Requests.LibraryRequest;
 
 /**
  * Purchases one or more books returned from the last book store search. Purchased books are added to the library's
@@ -8,7 +10,7 @@ package java.Requests.Book;
  *
  * @author Henry Larson
  */
-public class BookPurchaseRequest {
+public class BookPurchaseRequest extends LibraryRequest {
     private int quantity;
     private int id;
     private int[] ids;

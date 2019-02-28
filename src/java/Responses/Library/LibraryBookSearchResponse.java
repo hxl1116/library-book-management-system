@@ -1,6 +1,7 @@
-package java.Responses.Library;
+package Responses.Library;
 
-import java.Model.Book;
+import Model.Book;
+
 import java.util.HashMap;
 
 /**

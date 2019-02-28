@@ -1,47 +1,29 @@
-package java.Responses.Book;
+package Responses.Book;
+
+import Responses.LibraryResponse;
 
 /**
  * Returns a book borrowed by a library visitor.
  *
  * @author Henry Larson
  */
-public class ReturnBookResponse {
-    private boolean success;
-    private boolean overdue;
+public class ReturnBookResponse extends LibraryResponse {
     private double fine;
     private int id;
     private int[] ids;
 
-    public ReturnBookResponse(boolean success, boolean overdue, double fine, int id, int... ids) {
-        this.success = success;
-        this.overdue = overdue;
+    public ReturnBookResponse(double fine, int id, int... ids) {
         this.fine = fine;
         this.id = id;
         this.ids = ids;
     }
 
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public boolean isOverdue() {
-        return overdue;
-    }
-
-    public double getFine() {
-        return fine;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public int[] getIds() {
-        return ids;
-    }
-
-    // TODO - create response format
     public String toString() {
-        return "";
+        StringBuilder bookIds = new StringBuilder();
+        for (int id : ids) {
+            bookIds.append(",").append(id);
+        }
+
+        return (fine == 0) ? "success" : String.format("overdue,$%.2f,%d,%s", fine, id, bookIds.toString());
     }
 }

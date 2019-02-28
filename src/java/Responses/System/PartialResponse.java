@@ -1,4 +1,4 @@
-package java.Responses.System;
+package Responses.System;
 
 /**
  * The client sends a partial request (i.e. any request not terminated by a semi-colon).

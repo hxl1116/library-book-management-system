@@ -1,4 +1,6 @@
-package java.Requests.Library;
+package Requests.Library;
+
+import Requests.LibraryRequest;
 
 /**
  * Searches for books owned by the library and available for borrowing by visitors. A "*" may be specified in place of
@@ -7,7 +9,7 @@ package java.Requests.Library;
  *
  * @author Henry Larson
  */
-public class LibraryBookSearchRequest {
+public class LibraryBookSearchRequest extends LibraryRequest {
     private String title;
     private String[] authors;
     private int isbn;

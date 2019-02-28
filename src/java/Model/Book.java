@@ -1,4 +1,6 @@
-package java.Model;
+package Model;
+
+import Responses.LibraryResponse;
 
 import java.util.Date;
 
@@ -7,7 +9,7 @@ public class Book {
     private int tempID;
     private int isbn;
     private String title;
-    private String[] authors;
+    private String authors;
     private String publisher;
     private String datePublished;
     private int pageCount;
@@ -17,7 +19,7 @@ public class Book {
     public Book(int isbn, String title, String authors, String publisher, String datePublished, int pageCount) {
         this.isbn = isbn;
         this.title = title;
-        this.authors = authors.split(",");
+        this.authors = authors;
         this.publisher = publisher;
         this.datePublished = datePublished;
         this.pageCount = pageCount;
@@ -39,19 +41,12 @@ public class Book {
         return title;
     }
 
-    public String[] getAuthors() {
+    public String getAuthors() {
         return authors;
     }
 
-    public String getAuthorsAsString() {
-        StringBuilder authorList = new StringBuilder();
-        for (String author : authors) {
-            authorList.append(author).append(",");
-        }
-
-        String authors = authorList.toString();
-
-        return authors.substring(0, authors.lastIndexOf(","));
+    public String[] getAuthorsAsArray() {
+        return authors.split(",");
     }
 
     public String getPublisher() {
@@ -80,5 +75,18 @@ public class Book {
 
     public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public String purchaseFormat() {
+        return String.format("%s,%s,%s,%s", isbn, title, authors, LibraryResponse.DATE_FORMAT.format(datePublished));
+    }
+
+    public String searchFormat() {
+        return String.format("%d,%d,%s,%s,%s", tempID, isbn, title, authors,
+                LibraryResponse.DATE_FORMAT.format(datePublished));
+    }
+
+    public String queryFormat() {
+        return String.format("%d,%d,%s,%s", tempID, isbn, title, LibraryResponse.DATE_FORMAT.format(dateBorrowed));
     }
 }

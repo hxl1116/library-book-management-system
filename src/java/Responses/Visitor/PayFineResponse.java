@@ -1,4 +1,4 @@
-package java.Responses.Visitor;
+package Responses.Visitor;
 
 /**
  * Pays all or part of an outstanding fine.

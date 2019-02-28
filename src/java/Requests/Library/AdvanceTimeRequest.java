@@ -1,4 +1,6 @@
-package java.Requests.Library;
+package Requests.Library;
+
+import Requests.LibraryRequest;
 
 /**
  * For simulation purposes. This method will advance the simulated date of the library ahead by a specified number of
@@ -7,7 +9,7 @@ package java.Requests.Library;
  *
  * @author Henry Larson
  */
-public class AdvanceTimeRequest {
+public class AdvanceTimeRequest extends LibraryRequest {
     private int numberOfDays;
     private int numberOfHours;
 

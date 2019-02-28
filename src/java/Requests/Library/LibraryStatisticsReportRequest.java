@@ -1,4 +1,6 @@
-package java.Requests.Library;
+package Requests.Library;
+
+import Requests.LibraryRequest;
 
 import java.util.List;
 
@@ -7,7 +9,7 @@ import java.util.List;
  *
  * @author Henry Larson
  */
-public class LibraryStatisticsReportRequest {
+public class LibraryStatisticsReportRequest extends LibraryRequest {
     private List<Integer> days;
 
     public LibraryStatisticsReportRequest() {

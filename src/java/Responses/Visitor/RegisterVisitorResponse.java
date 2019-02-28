@@ -1,4 +1,4 @@
-package java.Responses.Visitor;
+package Responses.Visitor;
 
 import java.util.Date;
 

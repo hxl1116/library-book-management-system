@@ -1,6 +1,8 @@
-package java.Responses.Book;
+package Responses.Book;
 
-import java.Model.Book;
+import Model.Book;
+import Responses.LibraryResponse;
+
 import java.util.List;
 
 /**
@@ -8,35 +10,19 @@ import java.util.List;
  *
  * @author Henry Larson
  */
-public class QueryBorrowedBooksResponse {
-    private int numberOfBooks;
+public class QueryBorrowedBooksResponse extends LibraryResponse {
     private List<Book> books;
 
-    public QueryBorrowedBooksResponse(int numberOfBooks, List<Book> books) {
-        this.numberOfBooks = numberOfBooks;
+    public QueryBorrowedBooksResponse(List<Book> books) {
         this.books = books;
     }
 
-    public int getNumberOfBooks() {
-        return numberOfBooks;
-    }
-
-    @SuppressWarnings("Duplicates")
-    public String getBooks() {
-        StringBuilder bookList = new StringBuilder();
+    public String toString() {
+        StringBuilder queriedBooks = new StringBuilder();
         for (Book book : books) {
-            // ISBN, Title, Authors, Publish-Date, Quantity
-            bookList.append(book.getTempID()).append(",")
-                    .append(book.getIsbn()).append(",")
-                    .append(book.getTitle()).append(",")
-                    .append(book.getDateBorrowed()).append("\n");
+            queriedBooks.append(book.queryFormat()).append("\n");
         }
 
-        return bookList.toString();
-    }
-
-    // TODO - create response format
-    public String toString() {
-        return "";
+        return String.format("borrowed,%s", queriedBooks.toString());
     }
 }

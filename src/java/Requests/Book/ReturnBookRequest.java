@@ -1,11 +1,13 @@
-package java.Requests.Book;
+package Requests.Book;
+
+import Requests.LibraryRequest;
 
 /**
  * Returns a book borrowed by a library visitor.
  *
  * @author Henry Larson
  */
-public class ReturnBookRequest {
+public class ReturnBookRequest extends LibraryRequest {
     private int visitorID;
     private int id;
     private int[] ids;

@@ -1,6 +1,8 @@
-package java.Responses.Book;
+package Responses.Book;
 
-import java.Model.Book;
+import Model.Book;
+import Responses.LibraryResponse;
+
 import java.util.List;
 
 /**
@@ -11,36 +13,19 @@ import java.util.List;
  *
  * @author Henry Larson
  */
-public class BookStoreSearchResponse {
-    private int numberOfBooks;
+public class BookStoreSearchResponse extends LibraryResponse {
     private List<Book> books;
 
-    public BookStoreSearchResponse(int numberOfBooks, List<Book> books) {
-        this.numberOfBooks = numberOfBooks;
+    public BookStoreSearchResponse(List<Book> books) {
         this.books = books;
     }
 
-    public int getNumberOfBooks() {
-        return numberOfBooks;
-    }
-
-    @SuppressWarnings("Duplicates")
-    public String getBooks() {
-        StringBuilder bookList = new StringBuilder();
+    public String toString() {
+        StringBuilder searchedBooks = new StringBuilder();
         for (Book book : books) {
-            // ISBN, Title, Authors, Publish-Date, Quantity
-            bookList.append(book.getIsbn()).append(",")
-                    .append(book.getTitle()).append(",")
-                    .append(book.getAuthorsAsString()).append(",")
-                    .append(book.getDatePublished()).append(",")
-                    .append(books.size()).append("\n");
+            searchedBooks.append(book.searchFormat()).append("\n");
         }
 
-        return bookList.toString();
-    }
-
-    // TODO - create response format
-    public String toString() {
-        return "";
+        return String.format("search,%d,\n%s", books.size(), searchedBooks.toString());
     }
 }

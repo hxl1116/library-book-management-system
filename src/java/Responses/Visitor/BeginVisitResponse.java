@@ -1,4 +1,4 @@
-package java.Responses.Visitor;
+package Responses.Visitor;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,6 +38,6 @@ public class BeginVisitResponse {
 
     // TODO - create response format
     public String toString() {
-        return "";
+        return String.format("%s,%s,%s", visitorID, DATE_FORMAT.format(visitDate), TIME_FORMAT.format(visitStartTime));
     }
 }

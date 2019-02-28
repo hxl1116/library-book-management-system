@@ -1,4 +1,6 @@
-package java.Requests.Book;
+package Requests.Book;
+
+import Requests.LibraryRequest;
 
 /**
  * Searches for books that may be purchased by the library and added to its collection. The books included in the search
@@ -8,7 +10,7 @@ package java.Requests.Book;
  *
  * @author Henry Larson
  */
-public class BookStoreSearchRequest {
+public class BookStoreSearchRequest extends LibraryRequest {
     private String title;
     private String[] authors;
     private int isbn;
