@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Visitor {
 
     /**
@@ -31,6 +33,11 @@ public class Visitor {
      *number of books checked out by the visitor
      */
     private int booksChecked;
+
+    /**
+     * Array list to keep track of visitor loans
+     */
+    private ArrayList<Integer> loanList;
 
     /*
      * Constructor to create visitor object
