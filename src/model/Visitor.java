@@ -37,7 +37,7 @@ public class Visitor {
     /**
      * Array list to keep track of visitor loans
      */
-    private ArrayList<Loan> loanList;
+    //private ArrayList<Loan> loanList;
 
     /*
      * Constructor to create visitor object
