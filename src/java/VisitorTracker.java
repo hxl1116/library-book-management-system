@@ -65,4 +65,22 @@ public class VisitorTracker {
 
     }
 
+    /**
+     * Attempts to log the visitor in
+     *
+     * @param visitorAccounts
+     * @param id
+     * @param mVisitor
+     * @return
+     */
+    public boolean login(HashMap visitorAccounts,String id, Visitor mVisitor){
+        if(visitorAccounts.containsKey(mVisitor.getId())){
+            System.out.println("Login successful");
+            return true;
+        } else {
+            System.out.println("Login failed");
+            return false;
+        }
+    }
+
 }
