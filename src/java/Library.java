@@ -28,7 +28,9 @@ public class Library {
 
     }
 
-    public void loan(Visitor visitor, Book book) throws Exception {
+    public void loan(int visitorID, int bookID, ArrayList<Book> books) throws Exception {
+        Book book = books.get(bookID - 1);
+        Visitor visitor = visitorTracker.findVisitorByID(visitorID);
         if (!bookCatalog.isAvailable(book) || !visitor.canLoan()) {
             System.out.println("Book unavailable or max loans reached.");
         }
