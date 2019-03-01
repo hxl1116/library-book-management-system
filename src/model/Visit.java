@@ -1,4 +1,4 @@
-package java;
+package model;
 
 public class Visit {
 

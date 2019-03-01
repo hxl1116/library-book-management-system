@@ -1,6 +1,9 @@
-package java;
+package model;
 
 import org.junit.Test;
+
+import model.Visit;
+import model.Visitor;
 
 import static org.junit.Assert.*;
 
