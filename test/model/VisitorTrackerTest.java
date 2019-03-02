@@ -35,9 +35,9 @@ public class VisitorTrackerTest {
 
     @Test
     public void newAccount() {
-        visTrack.newAccount(visAccounts,visitor1.getId(),visitor1);
+        visTrack.newAccount(visAccounts,"Ryan11","Ryan","Doe","Global Village","000000000");
         assertEquals(1,visAccounts.size());
-        visTrack.newAccount(visAccounts,visitor2.getId(),visitor2);
+        visTrack.newAccount(visAccounts,"Ryan11","Ryan","Apple","UC","111111111");
         assertEquals(1,visAccounts.size());
     }
 

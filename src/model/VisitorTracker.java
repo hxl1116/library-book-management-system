@@ -45,11 +45,14 @@ public class VisitorTracker {
      * @param id
      * @param mVisitor
      */
-    public void newAccount(HashMap visitorAccounts,String id, Visitor mVisitor){
-        if(visitorAccounts.containsKey(mVisitor.getId())){
+    public void newAccount(HashMap visitorAccounts,String id, String firstName, String lastName, String address,
+                           String phone){
+        if(visitorAccounts.containsKey(id)){
             System.out.println("That username is already being used");
         } else {
-            visitorAccounts.put(id,mVisitor);
+            //String visitorObj = id + "Visitor";
+            Visitor visitorObj = new Visitor(id,firstName,lastName,address,phone,0);
+            visitorAccounts.put(id,visitorObj);
             System.out.println("You successfully created an account");
         }
     }
@@ -66,15 +69,15 @@ public class VisitorTracker {
     }
 
     /**
-     * Attempts to log the visitor in
+     * Attempts to login the visitor in
      *
      * @param visitorAccounts
      * @param id
      * @param mVisitor
      * @return
      */
-    public boolean login(HashMap visitorAccounts,String id, Visitor mVisitor){
-        if(visitorAccounts.containsKey(mVisitor.getId())){
+    public boolean login(HashMap visitorAccounts,String id){
+        if(visitorAccounts.containsKey(id)){
             System.out.println("Login successful");
             return true;
         } else {
