@@ -73,17 +73,30 @@ public class VisitorTracker {
      *
      * @param visitorAccounts
      * @param id
-     * @param mVisitor
      * @return
      */
-    public boolean login(HashMap visitorAccounts,String id){
+    public boolean logIn(HashMap visitorAccounts,String id, Visitor mVisitor){
         if(visitorAccounts.containsKey(id)){
             System.out.println("Login successful");
+            Visit visit = new Visit(mVisitor,2,2,"09");
             return true;
         } else {
             System.out.println("Login failed");
             return false;
         }
+    }
+
+    public void logOut(){
+
+    }
+
+    public void endVisit(Visit visit,int endDate){
+        visit.setTimeOut(endDate);
+
+    }
+
+    public void startVisit(Visit visit,int startDate){
+        visit.setTimeIn(startDate);
     }
 
 }
