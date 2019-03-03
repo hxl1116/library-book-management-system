@@ -33,22 +33,17 @@ public class Library {
         }
     }
 
-
-
-    public Integer getNumAvailable(Book book){
+    public static Integer getNumAvailable(Book book){
         return bookCatalog.getAvailable().get(book);
     }
 
-    public Integer getNumUnvailable(Book book){
+    public static Integer getNumUnvailable(Book book){
         return bookCatalog.getUnavailable().get(book);
     }
 
     public Integer getTotalNumAvailable(Book book){
-        return this.getNumAvailable(book)+this.getNumUnvailable(book);
+        return getNumAvailable(book)+ getNumUnvailable(book);
     }
-
-
-
 
     private static void loadBooks() throws ParseException {
         List<String> lines = new ArrayList<>();
