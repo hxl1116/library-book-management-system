@@ -33,6 +33,23 @@ public class Library {
         }
     }
 
+
+
+    public Integer getNumAvailable(Book book){
+        return bookCatalog.getAvailable().get(book);
+    }
+
+    public Integer getNumUnvailable(Book book){
+        return bookCatalog.getUnavailable().get(book);
+    }
+
+    public Integer getTotalNumAvailable(Book book){
+        return this.getNumAvailable(book)+this.getNumUnvailable(book);
+    }
+
+
+
+
     private static void loadBooks() throws ParseException {
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(Paths.get(BOOK_FILE))) {
@@ -51,7 +68,9 @@ public class Library {
             String publisher = lastPart.substring(lastPart.indexOf("\"") + 1, lastPart.lastIndexOf("\""));
             String publishDate = lastPart.substring(lastPart.lastIndexOf("\"") + 2, lastPart.lastIndexOf(","));
             int pageCount = Integer.parseInt(lastPart.substring(lastPart.lastIndexOf(",") + 1));
+
             books.add(new Book(isbn, title, authors, publisher, publishDate, pageCount));
+
         }
     }
 
