@@ -15,12 +15,12 @@ public class VisitorTracker implements Serializable {
      * key is String
      * object is Visitor
      */
-    private HashMap<String, Visitor> visitorAccounts;
+    private HashMap<String, Visitor> visitorAccounts = new HashMap<String, Visitor>();
 
     /**
      * ArrayList to hold visits
      */
-    private ArrayList<Visit> visitList;
+    private ArrayList<Visit> visitList = new ArrayList<Visit>();
 
     /**
      * visitor
@@ -73,10 +73,11 @@ public class VisitorTracker implements Serializable {
      * @param id
      * @return
      */
-    public boolean logIn(HashMap visitorAccounts, String id, Visitor mVisitor) {
+    public boolean logIn(HashMap visitorAccounts, String id) {
         if (visitorAccounts.containsKey(id)) {
             System.out.println("Login successful");
-            Visit visit = new Visit(mVisitor, 2, 2, "09");
+            Visit visit = new Visit((Visitor)visitorAccounts.get(id), 00, 00, "date");
+            visitList.add(visit);
             return true;
         } else {
             System.out.println("Login failed");
@@ -95,6 +96,15 @@ public class VisitorTracker implements Serializable {
 
     public void startVisit(Visit visit, int startDate) {
         visit.setTimeIn(startDate);
+    }
+
+    public String generateID(){
+        int[] numbers = new int[10];
+        //Generates 10 Random Numbers in the range 1 -20
+        for(int i = 0; i < numbers.length; i++) {
+            numbers[i] = (int)(Math.random()*20 + 1);
+        }//end for loop
+        return numbers.toString();
     }
 
 
