@@ -1,7 +1,6 @@
 package LibrarySystem;
 
 
-
 import temps.TempPurchaseRequest;
 import search.*;
 import search.Error;
@@ -20,21 +19,6 @@ public class BookCatalog {
 
     HashMap<Book,Integer> available = new HashMap<>();
     HashMap<Book,Integer> unavailable = new HashMap<>();
-
-    private List<Book> books;
-
-    public BookCatalog(List<Book> books){
-        this.books = books;
-
-    }
-
-    public void makeAvailable(String bookName){
-
-    }
-
-    public void makeUnavailable(String bookName){
-
-
 
     private ArrayList<Book> books;
     private TempSearchRequest tempSearchRequest;
@@ -83,10 +67,6 @@ public class BookCatalog {
 
     }
 
-
-
-
-}
 
     public Object executeSearchAndSortRequest() {
 
