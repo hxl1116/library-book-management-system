@@ -1,15 +1,14 @@
 package LibrarySystem;
 
-
-
-import temps.TempPurchaseRequest;
+//import temps.TempPurchaseRequest;
+import Model.Book;
 import search.*;
 import search.Error;
-import sort.AvailableSort;
+//import sort.AvailableSort;
 import sort.PublishDateSort;
 import sort.SortContext;
 import sort.TitleSort;
-import temps.TempSearchRequest;
+//import temps.TempSearchRequest;
 
 import java.util.ArrayList;
 
@@ -21,19 +20,18 @@ public class BookCatalog {
     HashMap<Book,Integer> available = new HashMap<>();
     HashMap<Book,Integer> unavailable = new HashMap<>();
     private ArrayList<Book> books;
-    private TempSearchRequest tempSearchRequest;
-    private TempPurchaseRequest tempPurchaseRequest;
+//    private TempSearchRequest tempSearchRequest;
+//    private TempPurchaseRequest tempPurchaseRequest;
 
     public BookCatalog(ArrayList<Book> books){
         this.books = books;
 
     }
 
-    public BookCatalog(ArrayList<Book> books, TempSearchRequest tempSearchRequest){
-        this.books = books;
-        this.tempSearchRequest = tempSearchRequest;
-
-    }
+//    public BookCatalog(ArrayList<Book> books, TempSearchRequest tempSearchRequest){
+//        this.books = books;
+//        this.tempSearchRequest = tempSearchRequest;
+//    }
 
     public void makeAvailable(Book book, int copies){
         available.put(book, available.get(book) + copies);
@@ -73,73 +71,73 @@ public class BookCatalog {
     }
 
 
-    public Object executeSearchAndSortRequest() {
+//    public Object executeSearchAndSortRequest() {
+//
+//
+//        //search context
+//        SearchContext context = new SearchContext();
+//        //sort context
+//        SortContext sortContext = new SortContext();
+//
+//        ArrayList<Book> searchResults;
+//        searchResults = books;
+//
+//        if (!(tempSearchRequest.getTitle().equals("*"))) {
+//            context.setSearch(new TitleSearch());
+//            searchResults = context.search(searchResults, tempSearchRequest.getTitle());
+//        }
+//        if (!(tempSearchRequest.getAuthors().get(0).equals("*"))) {
+//            context.setSearch(new AuthorsSearch());
+//            searchResults = context.search(searchResults, tempSearchRequest.getAuthors().toString());
+//        }
+//        if (!(tempSearchRequest.getIsbn().equals("*"))) {
+//            context.setSearch(new IsbnSearch());
+//            searchResults = context.search(searchResults, tempSearchRequest.getIsbn());
+//        }
+//        if (!(tempSearchRequest.getPublisher().equals("*"))) {
+//            context.setSearch(new PublishDateSearch());
+//            searchResults = context.search(searchResults, tempSearchRequest.getIsbn());
+//        }
+//
+//        if(!tempSearchRequest.getSortType().equals("title") || !tempSearchRequest.getSortType().equals("publish-date") || !tempSearchRequest.getSortType().equals("book-status")){
+//            //returns an error is user enters invalid sort type
+//            return Error.InvalidSortOrder;
+//        }
+//
+//        else{
+//
+//            switch (tempSearchRequest.getSortType()) {
+//
+//            case "title":
+//                sortContext.setBookSort(new TitleSort());
+//                sortContext.makeSort(searchResults);
+//            case "publish-date":
+//                sortContext.setBookSort(new PublishDateSort());
+//                sortContext.makeSort(searchResults);
+//            case "book-status":
+//                sortContext.setBookSort(new AvailableSort());
+//                sortContext.makeSort(searchResults);
+//
+//        }
+//        //returns a list of searched and sorted books (if any)
+//        return searchResults;
+//        }
+//    }
 
 
-        //search context
-        SearchContext context = new SearchContext();
-        //sort context
-        SortContext sortContext = new SortContext();
-
-        ArrayList<Book> searchResults;
-        searchResults = books;
-
-        if (!(tempSearchRequest.getTitle().equals("*"))) {
-            context.setSearch(new TitleSearch());
-            searchResults = context.search(searchResults, tempSearchRequest.getTitle());
-        }
-        if (!(tempSearchRequest.getAuthors().get(0).equals("*"))) {
-            context.setSearch(new AuthorsSearch());
-            searchResults = context.search(searchResults, tempSearchRequest.getAuthors().toString());
-        }
-        if (!(tempSearchRequest.getIsbn().equals("*"))) {
-            context.setSearch(new IsbnSearch());
-            searchResults = context.search(searchResults, tempSearchRequest.getIsbn());
-        }
-        if (!(tempSearchRequest.getPublisher().equals("*"))) {
-            context.setSearch(new PublishDateSearch());
-            searchResults = context.search(searchResults, tempSearchRequest.getIsbn());
-        }
-
-        if(!tempSearchRequest.getSortType().equals("title") || !tempSearchRequest.getSortType().equals("publish-date") || !tempSearchRequest.getSortType().equals("book-status")){
-            //returns an error is user enters invalid sort type
-            return Error.InvalidSortOrder;
-        }
-
-        else{
-
-            switch (tempSearchRequest.getSortType()) {
-
-            case "title":
-                sortContext.setBookSort(new TitleSort());
-                sortContext.makeSort(searchResults);
-            case "publish-date":
-                sortContext.setBookSort(new PublishDateSort());
-                sortContext.makeSort(searchResults);
-            case "book-status":
-                sortContext.setBookSort(new AvailableSort());
-                sortContext.makeSort(searchResults);
-
-        }
-        //returns a list of searched and sorted books (if any)
-        return searchResults;
-        }
-    }
-
-
-    public void makePurchase(){
-        List<Integer> iDList = tempPurchaseRequest.getBooksIDs();
-        int quantity = tempPurchaseRequest.getQuantity();
-        for(Integer id: iDList){
-            for(Book book: books){
-                if(book.getBookID() == id){
-                    if(available.containsKey(book))
-                        available.put(book, available.get(book) + quantity);
-                    else
-                        available.put(book, quantity);
-                }
-            }
-        }
-    }
+//    public void makePurchase(){
+//        List<Integer> iDList = tempPurchaseRequest.getBooksIDs();
+//        int quantity = tempPurchaseRequest.getQuantity();
+//        for(Integer id: iDList){
+//            for(Book book: books){
+//                if(book.getBookID() == id){
+//                    if(available.containsKey(book))
+//                        available.put(book, available.get(book) + quantity);
+//                    else
+//                        available.put(book, quantity);
+//                }
+//            }
+//        }
+//    }
 }
 
