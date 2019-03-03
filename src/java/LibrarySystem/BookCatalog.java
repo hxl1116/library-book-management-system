@@ -2,18 +2,12 @@ package LibrarySystem;
 
 //import temps.TempPurchaseRequest;
 import Model.Book;
-import search.*;
-import search.Error;
-//import sort.AvailableSort;
-import sort.PublishDateSort;
-import sort.SortContext;
-import sort.TitleSort;
+//import Sort.AvailableSort;
 //import temps.TempSearchRequest;
 
 import java.util.ArrayList;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class BookCatalog {
 
@@ -74,9 +68,9 @@ public class BookCatalog {
 //    public Object executeSearchAndSortRequest() {
 //
 //
-//        //search context
+//        //Search context
 //        SearchContext context = new SearchContext();
-//        //sort context
+//        //Sort context
 //        SortContext sortContext = new SortContext();
 //
 //        ArrayList<Book> searchResults;
@@ -84,23 +78,23 @@ public class BookCatalog {
 //
 //        if (!(tempSearchRequest.getTitle().equals("*"))) {
 //            context.setSearch(new TitleSearch());
-//            searchResults = context.search(searchResults, tempSearchRequest.getTitle());
+//            searchResults = context.Search(searchResults, tempSearchRequest.getTitle());
 //        }
 //        if (!(tempSearchRequest.getAuthors().get(0).equals("*"))) {
 //            context.setSearch(new AuthorsSearch());
-//            searchResults = context.search(searchResults, tempSearchRequest.getAuthors().toString());
+//            searchResults = context.Search(searchResults, tempSearchRequest.getAuthors().toString());
 //        }
 //        if (!(tempSearchRequest.getIsbn().equals("*"))) {
 //            context.setSearch(new IsbnSearch());
-//            searchResults = context.search(searchResults, tempSearchRequest.getIsbn());
+//            searchResults = context.Search(searchResults, tempSearchRequest.getIsbn());
 //        }
 //        if (!(tempSearchRequest.getPublisher().equals("*"))) {
 //            context.setSearch(new PublishDateSearch());
-//            searchResults = context.search(searchResults, tempSearchRequest.getIsbn());
+//            searchResults = context.Search(searchResults, tempSearchRequest.getIsbn());
 //        }
 //
 //        if(!tempSearchRequest.getSortType().equals("title") || !tempSearchRequest.getSortType().equals("publish-date") || !tempSearchRequest.getSortType().equals("book-status")){
-//            //returns an error is user enters invalid sort type
+//            //returns an error is user enters invalid Sort type
 //            return Error.InvalidSortOrder;
 //        }
 //

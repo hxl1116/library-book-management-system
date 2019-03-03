@@ -1,4 +1,4 @@
-package view;
+package View;
 
 public class MainMenu extends MenuAbstract {
     private static MainMenu mainMenu = new MainMenu();

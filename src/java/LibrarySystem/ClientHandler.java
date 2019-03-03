@@ -51,7 +51,7 @@ class ClientHandler implements Runnable
                 String MsgToSend = st.nextToken();
                 String recipient = st.nextToken();
 
-                // search for the recipient in the connected devices list.
+                // Search for the recipient in the connected devices list.
                 // ar is the vector storing client of active users
                 for (ClientHandler mc : Server.ar)
                 {

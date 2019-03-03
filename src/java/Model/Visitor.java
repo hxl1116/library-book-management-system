@@ -1,4 +1,4 @@
-package LibrarySystem;
+package Model;
 
 public class Visitor {
 

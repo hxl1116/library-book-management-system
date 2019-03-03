@@ -1,6 +1,9 @@
 package LibrarySystem;
 
 
+import Model.Visit;
+import Model.Visitor;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 public class VisitorTracker {
@@ -10,7 +13,7 @@ public class VisitorTracker {
      * key is String
      * object is Visitor
      */
-    private HashMap<String,Visitor> visitorAccounts;
+    private HashMap<String, Visitor> visitorAccounts;
 
     /**
      * Arraylist to hold visits

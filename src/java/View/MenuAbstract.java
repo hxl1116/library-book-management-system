@@ -1,6 +1,5 @@
-package view;
+package View;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public abstract class MenuAbstract {

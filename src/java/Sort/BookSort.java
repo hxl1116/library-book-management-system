@@ -1,4 +1,4 @@
-package sort;
+package Sort;
 
 import Model.Book;
 

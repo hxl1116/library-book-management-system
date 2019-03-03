@@ -1,4 +1,4 @@
-//package sort;
+//package Sort;
 //
 //
 //import LibrarySystem.Book;
@@ -19,7 +19,7 @@
 //    };
 //
 //    @Override
-//    public void sort(ArrayList<Book> books) {
-//        Collections.sort(books, NumAvailComparator);
+//    public void Sort(ArrayList<Book> books) {
+//        Collections.Sort(books, NumAvailComparator);
 //    }
 //}

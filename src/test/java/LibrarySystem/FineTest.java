@@ -1,14 +1,14 @@
 package LibrarySystem;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 public class FineTest {
 
-    @Test
+    //    @Test
     public void getCurrentDate() {
     }
 
-    @Test
+    //    @Test
     public void setCurrentDate() {
     }
 }
