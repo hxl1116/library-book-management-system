@@ -22,58 +22,128 @@ import java.util.List;
 
 public class BookCatalog implements Serializable {
 
+    /**
+     * HashMap of available books
+     */
     HashMap<Book,Integer> available = new HashMap<>();
+
+    /**
+     * HashMap of unavailable books
+     */
     HashMap<Book,Integer> unavailable = new HashMap<>();
+
+    /**
+     * ArrayList of books
+     */
     private ArrayList<Book> books;
+
+    /**
+     * book store search request
+     */
     private BookStoreSearchRequest bookStoreSearchRequest;
+
+    /**
+     *  book purchase request
+     */
     private BookPurchaseRequest bookPurchaseRequest;
 
+    /**
+     * book catalog
+     * @param books
+     */
     public BookCatalog(ArrayList<Book> books){
         this.books = books;
 
     }
 
+    /**
+     * constructor for book catalog
+     * @param books
+     * @param bookStoreSearchRequest
+     */
     public BookCatalog(ArrayList<Book> books, BookStoreSearchRequest bookStoreSearchRequest){
         this.books = books;
         this.bookStoreSearchRequest = bookStoreSearchRequest;
     }
 
+    /**
+     * makes books available
+     * @param book
+     * @param copies
+     */
     public void makeAvailable(Book book, int copies){
         available.put(book, available.get(book) + copies);
 
     }
 
+    /**
+     * adds a new book
+     * @param book
+     * @param copies
+     */
     public void addNewBook(Book book, int copies) {
         available.put(book, copies);
     }
 
+    /**
+     * makes book unavialable
+     * @param book
+     */
     public void makeUnavailable(Book book){
         available.put(book, available.get(book) - 1);
         unavailable.put(book, unavailable.get(book) + 1);
     }
 
+    /**
+     * checks if book is avaliable
+     * @param book
+     * @return
+     */
     public boolean isAvailable(Book book) {
         return available.get(book) > 0;
     }
 
+
+    /**
+     * gets number of available books
+     * @param book
+     * @return
+     */
     public int getNumberOfAvailableCopies(Book book){
         return available.get(book);
     }
 
+    /**
+     * gets the number of unavailable books
+     * @param book
+     * @return
+     */
     public int getNumberOfUnavailableCopies(Book book){
         return unavailable.get(book);
     }
 
+    /**
+     * gets available books from HashMap
+     * @return
+     */
     public HashMap<Book, Integer> getAvailable() {
         return available;
     }
 
+    /**
+     * gets unavilable books from HashMap
+     * @return
+     */
     public HashMap<Book, Integer> getUnavailable() {
         return unavailable;
 
     }
 
 
+    /**
+     * executes searching
+     * @return
+     */
     public Object executeSearchAndSortRequest() {
 
 
@@ -130,6 +200,9 @@ public class BookCatalog implements Serializable {
         }
     }
 
+    /**
+     * Makes a book purchase
+     */
     public void makePurchase(){
         int[] iDList = bookPurchaseRequest.getIds();
         int quantity = bookPurchaseRequest.getQuantity();
