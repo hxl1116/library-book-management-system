@@ -25,58 +25,6 @@ public class Book {
         this.pageCount = pageCount;
     }
 
-    public int getTempID() {
-        return tempID;
-    }
-
-    public void setTempID(int tempID) {
-        this.tempID = tempID;
-    }
-
-    public int getIsbn() {
-        return isbn;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getAuthors() {
-        return authors;
-    }
-
-    public String[] getAuthorsAsArray() {
-        return authors.split(",");
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public String getDatePublished() {
-        return datePublished;
-    }
-
-    public int getPageCount() {
-        return pageCount;
-    }
-
-    public Date getDateBorrowed() {
-        return dateBorrowed;
-    }
-
-    public void setDateBorrowed(Date dateBorrowed) {
-        this.dateBorrowed = dateBorrowed;
-    }
-
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
-    }
-
     public String purchaseFormat() {
         return String.format("%s,%s,%s,%s", isbn, title, authors, LibraryResponse.DATE_FORMAT.format(datePublished));
     }
