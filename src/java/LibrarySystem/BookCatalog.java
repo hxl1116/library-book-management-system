@@ -1,5 +1,7 @@
 package LibrarySystem;
 
+
+
 import temps.TempPurchaseRequest;
 import search.*;
 import search.Error;
@@ -10,6 +12,7 @@ import sort.TitleSort;
 import temps.TempSearchRequest;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,6 +20,22 @@ public class BookCatalog {
 
     HashMap<Book,Integer> available = new HashMap<>();
     HashMap<Book,Integer> unavailable = new HashMap<>();
+
+    private List<Book> books;
+
+    public BookCatalog(List<Book> books){
+        this.books = books;
+
+    }
+
+    public void makeAvailable(String bookName){
+
+    }
+
+    public void makeUnavailable(String bookName){
+
+
+
     private ArrayList<Book> books;
     private TempSearchRequest tempSearchRequest;
     private TempPurchaseRequest tempPurchaseRequest;
@@ -61,9 +80,13 @@ public class BookCatalog {
 
     public HashMap<Book, Integer> getUnavailable() {
         return unavailable;
+
     }
 
 
+
+
+}
 
     public Object executeSearchAndSortRequest() {
 
@@ -134,3 +157,4 @@ public class BookCatalog {
         }
     }
 }
+
