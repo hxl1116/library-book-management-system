@@ -28,11 +28,6 @@ public class BookCatalog {
 
     }
 
-    public void makeAvailable(String bookName){
-
-    }
-
-    public void makeUnavailable(String bookName){
 
 
 
