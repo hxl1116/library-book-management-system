@@ -85,19 +85,36 @@ public class VisitorTracker implements Serializable {
         }
     }
 
+    /**
+     * logs out the vitor
+     */
     public void logOut() {
 
     }
 
+    /**
+     * ends the visitor visit
+     * @param visit
+     * @param endDate
+     */
     public void endVisit(Visit visit, int endDate) {
         visit.setTimeOut(endDate);
 
     }
 
+    /**
+     * starts the visitor viit
+     * @param visit
+     * @param startDate
+     */
     public void startVisit(Visit visit, int startDate) {
         visit.setTimeIn(startDate);
     }
 
+    /**
+     * Generates a random string of 10 digits for unique visitor id
+     * @return
+     */
     public String generateID(){
         int[] numbers = new int[10];
         //Generates 10 Random Numbers in the range 1 -20
