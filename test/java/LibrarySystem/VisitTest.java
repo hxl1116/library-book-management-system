@@ -1,9 +1,9 @@
-package model;
+package java.LibrarySystem;
 
 import org.junit.Test;
 
-import model.Visit;
-import model.Visitor;
+import java.LibrarySystem.Visit;
+import java.LibrarySystem.Visitor;
 
 import static org.junit.Assert.*;
 

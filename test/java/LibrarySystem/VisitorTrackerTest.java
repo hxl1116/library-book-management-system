@@ -1,9 +1,12 @@
-package model;
+package java.LibrarySystem;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.LibrarySystem.Visit;
+import java.LibrarySystem.Visitor;
+import java.LibrarySystem.VisitorTracker;
 import java.util.ArrayList;
 import java.util.HashMap;
 
