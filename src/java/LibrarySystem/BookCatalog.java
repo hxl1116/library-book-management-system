@@ -1,12 +1,13 @@
-package library;
+package LibrarySystem;
 
-import purchase.TempPurchaseRequest;
+import temps.TempPurchaseRequest;
 import search.*;
 import search.Error;
 import sort.AvailableSort;
 import sort.PublishDateSort;
 import sort.SortContext;
 import sort.TitleSort;
+import temps.TempSearchRequest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
