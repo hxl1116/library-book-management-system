@@ -1,9 +1,11 @@
 package search;
 
 
-        import temps.Book;
 
-        import java.util.ArrayList;
+
+import LibrarySystem.Book;
+
+import java.util.ArrayList;
 
 public class TitleSearch implements BookSearch {
     @Override
