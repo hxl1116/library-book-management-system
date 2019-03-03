@@ -5,11 +5,12 @@ import Model.Book;
 //import Sort.AvailableSort;
 //import temps.TempSearchRequest;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import java.util.HashMap;
 
-public class BookCatalog {
+public class BookCatalog implements Serializable {
 
     HashMap<Book,Integer> available = new HashMap<>();
     HashMap<Book,Integer> unavailable = new HashMap<>();

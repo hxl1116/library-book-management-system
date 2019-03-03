@@ -2,8 +2,7 @@ package LibrarySystem;
 
 import Model.Book;
 
-import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
@@ -16,18 +15,22 @@ public class Library {
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     public static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm:ss");
 
-    private static final String BOOK_FILE = "C:/Users/Henry Larson/IdeaProjects/LibraryBookManagmentSystem/src/resources/book.txt";
+    private static final String BOOK_FILE = "src/resources/book.txt";
+    private static final String BOOK_CATALOG_FILE = "src/resources/book_catalog";
+    private static final String VISITOR_TRACKER_FILE = "src/resources/visitor_tracker";
 
     private static List<Book> books = new ArrayList<>();
+
+    private static BookCatalog bookCatalog;
+    private static VisitorTracker visitorTracker;
 
     public static void main(String[] args) {
         try {
             loadBooks();
-        } catch (ParseException e) {
+            saveData();
+        } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
-
-        System.out.println(books.size());
     }
 
     private static void loadBooks() throws ParseException {
@@ -49,6 +52,26 @@ public class Library {
             String publishDate = lastPart.substring(lastPart.lastIndexOf("\"") + 2, lastPart.lastIndexOf(","));
             int pageCount = Integer.parseInt(lastPart.substring(lastPart.lastIndexOf(",") + 1));
             books.add(new Book(isbn, title, authors, publisher, publishDate, pageCount));
+        }
+    }
+
+    private static void saveData() throws IOException {
+        try (FileOutputStream bookCatalogOutputStream = new FileOutputStream(BOOK_CATALOG_FILE);
+             ObjectOutputStream bookCatalogObjOutputStream = new ObjectOutputStream(bookCatalogOutputStream);
+             FileOutputStream visitorTrackerOutputStream = new FileOutputStream(VISITOR_TRACKER_FILE);
+             ObjectOutputStream visitorTrackerObjOutputStream = new ObjectOutputStream(visitorTrackerOutputStream)) {
+            bookCatalogObjOutputStream.writeObject(bookCatalog);
+            visitorTrackerObjOutputStream.writeObject(visitorTracker);
+        }
+    }
+
+    // TODO - create bookCatalog and visitorTracker from object files
+    private static void loadData() throws IOException {
+        try (FileInputStream bookCatalogInputStream = new FileInputStream(BOOK_CATALOG_FILE);
+             ObjectInputStream bookCatalogObjInputStream = new ObjectInputStream(bookCatalogInputStream);
+             FileInputStream visitorTrackerInputStream = new FileInputStream(VISITOR_TRACKER_FILE);
+             ObjectInputStream visitorTrackerObjInputStream = new ObjectInputStream(visitorTrackerInputStream)) {
+
         }
     }
 }

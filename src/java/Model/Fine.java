@@ -1,6 +1,8 @@
 package Model;
 
-public class Fine {
+import java.io.Serializable;
+
+public class Fine implements Serializable {
 
     /**
      *Fine amount for a one day loan

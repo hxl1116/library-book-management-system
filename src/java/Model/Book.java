@@ -2,11 +2,12 @@ package Model;
 
 import LibrarySystem.Library;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
-public class Book {
+public class Book implements Serializable {
     private int tempID;
     private long isbn;
     private String title;

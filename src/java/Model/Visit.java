@@ -1,6 +1,8 @@
 package Model;
 
-public class Visit {
+import java.io.Serializable;
+
+public class Visit implements Serializable {
 
 
     /**
