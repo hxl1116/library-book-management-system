@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Client {
+public class LibClient {
     private static final String url = "http://localhost.com";
     private static final String charset = "UTF-8";
 
