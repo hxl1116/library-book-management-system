@@ -2,6 +2,7 @@ package LibrarySystem;
 
 public class Visit {
 
+
     /**
      * visitor
      */
@@ -104,4 +105,5 @@ public class Visit {
     public void setDate(String date) {
         this.date = date;
     }
+
 }

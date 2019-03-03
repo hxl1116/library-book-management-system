@@ -2,6 +2,7 @@ package LibrarySystem;
 
 public class Visitor {
 
+
     /**
      * unique visitor id
      */
@@ -155,3 +156,12 @@ public class Visitor {
         this.booksChecked = booksChecked;
     }
 }
+
+    private int id;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String phone;
+    private int booksChecked;
+}
+

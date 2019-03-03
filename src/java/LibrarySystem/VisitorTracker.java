@@ -1,5 +1,6 @@
 package LibrarySystem;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 public class VisitorTracker {
@@ -98,5 +99,21 @@ public class VisitorTracker {
     public void startVisit(Visit visit,int startDate){
         visit.setTimeIn(startDate);
     }
+
+import java.util.List;
+
+public class VisitorTracker {
+
+    private List<Visitor> visitors;
+    private List<Visit> visits;
+
+
+    public VisitorTracker(Visit visit, Visitor visitor){
+        this.visitors.add(visitor);
+        this.visits.add(visit);
+
+    }
+
+
 
 }
