@@ -20,20 +20,14 @@ public class BookCatalog {
 
     HashMap<Book,Integer> available = new HashMap<>();
     HashMap<Book,Integer> unavailable = new HashMap<>();
-
-    private List<Book> books;
-
-    public BookCatalog(List<Book> books){
-        this.books = books;
-
-    }
-
-
-
-
     private ArrayList<Book> books;
     private TempSearchRequest tempSearchRequest;
     private TempPurchaseRequest tempPurchaseRequest;
+
+    public BookCatalog(ArrayList<Book> books){
+        this.books = books;
+
+    }
 
     public BookCatalog(ArrayList<Book> books, TempSearchRequest tempSearchRequest){
         this.books = books;
@@ -78,10 +72,6 @@ public class BookCatalog {
 
     }
 
-
-
-
-}
 
     public Object executeSearchAndSortRequest() {
 
