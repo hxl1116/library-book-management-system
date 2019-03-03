@@ -1,4 +1,4 @@
-package java.LibrarySystem;
+package LibrarySystem;
 
 import org.junit.Test;
 

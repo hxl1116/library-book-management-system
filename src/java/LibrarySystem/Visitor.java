@@ -1,4 +1,4 @@
-package java.LibrarySystem;
+package LibrarySystem;
 
 public class Visitor {
 
