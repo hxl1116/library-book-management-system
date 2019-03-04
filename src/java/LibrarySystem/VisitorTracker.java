@@ -124,6 +124,11 @@ public class VisitorTracker implements Serializable {
         return numbers.toString();
     }
 
+    /**
+     * Gets a Visitor object from their unique ID
+     * @param ID unique ID of the desired visitor
+     * @return Matching visitor (null if none found)
+     */
     public Visitor findVisitorByID(String ID) {
         for (String visitorID : visitorAccounts.keySet()) {
             if (visitorID.equals(ID)) {

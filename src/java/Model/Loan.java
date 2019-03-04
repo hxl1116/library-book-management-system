@@ -7,6 +7,9 @@ import java.util.Date;
 
 public class Loan {
 
+  /**
+   * Class that represents a loaned book
+   */
   private Visitor visitor;
   private Book book;
   private Date dateOut;
@@ -19,14 +22,26 @@ public class Loan {
     this.dateDue = dateDue;
   }
 
+  /**
+   * Gets the book of this loan
+   * @return Book object
+   */
   public Book getBook() {
     return this.book;
   }
 
+  /**
+   * Gets the visitor that has made this loan
+   * @return Visitor object
+   */
   public Visitor getVisitor() {
     return this.visitor;
   }
 
+  /**
+   * Turns the loan into a String for printing
+   * @return String format of loan
+   */
   public String toString() {
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
