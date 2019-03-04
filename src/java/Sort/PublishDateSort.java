@@ -8,6 +8,7 @@ import java.util.Comparator;
 
 /**
  * This class is responsible for the algorithm for sorting books based on the publish date
+ * @author Jimmy Dugan
  */
 
 public class PublishDateSort implements BookSort {
@@ -25,6 +26,7 @@ public class PublishDateSort implements BookSort {
     };
 
     /**
+     * sorting
      * @param books
      */
     @Override

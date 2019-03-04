@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 /**
  * Interface responsible for outlining the search method which will be used in the algorithm implementations
+ * @author Jimmy Dugan
  */
 
 public interface BookSearch {

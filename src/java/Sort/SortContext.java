@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 /**
  * This class is responsible for the execution of the particular sort strategy which is set by setBookSort
+ * @author Jimmy Dugan
  */
 
 public class SortContext {

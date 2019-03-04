@@ -10,11 +10,13 @@ import java.util.List;
 
 /**
  * This class is responsible for the algorithm for searching for a book based on the author(s)
+ * @author Jimmy Dugan
  */
 
 
 public class AuthorsSearch implements BookSearch {
     /**
+     * search algorithm
      * @param books
      * @param searchParam
      * @return ArrayList<Book>

@@ -8,6 +8,7 @@ import java.util.Comparator;
 
 /**
  * This class is responsible for the algorithm for sorting books based on the title
+ * @author Jimmy Dugan
  */
 
 public class TitleSort implements BookSort {
@@ -26,6 +27,7 @@ public class TitleSort implements BookSort {
     };
 
     /**
+     * sorting
      * @param books
      */
     @Override

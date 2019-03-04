@@ -9,10 +9,12 @@ import java.util.ArrayList;
 
 /**
  * This class is responsible for the algorithm for searching for a book based on the title
+ * @author Jimmy Dugan
  */
 
 public class TitleSearch implements BookSearch {
     /**
+     * search algorithm
      * @param books
      * @param searchData
      * @return ArrayList<Book>

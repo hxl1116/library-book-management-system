@@ -8,10 +8,12 @@ import java.util.ArrayList;
 
 /**
  * This class is responsible for the algorithm for searching for a book based on the isbn
+ * @author Jimmy Dugan
  */
 
 public class IsbnSearch implements BookSearch {
     /**
+     * search algorithm
      * @param books
      * @param searchData
      * @return ArrayList<Book>

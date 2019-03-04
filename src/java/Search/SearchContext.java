@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 /**
  * This class is responsible for the execution of the particular search strategy which is set by setSearch
+ * @author Jimmy Dugan
  */
 
 public class SearchContext {
