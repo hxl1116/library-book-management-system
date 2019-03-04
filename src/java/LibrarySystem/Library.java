@@ -15,6 +15,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Top layer of the LBMS.
+ * All subsystems converge at this class and interact with each other through this class.
+ *
+ * @author Jimmy Dugan, Henry Larson
+ */
 public class Library {
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     public static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm:ss");

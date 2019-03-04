@@ -18,12 +18,23 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
+/**
+ * Client class that allows for interaction with the LBMS.
+ *
+ * @author Henry Larson
+ */
 public class LibClient {
     private static final String URL = "localhost";
     private static final int PORT = 8888;
 
     private static final Scanner key = new Scanner(System.in);
 
+    /**
+     * Opens socket for client and connects to server (Receptionist).
+     * Waits for user input and parses it into LibraryRequest objects then waits for a LibraryResponse object.
+     *
+     * @param args Runtime arguments
+     */
     public static void main(String[] args) {
         try (Socket socket = new Socket(URL, PORT);
              ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
@@ -32,7 +43,6 @@ public class LibClient {
             String command;
             String[] params;
             while (socket.isConnected()) {
-                System.out.println("Sending");
                 output = key.nextLine();
                 if (output.contains(";")) {
                     if (output.contains(",")) {
@@ -118,21 +128,30 @@ public class LibClient {
                     }
                 } else {
                     outputStream.writeObject(new PartialRequest(output));
-                    System.out.println("Receiving");
                     receiveResponse(inputStream);
                 }
             }
-
-            System.out.println("Connection closed.");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Returns an invalid request error message
+     *
+     * @param request User request input
+     * @return invalid request error message
+     */
     private static String invalidRequest(String request) {
         return String.format("%c[31mInvalid Request: %s%c[0m", 27, request, 27);
     }
 
+    /**
+     * Returns invalid parameter(s) error message
+     *
+     * @param paramsArray User request parameters
+     * @return invalid parameters error message
+     */
     private static String invalidParams(String[] paramsArray) {
         StringBuilder params = new StringBuilder();
         for (String param : paramsArray) {
@@ -144,6 +163,13 @@ public class LibClient {
                 27);
     }
 
+    /**
+     * Receives and parses LibraryResponse objects from the server (Receptionist)
+     *
+     * @param inputStream Client socket object input stream
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     private static void receiveResponse(ObjectInputStream inputStream) throws IOException, ClassNotFoundException {
         LibraryResponse input;
         ResponseType responseType;

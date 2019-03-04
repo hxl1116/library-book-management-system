@@ -11,9 +11,22 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * Server for the LBMS.
+ * Sends and receives LibraryResponse and LibraryRequest objects, respectively.
+ *
+ * @author Henry Larson
+ */
 public class Receptionist {
     private StringBuilder partials = new StringBuilder();
 
+    /**
+     * Opens the server socket.
+     * LibraryRequest objects are deserialized and parsed.
+     * LibraryResponse objects are serialized according to the request.
+     *
+     * @param port The socket port
+     */
     public void openDoors(int port) {
         try {
             ServerSocket serverSocket = new ServerSocket(port);
@@ -46,7 +59,6 @@ public class Receptionist {
                         case LibraryStatisticsReportRequest:
                             break;
                         case PartialRequest:
-                            System.out.println(((PartialRequest) input).getPartial());
                             partials.append(((PartialRequest) input).getPartial());
                             outputStream.writeObject(new PartialResponse(partials.toString()));
                             break;

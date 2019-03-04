@@ -1,5 +1,10 @@
 package Responses;
 
+/**
+ * LibraryResponse enumeration used for getting LibraryResponse sub-classes.
+ *
+ * @author Henry Larson
+ */
 public enum ResponseType {
     BookPurchaseResponse,
     BookStoreSearchResponse,

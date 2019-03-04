@@ -1,5 +1,10 @@
 package Requests;
 
+/**
+ * LibraryRequest enumeration used for getting LibraryRequest sub-classes.
+ *
+ * @author Henry Larson
+ */
 public enum RequestType {
     BookPurchaseRequest,
     BookStoreSearchRequest,
