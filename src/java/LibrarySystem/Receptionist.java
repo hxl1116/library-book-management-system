@@ -1,8 +1,10 @@
 package LibrarySystem;
 
+import Requests.Book.ReturnBookRequest;
 import Requests.LibraryRequest;
 import Requests.RequestType;
 import Requests.System.PartialRequest;
+import Responses.Book.ReturnBookResponse;
 import Responses.System.PartialResponse;
 
 import java.io.IOException;
@@ -69,6 +71,10 @@ public class Receptionist {
                         case RegisterVisitorRequest:
                             break;
                         case ReturnBookRequest:
+                            String visitorID = ((ReturnBookRequest) input).getVisitorID();
+                            int[] ids = ((ReturnBookRequest) input).getIds();
+                            Library.returnBook(visitorID, ids[0]);
+                            outputStream.writeObject(new ReturnBookResponse(0, 0));
                             break;
                         default:
                             partials = new StringBuilder();

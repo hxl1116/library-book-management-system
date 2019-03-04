@@ -33,11 +33,16 @@ public class Library {
 
     private static List<Book> books = new ArrayList<>();
 
-    private String currentDate;
+    private static String currentDate;
     private static Receptionist receptionist;
     private static BookCatalog bookCatalog;
     private static VisitorTracker visitorTracker;
 
+    /**
+     * Loads book data, BookCatalog object data, and VisitorTracker object data.
+     *
+     * @param args Runtime arguments
+     */
     public static void main(String[] args) {
         receptionist = new Receptionist();
 
@@ -45,12 +50,15 @@ public class Library {
             loadBooks();
             loadData();
             receptionist.openDoors(SOCKET_PORT);
-        } catch (ParseException | ClassNotFoundException | IOException e) {
+        } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void loadBooks() throws ParseException {
+    /**
+     * Reads and parses books.txt
+     */
+    private static void loadBooks() {
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(Paths.get(BOOK_FILE))) {
             lines = reader.lines().collect(Collectors.toList());
@@ -78,6 +86,11 @@ public class Library {
         }
     }
 
+    /**
+     * Saves BookCatalog and VisitorTracker object states to an object file.
+     *
+     * @throws IOException
+     */
     private static void saveData() throws IOException {
         try (FileOutputStream bookCatalogOutputStream = new FileOutputStream(BOOK_CATALOG_FILE);
              ObjectOutputStream bookCatalogObjOutputStream = new ObjectOutputStream(bookCatalogOutputStream);
@@ -88,6 +101,12 @@ public class Library {
         }
     }
 
+    /**
+     * Loads previous BookCatalog and VisitorTracker object data from an object file
+     *
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     private static void loadData() throws IOException, ClassNotFoundException {
         try (FileInputStream bookCatalogInputStream = new FileInputStream(BOOK_CATALOG_FILE);
              ObjectInputStream bookCatalogObjInputStream = new ObjectInputStream(bookCatalogInputStream);
@@ -99,18 +118,25 @@ public class Library {
         }
     }
 
+    /**
+     * Gets the number of available books from the BookCatalog
+     *
+     * @param book queried book
+     * @return amount of queried book
+     */
     public static Integer getNumAvailable(Book book) {
         return bookCatalog.getNumberOfAvailableCopies(book);
     }
 
     /**
      * Loans a book to a given Visitor, book list, and location of book
+     *
      * @param visitorID Unique ID of the visitor being loaned to
      * @param bookID location of the book in the list
-     * @param books list of books yielded from the book search
+//     * @param books list of books yielded from the book search
      * @throws Exception
      */
-    public void loan(String visitorID, int bookID, ArrayList<Book> books) throws Exception {
+    public static void loan(String visitorID, int bookID) throws Exception {
         Book book = books.get(bookID - 1);
         Visitor visitor = visitorTracker.findVisitorByID(visitorID);
         if (!bookCatalog.isAvailable(book) || !visitor.canLoan()) {
@@ -129,10 +155,11 @@ public class Library {
 
     /**
      * Returns a book from a visitor to the library
+     *
      * @param visitorID unique ID of the returning visitor
      * @param bookID location of the loan in the visitor's loan list
      */
-    public void returnBook(String visitorID, int bookID) {
+    public static void returnBook(String visitorID, int bookID) {
         Visitor visitor = visitorTracker.findVisitorByID(visitorID);
         ArrayList<Loan> loans = visitor.getLoanList();
         try {
@@ -140,7 +167,6 @@ public class Library {
             Book book = loan.getBook();
             visitor.removeLoan(loan);
             bookCatalog.makeAvailable(book, 1);
-
         }
         catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid ID");

@@ -18,8 +18,7 @@ public class PartialResponse extends LibraryResponse {
         return partial;
     }
 
-    // TODO - create response format
     public String toString() {
-        return "";
+        return partial;
     }
 }

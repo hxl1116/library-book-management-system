@@ -1,6 +1,7 @@
 package LibrarySystem;
 
 import Requests.Book.QueryBorrowedBooksRequest;
+import Requests.Book.ReturnBookRequest;
 import Requests.Library.AdvanceTimeRequest;
 import Requests.Library.CurrentDateTimeRequest;
 import Requests.Library.LibraryStatisticsReportRequest;
@@ -9,13 +10,18 @@ import Requests.Visitor.BeginVisitRequest;
 import Requests.Visitor.EndVisitRequest;
 import Requests.Visitor.PayFineRequest;
 import Requests.Visitor.RegisterVisitorRequest;
+import Responses.Book.ReturnBookResponse;
 import Responses.LibraryResponse;
 import Responses.ResponseType;
+import Responses.System.PartialResponse;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -104,6 +110,14 @@ public class LibClient {
                                 );
                                 break;
                             case "return":
+                                List<String> idsList = Arrays.asList(params).subList(1, params.length - 1);
+                                int[] ids = new int[params.length - 1];
+                                for (int i = 1; i < params.length - 1; i++) {
+                                    ids[i] = Integer.parseInt(params[i]);
+                                }
+
+                                outputStream.writeObject(new ReturnBookRequest(params[0], ids));
+                                receiveResponse(inputStream);
                                 break;
                             case "logout":
                                 outputStream.writeObject(new PartialRequest(command));
@@ -198,6 +212,7 @@ public class LibClient {
                 case LibraryStatisticsReportResponse:
                     break;
                 case PartialResponse:
+                    System.out.println(((PartialResponse) input).toString());
                     break;
                 case PayFineResponse:
                     break;
@@ -206,6 +221,7 @@ public class LibClient {
                 case RegisterVisitorResponse:
                     break;
                 case ReturnBookResponse:
+                    System.out.println(((ReturnBookResponse) input).toString());
                     break;
                 default:
                     break;

@@ -8,27 +8,16 @@ import Requests.LibraryRequest;
  * @author Henry Larson
  */
 public class ReturnBookRequest extends LibraryRequest {
-    private int visitorID;
-    private int id;
+    private String visitorID;
     private int[] ids;
 
-    public ReturnBookRequest(int visitorID, int id) {
+    public ReturnBookRequest(String visitorID, int[] ids) {
         this.visitorID = visitorID;
-        this.id = id;
-    }
-
-    public ReturnBookRequest(int visitorID, int id, int... ids) {
-        this.visitorID = visitorID;
-        this.id = id;
         this.ids = ids;
     }
 
-    public int getVisitorID() {
+    public String getVisitorID() {
         return visitorID;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public int[] getIds() {
