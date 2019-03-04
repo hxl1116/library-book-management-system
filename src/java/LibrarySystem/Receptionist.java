@@ -3,7 +3,6 @@ package LibrarySystem;
 import Requests.LibraryRequest;
 import Requests.RequestType;
 import Requests.System.PartialRequest;
-import Requests.Visitor.BeginVisitRequest;
 import Responses.System.PartialResponse;
 
 import java.io.IOException;
@@ -15,11 +14,12 @@ import java.net.Socket;
 public class Receptionist {
     private StringBuilder partials = new StringBuilder();
 
-    public void openDoors(int port) throws IOException, ClassNotFoundException {
-        try (ServerSocket serverSocket = new ServerSocket(port);
-             Socket socket = serverSocket.accept();
-             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
-             ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream())) {
+    public void openDoors(int port) {
+        try {
+            ServerSocket serverSocket = new ServerSocket(port);
+            Socket socket = serverSocket.accept();
+            ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
+            ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
 
             LibraryRequest input;
             RequestType requestType;
@@ -46,6 +46,7 @@ public class Receptionist {
                         case LibraryStatisticsReportRequest:
                             break;
                         case PartialRequest:
+                            System.out.println(((PartialRequest) input).getPartial());
                             partials.append(((PartialRequest) input).getPartial());
                             outputStream.writeObject(new PartialResponse(partials.toString()));
                             break;
@@ -63,6 +64,8 @@ public class Receptionist {
                     }
                 }
             }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }

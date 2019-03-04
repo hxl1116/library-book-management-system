@@ -76,7 +76,7 @@ public class VisitorTracker implements Serializable {
     public boolean logIn(HashMap visitorAccounts, String id) {
         if (visitorAccounts.containsKey(id)) {
             System.out.println("Login successful");
-            Visit visit = new Visit((Visitor)visitorAccounts.get(id), 00, 00, "date");
+            Visit visit = new Visit((Visitor) visitorAccounts.get(id), 00, 00, "date");
             visitList.add(visit);
             return true;
         } else {
@@ -94,6 +94,7 @@ public class VisitorTracker implements Serializable {
 
     /**
      * ends the visitor visit
+     *
      * @param visit
      * @param endDate
      */
@@ -104,6 +105,7 @@ public class VisitorTracker implements Serializable {
 
     /**
      * starts the visitor viit
+     *
      * @param visit
      * @param startDate
      */
@@ -113,16 +115,15 @@ public class VisitorTracker implements Serializable {
 
     /**
      * Generates a random string of 10 digits for unique visitor id
+     *
      * @return
      */
-    public String generateID(){
+    public String generateID() {
         int[] numbers = new int[10];
         //Generates 10 Random Numbers in the range 1 -20
-        for(int i = 0; i < numbers.length; i++) {
-            numbers[i] = (int)(Math.random()*20 + 1);
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = (int) (Math.random() * 20 + 1);
         }//end for loop
         return numbers.toString();
     }
-
-
 }

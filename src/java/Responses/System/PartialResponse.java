@@ -1,11 +1,13 @@
 package Responses.System;
 
+import Responses.LibraryResponse;
+
 /**
  * The client sends a partial request (i.e. any request not terminated by a semi-colon).
  *
  * @author Henry Larson
  */
-public class PartialResponse {
+public class PartialResponse extends LibraryResponse {
     private String partial;
 
     public PartialResponse(String partial) {

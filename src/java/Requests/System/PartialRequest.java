@@ -2,6 +2,8 @@ package Requests.System;
 
 import Requests.LibraryRequest;
 
+import java.io.Serializable;
+
 /**
  * The client sends a partial request (i.e. any request not terminated by a semi-colon).
  *
