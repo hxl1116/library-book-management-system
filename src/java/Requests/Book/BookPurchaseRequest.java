@@ -12,26 +12,15 @@ import Requests.LibraryRequest;
  */
 public class BookPurchaseRequest extends LibraryRequest {
     private int quantity;
-    private int id;
     private int[] ids;
 
-    public BookPurchaseRequest(int quantity, int id) {
+    public BookPurchaseRequest(int quantity, int... ids) {
         this.quantity = quantity;
-        this.id = id;
-    }
-
-    public BookPurchaseRequest(int quantity, int id, int... ids) {
-        this.quantity = quantity;
-        this.id = id;
         this.ids = ids;
     }
 
     public int getQuantity() {
         return quantity;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public int[] getIds() {

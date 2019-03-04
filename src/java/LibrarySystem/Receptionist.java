@@ -4,36 +4,65 @@ import Requests.LibraryRequest;
 import Requests.RequestType;
 import Requests.System.PartialRequest;
 import Requests.Visitor.BeginVisitRequest;
+import Responses.System.PartialResponse;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Receptionist {
-    public void openDoors(int port) {
-        try {
-            ServerSocket serverSocket = new ServerSocket(port);
-            Socket socket = serverSocket.accept();
+    private StringBuilder partials = new StringBuilder();
 
-            ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
+    public void openDoors(int port) throws IOException, ClassNotFoundException {
+        try (ServerSocket serverSocket = new ServerSocket(port);
+             Socket socket = serverSocket.accept();
+             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
+             ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream())) {
+
             LibraryRequest input;
             RequestType requestType;
             while (socket.isConnected()) {
                 if ((input = (LibraryRequest) inputStream.readObject()) != null) {
                     requestType = RequestType.valueOf(input.getClass().getSimpleName());
                     switch (requestType) {
+                        case AdvanceTimeRequest:
+                            break;
                         case BeginVisitRequest:
-                            System.out.println(((BeginVisitRequest) input).getVisitorID());
+                            break;
+                        case BookPurchaseRequest:
+                            break;
+                        case BookStoreSearchRequest:
+                            break;
+                        case BorrowBookRequest:
+                            break;
+                        case CurrentDateTimeRequest:
+                            break;
+                        case EndVisitRequest:
+                            break;
+                        case LibraryBookSearchRequest:
+                            break;
+                        case LibraryStatisticsReportRequest:
                             break;
                         case PartialRequest:
-                            System.out.println(((PartialRequest) input).getPartial());
+                            partials.append(((PartialRequest) input).getPartial());
+                            outputStream.writeObject(new PartialResponse(partials.toString()));
+                            break;
+                        case PayFineRequest:
+                            break;
+                        case QueryBorrowedBooksRequest:
+                            break;
+                        case RegisterVisitorRequest:
+                            break;
+                        case ReturnBookRequest:
+                            break;
+                        default:
+                            partials = new StringBuilder();
                             break;
                     }
                 }
             }
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
         }
     }
 }

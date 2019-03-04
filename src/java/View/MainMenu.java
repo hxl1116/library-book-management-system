@@ -14,13 +14,12 @@ public class MainMenu extends MenuAbstract {
     public void displayMenu() {
         int menuSelection = -60;
 
-        while (menuSelection != 3)
-        {
+        while (menuSelection != 3) {
             setMenu();
             switch (getCurrentmenu()) {
                 case MAIN_LOGIN:
                     showLoginMenu();
-                    switch (getSelection("Enter Menu Selection")){
+                    switch (getSelection("Enter Menu Selection")) {
                         case 1:
                             setCurrentMenu(MenuAbstract.MenuOptions.LOGIN);
                             loginMenu.displayMenu();

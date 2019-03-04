@@ -10,17 +10,17 @@ import java.util.List;
  * @author Henry Larson
  */
 public class LibraryStatisticsReportRequest extends LibraryRequest {
-    private List<Integer> days;
+    private int days;
 
     public LibraryStatisticsReportRequest() {
 
     }
 
-    public LibraryStatisticsReportRequest(List<Integer> days) {
+    public LibraryStatisticsReportRequest(int days) {
         this.days = days;
     }
 
-    public List<Integer> getDays() {
+    public int getDays() {
         return days;
     }
 }
