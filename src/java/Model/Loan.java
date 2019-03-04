@@ -1,5 +1,6 @@
-package java;
+package Model;
 
+import Model.Visitor;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;

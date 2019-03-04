@@ -1,7 +1,9 @@
-package java;
+package LoanReturnCommand;
 
+import LibrarySystem.Library;
+import LoanReturnCommand.Command;
+import Model.Book;
 import java.util.ArrayList;
-import java.util.List;
 
 public class LoanCommand implements Command {
 
@@ -11,7 +13,7 @@ public class LoanCommand implements Command {
     this.library = library;
   }
 
-  public void execute(int visitorID, int bookID, ArrayList<Book> books) {
+  public void execute(String visitorID, int bookID, ArrayList<Book> books) {
     try {
       library.loan(visitorID, bookID, books);
     } catch (Exception e) {

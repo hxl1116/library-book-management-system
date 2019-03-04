@@ -107,5 +107,14 @@ public class VisitorTracker implements Serializable {
         return numbers.toString();
     }
 
+    public Visitor findVisitorByID(String ID) {
+        for (String visitorID : visitorAccounts.keySet()) {
+            if (visitorID.equals(ID)) {
+                return visitorAccounts.get(visitorID);
+            }
+        }
+        return null;
+    }
+
 
 }

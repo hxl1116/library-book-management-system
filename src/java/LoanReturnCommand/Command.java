@@ -1,10 +1,10 @@
-package java;
+package LoanReturnCommand;
 
+import Model.Book;
 import java.util.ArrayList;
-import java.util.List;
 
 public interface Command {
 
-  public void execute(int visitorID, int bookID, ArrayList<Book> books);
+  public void execute(String visitorID, int bookID, ArrayList<Book> books);
 
 }
