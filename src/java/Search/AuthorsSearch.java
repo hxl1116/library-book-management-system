@@ -8,7 +8,17 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * This class is responsible for the algorithm for searching for a book based on the author(s)
+ */
+
+
 public class AuthorsSearch implements BookSearch {
+    /**
+     * @param books
+     * @param searchParam
+     * @return ArrayList<Book>
+     */
     @Override
     public ArrayList<Book> search(ArrayList<Book> books, String searchParam) {
         ArrayList<Book> newBooks = new ArrayList<>();
