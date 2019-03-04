@@ -9,15 +9,15 @@ import Requests.LibraryRequest;
  * @author Henry Larson
  */
 public class BorrowBookRequest extends LibraryRequest {
-    private int visitorID;
+    private String visitorID;
     private int[] ids;
 
-    public BorrowBookRequest(int visitorID, int... ids) {
+    public BorrowBookRequest(String visitorID, int... ids) {
         this.visitorID = visitorID;
         this.ids = ids;
     }
 
-    public int getVisitorID() {
+    public String getVisitorID() {
         return visitorID;
     }
 

@@ -1,10 +1,13 @@
 package LibrarySystem;
 
+import Requests.Book.BorrowBookRequest;
 import Requests.Book.ReturnBookRequest;
 import Requests.LibraryRequest;
 import Requests.RequestType;
 import Requests.System.PartialRequest;
+import Responses.Book.BorrowBookResponse;
 import Responses.Book.ReturnBookResponse;
+import Responses.Library.CurrentTimeDateResponse;
 import Responses.System.PartialResponse;
 
 import java.io.IOException;
@@ -38,6 +41,9 @@ public class Receptionist {
 
             LibraryRequest input;
             RequestType requestType;
+            String visitorID;
+            int[] ids;
+
             while (socket.isConnected()) {
                 if ((input = (LibraryRequest) inputStream.readObject()) != null) {
                     requestType = RequestType.valueOf(input.getClass().getSimpleName());
@@ -51,8 +57,14 @@ public class Receptionist {
                         case BookStoreSearchRequest:
                             break;
                         case BorrowBookRequest:
+                            visitorID = ((BorrowBookRequest) input).getVisitorID();
+                            ids = ((BorrowBookRequest) input).getIds();
+                            String dueDate = Library.loan(visitorID, ids[0]);
+                            outputStream.writeObject(new BorrowBookResponse(dueDate));
                             break;
                         case CurrentDateTimeRequest:
+                            String[] currentDate = Library.getCurrentDate();
+                            outputStream.writeObject(new CurrentTimeDateResponse(currentDate[0], currentDate[1]));
                             break;
                         case EndVisitRequest:
                             break;
@@ -61,8 +73,13 @@ public class Receptionist {
                         case LibraryStatisticsReportRequest:
                             break;
                         case PartialRequest:
-                            partials.append(((PartialRequest) input).getPartial());
-                            outputStream.writeObject(new PartialResponse(partials.toString()));
+                            if (((PartialRequest) input).getPartial().equals("logout")) {
+                                Library.saveData();
+                                partials = new StringBuilder();
+                            } else {
+                                partials.append(((PartialRequest) input).getPartial());
+                                outputStream.writeObject(new PartialResponse(partials.toString()));
+                            }
                             break;
                         case PayFineRequest:
                             break;
@@ -71,8 +88,8 @@ public class Receptionist {
                         case RegisterVisitorRequest:
                             break;
                         case ReturnBookRequest:
-                            String visitorID = ((ReturnBookRequest) input).getVisitorID();
-                            int[] ids = ((ReturnBookRequest) input).getIds();
+                            visitorID = ((ReturnBookRequest) input).getVisitorID();
+                            ids = ((ReturnBookRequest) input).getIds();
                             Library.returnBook(visitorID, ids[0]);
                             outputStream.writeObject(new ReturnBookResponse(0, 0));
                             break;
@@ -82,7 +99,7 @@ public class Receptionist {
                     }
                 }
             }
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -1,5 +1,6 @@
 package LibrarySystem;
 
+import Requests.Book.BorrowBookRequest;
 import Requests.Book.QueryBorrowedBooksRequest;
 import Requests.Book.ReturnBookRequest;
 import Requests.Library.AdvanceTimeRequest;
@@ -10,6 +11,7 @@ import Requests.Visitor.BeginVisitRequest;
 import Requests.Visitor.EndVisitRequest;
 import Requests.Visitor.PayFineRequest;
 import Requests.Visitor.RegisterVisitorRequest;
+import Responses.Book.BorrowBookResponse;
 import Responses.Book.ReturnBookResponse;
 import Responses.LibraryResponse;
 import Responses.ResponseType;
@@ -41,6 +43,7 @@ public class LibClient {
      *
      * @param args Runtime arguments
      */
+    @SuppressWarnings("Duplicates")
     public static void main(String[] args) {
         try (Socket socket = new Socket(URL, PORT);
              ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
@@ -78,6 +81,14 @@ public class LibClient {
                             case "search":
                                 break;
                             case "borrow":
+                                if (params.length > 1) {
+                                    String visitorID = params[0];
+                                    int[] ids = new int[params.length - 1];
+                                    for (int i = 1; i < params.length - 1; i++) {
+                                        ids[i] = Integer.parseInt(params[i]);
+                                    }
+                                    outputStream.writeObject(new BorrowBookRequest(visitorID, ids));
+                                } else System.out.println(invalidParams(params));
                                 break;
                             case "depart":
                                 if (params.length == 1) outputStream.writeObject(new EndVisitRequest(
@@ -110,14 +121,15 @@ public class LibClient {
                                 );
                                 break;
                             case "return":
-                                List<String> idsList = Arrays.asList(params).subList(1, params.length - 1);
-                                int[] ids = new int[params.length - 1];
-                                for (int i = 1; i < params.length - 1; i++) {
-                                    ids[i] = Integer.parseInt(params[i]);
-                                }
+                                if (params.length > 1) {
+                                    int[] ids = new int[params.length - 1];
+                                    for (int i = 1; i < params.length - 1; i++) {
+                                        ids[i] = Integer.parseInt(params[i]);
+                                    }
 
-                                outputStream.writeObject(new ReturnBookRequest(params[0], ids));
-                                receiveResponse(inputStream);
+                                    outputStream.writeObject(new ReturnBookRequest(params[0], ids));
+                                    receiveResponse(inputStream);
+                                } else System.out.println(invalidParams(params));
                                 break;
                             case "logout":
                                 outputStream.writeObject(new PartialRequest(command));
@@ -127,13 +139,14 @@ public class LibClient {
                                 break;
                         }
                     } else {
-                        command = output;
+                        command = output.substring(0, output.length() - 1);
 
                         switch (command) {
                             case "datetime":
                                 outputStream.writeObject(new CurrentDateTimeRequest());
                                 break;
                             case "logout":
+                                outputStream.writeObject(new PartialRequest(command));
                                 break;
                             default:
                                 System.out.println(invalidRequest(output));
@@ -202,8 +215,10 @@ public class LibClient {
                 case BookStoreSearchResponse:
                     break;
                 case BorrowBookResponse:
+                    System.out.println(input.toString());
                     break;
                 case CurrentDateTimeResponse:
+                    System.out.println(input.toString());
                     break;
                 case EndVisitResponse:
                     break;
@@ -212,7 +227,7 @@ public class LibClient {
                 case LibraryStatisticsReportResponse:
                     break;
                 case PartialResponse:
-                    System.out.println(((PartialResponse) input).toString());
+                    System.out.println(input.toString());
                     break;
                 case PayFineResponse:
                     break;
@@ -221,7 +236,7 @@ public class LibClient {
                 case RegisterVisitorResponse:
                     break;
                 case ReturnBookResponse:
-                    System.out.println(((ReturnBookResponse) input).toString());
+                    System.out.println(input.toString());
                     break;
                 default:
                     break;

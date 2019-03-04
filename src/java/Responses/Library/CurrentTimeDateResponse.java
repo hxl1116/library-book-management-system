@@ -6,24 +6,24 @@ import java.util.Date;
  *
  */
 public class CurrentTimeDateResponse {
-    private Date date;
-    private Date time;
+    private String date;
+    private String time;
 
-    public CurrentTimeDateResponse(Date date, Date time) {
+    public CurrentTimeDateResponse(String date, String time) {
         this.date = date;
         this.time = time;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
     // TODO - create response format
     public String toString() {
-        return "";
+        return String.format("datetime,%s,%s", date, time);
     }
 }

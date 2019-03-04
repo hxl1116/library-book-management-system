@@ -91,7 +91,7 @@ public class Library {
      *
      * @throws IOException
      */
-    private static void saveData() throws IOException {
+    public static void saveData() throws IOException {
         try (FileOutputStream bookCatalogOutputStream = new FileOutputStream(BOOK_CATALOG_FILE);
              ObjectOutputStream bookCatalogObjOutputStream = new ObjectOutputStream(bookCatalogOutputStream);
              FileOutputStream visitorTrackerOutputStream = new FileOutputStream(VISITOR_TRACKER_FILE);
@@ -128,6 +128,10 @@ public class Library {
         return bookCatalog.getNumberOfAvailableCopies(book);
     }
 
+    public static String[] getCurrentDate() {
+        return new String[]{DATE_FORMAT.format(currentDate), TIME_FORMAT.format(currentDate)};
+    }
+
     /**
      * Loans a book to a given Visitor, book list, and location of book
      *
@@ -136,21 +140,23 @@ public class Library {
 //     * @param books list of books yielded from the book search
      * @throws Exception
      */
-    public static void loan(String visitorID, int bookID) throws Exception {
+    public static String loan(String visitorID, int bookID) throws Exception {
         Book book = books.get(bookID - 1);
         Visitor visitor = visitorTracker.findVisitorByID(visitorID);
+        Date date = DATE_FORMAT.parse(currentDate);
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, 7);
+        Date dueDate = c.getTime();
+        date = DATE_FORMAT.parse(currentDate);
         if (!bookCatalog.isAvailable(book) || !visitor.canLoan()) {
             System.out.println("Book unavailable or max loans reached.");
         } else {
             bookCatalog.makeUnavailable(book);
-            Date date = DATE_FORMAT.parse(currentDate);
-            Calendar c = Calendar.getInstance();
-            c.setTime(date);
-            c.add(Calendar.DATE, 7);
-            Date dueDate = c.getTime();
-            date = DATE_FORMAT.parse(currentDate);
             visitor.loan(book, date, dueDate);
         }
+
+        return DATE_FORMAT.format(dueDate);
     }
 
     /**

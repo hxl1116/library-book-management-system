@@ -12,15 +12,13 @@ import java.util.Date;
  * @author Henry Larson
  */
 public class BorrowBookResponse extends LibraryResponse {
-    // YYYY/MM/DD format
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
-    private Date dueDate;
+    private String dueDate;
 
-    public BorrowBookResponse(Date dueDate) {
+    public BorrowBookResponse(String dueDate) {
         this.dueDate = dueDate;
     }
 
     public String toString() {
-        return String.format("borrow,%s", DATE_FORMAT.format(dueDate));
+        return String.format("borrow,%s", dueDate);
     }
 }
