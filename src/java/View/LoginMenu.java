@@ -1,27 +1,25 @@
 package View;
 
-public class LoginMenu extends MenuAbstract
-{
+public class LoginMenu extends MenuAbstract {
 
     @Override
     public void displayMenu() {
+        setMenu();
 
-            setMenu();
+        switch (getCurrentmenu()) {
+            case LOGIN:
+                showLoginMenu();
 
-            switch (getCurrentmenu()) {
-                case LOGIN:
-                    showLoginMenu();
+                System.out.println("");
 
-                    System.out.println("");
-
-                    break;
-                case SIGNUP:
-                    signUpMenu();
-                    break;
-                default:
-                    displayMenu();
-                    break;
-            }
+                break;
+            case SIGNUP:
+                signUpMenu();
+                break;
+            default:
+                displayMenu();
+                break;
+        }
 
     }
 

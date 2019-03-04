@@ -19,30 +19,24 @@ public class Library {
     private static final String BOOK_CATALOG_FILE = "src/resources/book_catalog";
     private static final String VISITOR_TRACKER_FILE = "src/resources/visitor_tracker";
 
+    private static final int SOCKET_PORT = 8888;
+
     private static List<Book> books = new ArrayList<>();
 
+    private static Receptionist receptionist;
     private static BookCatalog bookCatalog;
     private static VisitorTracker visitorTracker;
 
     public static void main(String[] args) {
+        receptionist = new Receptionist();
+
         try {
             loadBooks();
-            saveData();
-        } catch (ParseException | IOException e) {
+            loadData();
+            receptionist.openDoors(SOCKET_PORT);
+        } catch (ParseException | ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static Integer getNumAvailable(Book book){
-        return bookCatalog.getAvailable().get(book);
-    }
-
-    public static Integer getNumUnvailable(Book book){
-        return bookCatalog.getUnavailable().get(book);
-    }
-
-    public Integer getTotalNumAvailable(Book book){
-        return getNumAvailable(book)+ getNumUnvailable(book);
     }
 
     private static void loadBooks() throws ParseException {
@@ -53,6 +47,7 @@ public class Library {
             e.printStackTrace();
         }
 
+        int tempIDCounter = 100;
         for (String line : lines) {
             String firstPart = line.substring(0, line.indexOf("{") - 1);
             String lastPart = line.substring(line.indexOf("}") + 2);
@@ -64,8 +59,11 @@ public class Library {
             String publishDate = lastPart.substring(lastPart.lastIndexOf("\"") + 2, lastPart.lastIndexOf(","));
             int pageCount = Integer.parseInt(lastPart.substring(lastPart.lastIndexOf(",") + 1));
 
-            books.add(new Book(isbn, title, authors, publisher, publishDate, pageCount));
+            Book book = new Book(isbn, title, authors, publisher, publishDate, pageCount);
+            book.setTempID(tempIDCounter);
+            books.add(book);
 
+            tempIDCounter++;
         }
     }
 
@@ -79,13 +77,18 @@ public class Library {
         }
     }
 
-    // TODO - create bookCatalog and visitorTracker from object files
-    private static void loadData() throws IOException {
+    private static void loadData() throws IOException, ClassNotFoundException {
         try (FileInputStream bookCatalogInputStream = new FileInputStream(BOOK_CATALOG_FILE);
              ObjectInputStream bookCatalogObjInputStream = new ObjectInputStream(bookCatalogInputStream);
              FileInputStream visitorTrackerInputStream = new FileInputStream(VISITOR_TRACKER_FILE);
              ObjectInputStream visitorTrackerObjInputStream = new ObjectInputStream(visitorTrackerInputStream)) {
 
+            bookCatalog = (BookCatalog) bookCatalogObjInputStream.readObject();
+            visitorTracker = (VisitorTracker) visitorTrackerObjInputStream.readObject();
         }
+    }
+
+    public static Integer getNumAvailable(Book book) {
+        return bookCatalog.getNumberOfAvailableCopies(book);
     }
 }
