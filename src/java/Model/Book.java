@@ -106,4 +106,12 @@ public class Book implements Serializable {
     public String queryFormat() {
         return String.format("%d,%d,%s,%s", tempID, isbn, title, Library.DATE_FORMAT.format(dateBorrowed));
     }
+
+    /**
+     * Turns this book into a String for when it has been loaned.
+     * @return String form of book
+     */
+    public String toStringBorrowed() {
+        return Long.toString(isbn) + "," + title;
+    }
 }

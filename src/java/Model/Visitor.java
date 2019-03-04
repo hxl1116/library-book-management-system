@@ -1,6 +1,8 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class Visitor implements Serializable {
 
@@ -38,7 +40,7 @@ public class Visitor implements Serializable {
     /**
      * Array list to keep track of visitor loans
      */
-    //private ArrayList<Loan> loanList;
+    private ArrayList<Loan> loanList;
 
     /*
      * Constructor to create visitor object
@@ -156,5 +158,40 @@ public class Visitor implements Serializable {
      */
     public void setBooksChecked(int booksChecked) {
         this.booksChecked = booksChecked;
+    }
+
+    /**
+     * Determines if this visitor is eligible to loan a book
+     * @return true, if number of current loans is less than 5
+     */
+    public boolean canLoan() {
+        return this.booksChecked < 5;
+    }
+
+    /**
+     * Gets the list of loans this visitor has
+     * @return list of Loans
+     */
+    public ArrayList<Loan> getLoanList(){
+        return this.loanList;
+    }
+
+    /**
+     * Removes a particular loan from this visitor's list of loans
+     * @param loan loan to be removed
+     */
+    public void removeLoan(Loan loan) {
+        loanList.remove(loan);
+    }
+
+    /**
+     * Creates a new Loan for this visitor
+     * @param book book being loaned
+     * @param currentDate date that the book is loaned on
+     * @param dueDate date that the book will be due (7 days from loan date)
+     */
+    public void loan(Book book, Date currentDate, Date dueDate) {
+        this.booksChecked++;
+        this.loanList.add(new Loan(this, book, currentDate, dueDate));
     }
 }

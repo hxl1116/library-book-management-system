@@ -2,12 +2,16 @@ package LibrarySystem;
 
 import Model.Book;
 
+import Model.Loan;
+import Model.Visitor;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +27,7 @@ public class Library {
 
     private static List<Book> books = new ArrayList<>();
 
+    private String currentDate;
     private static Receptionist receptionist;
     private static BookCatalog bookCatalog;
     private static VisitorTracker visitorTracker;
@@ -90,5 +95,50 @@ public class Library {
 
     public static Integer getNumAvailable(Book book) {
         return bookCatalog.getNumberOfAvailableCopies(book);
+    }
+
+    /**
+     * Loans a book to a given Visitor, book list, and location of book
+     * @param visitorID Unique ID of the visitor being loaned to
+     * @param bookID location of the book in the list
+     * @param books list of books yielded from the book search
+     * @throws Exception
+     */
+    public void loan(String visitorID, int bookID, ArrayList<Book> books) throws Exception {
+        Book book = books.get(bookID - 1);
+        Visitor visitor = visitorTracker.findVisitorByID(visitorID);
+        if (!bookCatalog.isAvailable(book) || !visitor.canLoan()) {
+            System.out.println("Book unavailable or max loans reached.");
+        } else {
+            bookCatalog.makeUnavailable(book);
+            Date date = DATE_FORMAT.parse(currentDate);
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
+            c.add(Calendar.DATE, 7);
+            Date dueDate = c.getTime();
+            date = DATE_FORMAT.parse(currentDate);
+            visitor.loan(book, date, dueDate);
+        }
+    }
+
+    /**
+     * Returns a book from a visitor to the library
+     * @param visitorID unique ID of the returning visitor
+     * @param bookID location of the loan in the visitor's loan list
+     */
+    public void returnBook(String visitorID, int bookID) {
+        Visitor visitor = visitorTracker.findVisitorByID(visitorID);
+        ArrayList<Loan> loans = visitor.getLoanList();
+        try {
+            Loan loan = loans.get(bookID - 1);
+            Book book = loan.getBook();
+            visitor.removeLoan(loan);
+            bookCatalog.makeAvailable(book, 1);
+
+        }
+        catch (IndexOutOfBoundsException e) {
+            System.out.println("Invalid ID");
+        }
+
     }
 }
