@@ -4,6 +4,9 @@ import Model.Book;
 
 import Model.Loan;
 import Model.Visitor;
+import Requests.Book.BookPurchaseRequest;
+import Requests.Book.BookStoreSearchRequest;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -31,7 +34,7 @@ public class Library {
 
     private static final int SOCKET_PORT = 8888;
 
-    private static List<Book> books = new ArrayList<>();
+    private static ArrayList<Book> books = new ArrayList<>();
 
     private static String currentDate;
     private static Receptionist receptionist;
@@ -177,6 +180,17 @@ public class Library {
         catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid ID");
         }
-
     }
+
+
+    public static void initiateSearchAndSort(BookStoreSearchRequest bookStoreSearchRequest){
+        BookCatalog bookCatalog = new BookCatalog(books, bookStoreSearchRequest);
+        bookCatalog.executeSearchAndSortRequest();
+    }
+
+    public static void initiatePurchase(BookPurchaseRequest bookPurchaseRequest){
+        BookCatalog bookCatalog = new BookCatalog(books, bookPurchaseRequest);
+        bookCatalog.makePurchase();
+    }
+
 }

@@ -20,6 +20,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+
+/**
+ * Responsible for searching and sorting through the books
+ * @author Jimmy Dugan
+ */
 public class BookCatalog implements Serializable {
 
     /**
@@ -64,6 +69,11 @@ public class BookCatalog implements Serializable {
     public BookCatalog(ArrayList<Book> books, BookStoreSearchRequest bookStoreSearchRequest){
         this.books = books;
         this.bookStoreSearchRequest = bookStoreSearchRequest;
+    }
+
+    public BookCatalog(ArrayList<Book> books, BookPurchaseRequest bookPurchaseRequest){
+        this.books = books;
+        this.bookPurchaseRequest = bookPurchaseRequest;
     }
 
     /**
