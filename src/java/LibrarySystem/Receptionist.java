@@ -53,6 +53,7 @@ public class Receptionist {
                         case BeginVisitRequest:
                             break;
                         case BookPurchaseRequest:
+                            outputStream.writeObject(input.execute());
                             break;
                         case BookStoreSearchRequest:
                             break;

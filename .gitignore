@@ -93,3 +93,7 @@ fabric.properties
 *.iml
 
 *.xml
+
+*.bat
+
+*.MF
