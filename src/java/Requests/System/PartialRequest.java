@@ -1,6 +1,8 @@
 package Requests.System;
 
 import Requests.LibraryRequest;
+import Responses.LibraryResponse;
+import Responses.System.PartialResponse;
 
 import java.io.Serializable;
 
@@ -18,5 +20,10 @@ public class PartialRequest extends LibraryRequest {
 
     public String getPartial() {
         return partial;
+    }
+
+    @Override
+    public LibraryResponse execute() {
+        return new PartialResponse(partial);
     }
 }

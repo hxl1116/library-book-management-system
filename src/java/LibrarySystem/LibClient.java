@@ -1,5 +1,6 @@
 package LibrarySystem;
 
+import Requests.Book.BookPurchaseRequest;
 import Requests.Book.BorrowBookRequest;
 import Requests.Book.QueryBorrowedBooksRequest;
 import Requests.Book.ReturnBookRequest;
@@ -67,16 +68,25 @@ public class LibClient {
                                     outputStream.writeObject(new AdvanceTimeRequest(
                                             Integer.parseInt(params[0])
                                     ));
-                                else System.out.println(invalidParams(params));
+                                else invalidParams(params);
                                 break;
                             case "arrive":
                                 if (params.length == 1) {
                                     outputStream.writeObject(new BeginVisitRequest(
                                             Integer.parseInt(params[0])
                                     ));
-                                } else System.out.println(invalidParams(params));
+                                } else invalidParams(params);
                                 break;
                             case "buy":
+                                if (params.length > 1) {
+                                    int quantity = Integer.parseInt(params[0]);
+                                    int[] ids = new int[params.length - 1];
+                                    for (int i = 0; i < ids.length; i++) {
+                                        ids[i] = Integer.parseInt(params[i + 1]);
+                                    }
+
+                                    outputStream.writeObject(new BookPurchaseRequest(quantity, ids));
+                                } else invalidParams(params);
                                 break;
                             case "search":
                                 break;
@@ -84,17 +94,17 @@ public class LibClient {
                                 if (params.length > 1) {
                                     String visitorID = params[0];
                                     int[] ids = new int[params.length - 1];
-                                    for (int i = 1; i < params.length - 1; i++) {
-                                        ids[i] = Integer.parseInt(params[i]);
+                                    for (int i = 0; i < ids.length; i++) {
+                                        ids[i] = Integer.parseInt(params[i + 1]);
                                     }
                                     outputStream.writeObject(new BorrowBookRequest(visitorID, ids));
-                                } else System.out.println(invalidParams(params));
+                                } else invalidParams(params);
                                 break;
                             case "depart":
                                 if (params.length == 1) outputStream.writeObject(new EndVisitRequest(
                                         Integer.parseInt(params[0])
                                 ));
-                                else System.out.println(invalidParams(params));
+                                else invalidParams(params);
                                 break;
                             case "info":
                                 break;
@@ -123,19 +133,19 @@ public class LibClient {
                             case "return":
                                 if (params.length > 1) {
                                     int[] ids = new int[params.length - 1];
-                                    for (int i = 1; i < params.length - 1; i++) {
-                                        ids[i] = Integer.parseInt(params[i]);
+                                    for (int i = 1; i < ids.length; i++) {
+                                        ids[i] = Integer.parseInt(params[i + 1]);
                                     }
 
                                     outputStream.writeObject(new ReturnBookRequest(params[0], ids));
                                     receiveResponse(inputStream);
-                                } else System.out.println(invalidParams(params));
+                                } else invalidParams(params);
                                 break;
                             case "logout":
                                 outputStream.writeObject(new PartialRequest(command));
                                 break;
                             default:
-                                System.out.println(invalidRequest(output));
+                                invalidRequest(output);
                                 break;
                         }
                     } else {
@@ -149,7 +159,7 @@ public class LibClient {
                                 outputStream.writeObject(new PartialRequest(command));
                                 break;
                             default:
-                                System.out.println(invalidRequest(output));
+                                invalidRequest(output);
                                 break;
                         }
                     }
@@ -164,30 +174,29 @@ public class LibClient {
     }
 
     /**
-     * Returns an invalid request error message
+     * Prints an invalid request error message
      *
      * @param request User request input
-     * @return invalid request error message
      */
-    private static String invalidRequest(String request) {
-        return String.format("%c[31mInvalid Request: %s%c[0m", 27, request, 27);
+    private static void invalidRequest(String request) {
+        System.out.printf("%c[31mInvalid Request: %s%c[0m\n", 27, request, 27);
     }
 
     /**
-     * Returns invalid parameter(s) error message
+     * Prints invalid parameter(s) error message
      *
      * @param paramsArray User request parameters
-     * @return invalid parameters error message
      */
-    private static String invalidParams(String[] paramsArray) {
+    private static void invalidParams(String[] paramsArray) {
         StringBuilder params = new StringBuilder();
         for (String param : paramsArray) {
             params.append(param).append(",");
         }
-        return String.format("%c[31mInvalid Params: %s%c[0m",
-                27,
-                params.toString().substring(0, params.toString().length() - 1),
-                27);
+        System.out.printf("%c[31mInvalid Params: %s%c[0m\n", 27, params.
+                toString().
+                substring(0, params.toString().length() - 1),
+                27
+        );
     }
 
     /**
@@ -199,48 +208,6 @@ public class LibClient {
      */
     private static void receiveResponse(ObjectInputStream inputStream) throws IOException, ClassNotFoundException {
         LibraryResponse input;
-        ResponseType responseType;
-
-        if ((input = (LibraryResponse) inputStream.readObject()) != null) {
-            responseType = ResponseType.valueOf(input.getClass().getSimpleName());
-
-            System.out.println("Inside receiving if statement.");
-            switch (responseType) {
-                case AdvanceTimeResponse:
-                    break;
-                case BeginVisitResponse:
-                    break;
-                case BookPurchaseResponse:
-                    break;
-                case BookStoreSearchResponse:
-                    break;
-                case BorrowBookResponse:
-                    System.out.println(input.toString());
-                    break;
-                case CurrentDateTimeResponse:
-                    System.out.println(input.toString());
-                    break;
-                case EndVisitResponse:
-                    break;
-                case LibraryBookSearchResponse:
-                    break;
-                case LibraryStatisticsReportResponse:
-                    break;
-                case PartialResponse:
-                    System.out.println(input.toString());
-                    break;
-                case PayFineResponse:
-                    break;
-                case QueryBorrowedBooksResponse:
-                    break;
-                case RegisterVisitorResponse:
-                    break;
-                case ReturnBookResponse:
-                    System.out.println(input.toString());
-                    break;
-                default:
-                    break;
-            }
-        }
+        if ((input = (LibraryResponse) inputStream.readObject()) != null) System.out.println(input.toString());
     }
 }

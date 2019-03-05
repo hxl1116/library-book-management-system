@@ -1,6 +1,7 @@
 package Requests.Library;
 
 import Requests.LibraryRequest;
+import Responses.LibraryResponse;
 
 import java.util.List;
 
@@ -12,15 +13,12 @@ import java.util.List;
 public class LibraryStatisticsReportRequest extends LibraryRequest {
     private int days;
 
-    public LibraryStatisticsReportRequest() {
-
-    }
-
     public LibraryStatisticsReportRequest(int days) {
         this.days = days;
     }
 
-    public int getDays() {
-        return days;
+    @Override
+    public LibraryResponse execute() {
+        return null;
     }
 }

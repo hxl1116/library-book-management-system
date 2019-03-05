@@ -1,6 +1,7 @@
 package Requests.Library;
 
 import Requests.LibraryRequest;
+import Responses.LibraryResponse;
 
 /**
  * For simulation purposes. This method will advance the simulated date of the library ahead by a specified number of
@@ -22,11 +23,8 @@ public class AdvanceTimeRequest extends LibraryRequest {
         this.numberOfHours = numberOfHours;
     }
 
-    public int getNumberOfDays() {
-        return numberOfDays;
-    }
-
-    public int getNumberOfHours() {
-        return numberOfHours;
+    @Override
+    public LibraryResponse execute() {
+        return null;
     }
 }

@@ -1,6 +1,7 @@
 package Requests.Visitor;
 
 import Requests.LibraryRequest;
+import Responses.LibraryResponse;
 
 /**
  * Registers a new visitor so that they can access the library. Visitors are assigned a unique, 10-digit ID by the LBMS.
@@ -34,5 +35,10 @@ public class RegisterVisitorRequest extends LibraryRequest {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    @Override
+    public LibraryResponse execute() {
+        return null;
     }
 }

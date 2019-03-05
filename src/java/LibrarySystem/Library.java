@@ -188,9 +188,8 @@ public class Library {
         bookCatalog.executeSearchAndSortRequest();
     }
 
-    public static void initiatePurchase(BookPurchaseRequest bookPurchaseRequest){
-        BookCatalog bookCatalog = new BookCatalog(books, bookPurchaseRequest);
-        bookCatalog.makePurchase();
+    public static Object[] initiatePurchase(int quantity, int[] ids){
+        return bookCatalog.makePurchase(quantity, ids);
     }
 
 }

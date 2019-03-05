@@ -1,5 +1,7 @@
 package Requests.Visitor;
 
+import Responses.LibraryResponse;
+
 /**
  * Ends a visit in progress.
  *
@@ -12,5 +14,10 @@ public class EndVisitRequest extends VisitRequest {
 
     public int getVisitorID() {
         return super.getVisitorID();
+    }
+
+    @Override
+    public LibraryResponse execute() {
+        return null;
     }
 }

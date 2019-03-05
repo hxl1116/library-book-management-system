@@ -1,6 +1,7 @@
 package Requests.Book;
 
 import Requests.LibraryRequest;
+import Responses.LibraryResponse;
 
 /**
  * Queries for a list of books currently borrowed by a specific visitor.
@@ -16,5 +17,10 @@ public class QueryBorrowedBooksRequest extends LibraryRequest {
 
     public int getVisitorID() {
         return visitorID;
+    }
+
+    @Override
+    public LibraryResponse execute() {
+        return null;
     }
 }

@@ -3,7 +3,9 @@ package Responses.Book;
 import Model.Book;
 import Responses.LibraryResponse;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,16 +17,19 @@ import java.util.Map;
  * @author Henry Larson
  */
 public class BookPurchaseResponse extends LibraryResponse {
-    private HashMap<Book, Integer> books;
+    private List<Book> books;
+    private int quantity;
 
-    public BookPurchaseResponse(HashMap<Book, Integer> books) {
-        this.books = books;
+    public BookPurchaseResponse(Object[] purchaseData) {
+        books = (ArrayList<Book>) purchaseData[0];
+        quantity = (int) purchaseData[1];
     }
 
+    // TODO - Fix toString()
     public String toString() {
         StringBuilder purchasedBooks = new StringBuilder();
-        for (Map.Entry<Book, Integer> entry : books.entrySet()) {
-            purchasedBooks.append(entry.getKey().purchaseFormat()).append(",").append(entry.getValue()).append("\n");
+        for (Book book : books) {
+            purchasedBooks.append(book.purchaseFormat()).append(",").append(quantity).append("\n");
         }
 
         return String.format("buy,success,%d,%s", books.size(), purchasedBooks.toString());

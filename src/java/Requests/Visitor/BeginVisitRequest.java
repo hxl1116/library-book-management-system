@@ -1,5 +1,7 @@
 package Requests.Visitor;
 
+import Responses.LibraryResponse;
+
 /**
  * Begins a new visit by a registered visitor.
  *
@@ -12,5 +14,10 @@ public class BeginVisitRequest extends VisitRequest {
 
     public int getVisitorID() {
         return super.getVisitorID();
+    }
+
+    @Override
+    public LibraryResponse execute() {
+        return null;
     }
 }

@@ -1,6 +1,7 @@
 package Requests.Library;
 
 import Requests.LibraryRequest;
+import Responses.LibraryResponse;
 
 /**
  * Searches for books owned by the library and available for borrowing by visitors. A "*" may be specified in place of
@@ -24,23 +25,8 @@ public class LibraryBookSearchRequest extends LibraryRequest {
         this.sortOrder = sortOrder;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String[] getAuthors() {
-        return authors;
-    }
-
-    public int getIsbn() {
-        return isbn;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public String getSortOrder() {
-        return sortOrder;
+    @Override
+    public LibraryResponse execute() {
+        return null;
     }
 }

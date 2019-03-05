@@ -1,6 +1,7 @@
 package Requests.Book;
 
 import Requests.LibraryRequest;
+import Responses.LibraryResponse;
 
 /**
  * Returns a book borrowed by a library visitor.
@@ -22,5 +23,10 @@ public class ReturnBookRequest extends LibraryRequest {
 
     public int[] getIds() {
         return ids;
+    }
+
+    @Override
+    public LibraryResponse execute() {
+        return null;
     }
 }

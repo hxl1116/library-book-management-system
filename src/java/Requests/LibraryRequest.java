@@ -1,5 +1,7 @@
 package Requests;
 
+import Responses.LibraryResponse;
+
 import java.io.Serializable;
 
 /**
@@ -9,5 +11,5 @@ import java.io.Serializable;
  * @author Henry Larson
  */
 public abstract class LibraryRequest implements Serializable {
-
+    public abstract LibraryResponse execute();
 }

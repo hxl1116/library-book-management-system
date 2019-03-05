@@ -1,6 +1,7 @@
 package Requests.Book;
 
 import Requests.LibraryRequest;
+import Responses.LibraryResponse;
 
 /**
  * Searches for books that may be purchased by the library and added to its collection. The books included in the search
@@ -43,5 +44,10 @@ public class BookStoreSearchRequest extends LibraryRequest {
 
     public String getSortOrder() {
         return sortOrder;
+    }
+
+    @Override
+    public LibraryResponse execute() {
+        return null;
     }
 }

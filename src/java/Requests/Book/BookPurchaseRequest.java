@@ -1,6 +1,12 @@
 package Requests.Book;
 
+import LibrarySystem.Library;
+import Model.Book;
 import Requests.LibraryRequest;
+import Responses.Book.BookPurchaseResponse;
+import Responses.LibraryResponse;
+
+import java.util.List;
 
 /**
  * Purchases one or more books returned from the last book store search. Purchased books are added to the library's
@@ -25,5 +31,11 @@ public class BookPurchaseRequest extends LibraryRequest {
 
     public int[] getIds() {
         return ids;
+    }
+
+    @Override
+    public LibraryResponse execute() {
+        Object[] purchasedBooks = Library.initiatePurchase(quantity, ids);
+        return new BookPurchaseResponse(purchasedBooks);
     }
 }

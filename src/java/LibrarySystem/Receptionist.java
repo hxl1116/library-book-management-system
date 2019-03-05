@@ -73,13 +73,8 @@ public class Receptionist {
                         case LibraryStatisticsReportRequest:
                             break;
                         case PartialRequest:
-                            if (((PartialRequest) input).getPartial().equals("logout")) {
-                                Library.saveData();
-                                partials = new StringBuilder();
-                            } else {
-                                partials.append(((PartialRequest) input).getPartial());
-                                outputStream.writeObject(new PartialResponse(partials.toString()));
-                            }
+                            partials.append(((PartialRequest) input).getPartial());
+                            outputStream.writeObject(input.execute());
                             break;
                         case PayFineRequest:
                             break;

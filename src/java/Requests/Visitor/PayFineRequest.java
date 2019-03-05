@@ -1,6 +1,7 @@
 package Requests.Visitor;
 
 import Requests.LibraryRequest;
+import Responses.LibraryResponse;
 
 /**
  * Pays all or part of an outstanding fine.
@@ -22,5 +23,10 @@ public class PayFineRequest extends LibraryRequest {
 
     public double getAmount() {
         return amount;
+    }
+
+    @Override
+    public LibraryResponse execute() {
+        return null;
     }
 }
