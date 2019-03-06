@@ -1,5 +1,7 @@
 package Responses.Visitor;
 
+import Responses.LibraryResponse;
+
 import java.util.Date;
 
 /**
@@ -7,7 +9,7 @@ import java.util.Date;
  *
  * @author Henry Larson
  */
-public class RegisterVisitorResponse {
+public class RegisterVisitorResponse extends LibraryResponse {
     private int visitorID;
     private Date registrationDate;
 

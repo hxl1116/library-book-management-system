@@ -48,15 +48,20 @@ public class LibClient {
     public static void main(String[] args) {
         try (Socket socket = new Socket(URL, PORT);
              ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())) {
+             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())
+        ) {
             String output;
             String command;
             String[] params;
+
             while (socket.isConnected()) {
                 output = key.nextLine();
+
                 if (output.contains(";")) {
+                    command = output.substring(0, output.indexOf(","));
+                    output = output.substring(0, output.length() - 1);
+
                     if (output.contains(",")) {
-                        command = output.substring(0, output.indexOf(","));
                         params = output.substring(output.indexOf(",") + 1).split(",");
 
                         switch (command) {
@@ -89,6 +94,7 @@ public class LibClient {
                                 } else invalidParams(params);
                                 break;
                             case "search":
+
                                 break;
                             case "borrow":
                                 if (params.length > 1) {
@@ -136,9 +142,7 @@ public class LibClient {
                                     for (int i = 1; i < ids.length; i++) {
                                         ids[i] = Integer.parseInt(params[i + 1]);
                                     }
-
                                     outputStream.writeObject(new ReturnBookRequest(params[0], ids));
-                                    receiveResponse(inputStream);
                                 } else invalidParams(params);
                                 break;
                             case "logout":
@@ -149,8 +153,6 @@ public class LibClient {
                                 break;
                         }
                     } else {
-                        command = output.substring(0, output.length() - 1);
-
                         switch (command) {
                             case "datetime":
                                 outputStream.writeObject(new CurrentDateTimeRequest());
@@ -165,8 +167,9 @@ public class LibClient {
                     }
                 } else {
                     outputStream.writeObject(new PartialRequest(output));
-                    receiveResponse(inputStream);
                 }
+
+                receiveResponse(inputStream);
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -179,7 +182,7 @@ public class LibClient {
      * @param request User request input
      */
     private static void invalidRequest(String request) {
-        System.out.printf("%c[31mInvalid Request: %s%c[0m\n", 27, request, 27);
+        System.out.printf("Invalid Request: %s\n", request);
     }
 
     /**
@@ -192,11 +195,7 @@ public class LibClient {
         for (String param : paramsArray) {
             params.append(param).append(",");
         }
-        System.out.printf("%c[31mInvalid Params: %s%c[0m\n", 27, params.
-                toString().
-                substring(0, params.toString().length() - 1),
-                27
-        );
+        System.out.printf("Invalid Params: %s\n", params.toString().substring(0, params.toString().length() - 1));
     }
 
     /**

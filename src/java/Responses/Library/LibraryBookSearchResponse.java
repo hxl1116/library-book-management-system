@@ -1,6 +1,7 @@
 package Responses.Library;
 
 import Model.Book;
+import Responses.LibraryResponse;
 
 import java.util.HashMap;
 
@@ -11,7 +12,7 @@ import java.util.HashMap;
  *
  * @author Henry Larson
  */
-public class LibraryBookSearchResponse {
+public class LibraryBookSearchResponse extends LibraryResponse {
     private int numberOfBooks;
     private HashMap<Book, Integer> books;
 

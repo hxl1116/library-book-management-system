@@ -1,11 +1,13 @@
 package Responses.Library;
 
+import Responses.LibraryResponse;
+
 import java.util.Date;
 
 /**
  *
  */
-public class CurrentTimeDateResponse {
+public class CurrentTimeDateResponse extends LibraryResponse {
     private String date;
     private String time;
 

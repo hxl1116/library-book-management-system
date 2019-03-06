@@ -23,7 +23,7 @@ import java.net.Socket;
  * @author Henry Larson
  */
 public class Receptionist {
-    private StringBuilder partials = new StringBuilder();
+    private static StringBuilder partials = new StringBuilder();
 
     /**
      * Opens the server socket.
@@ -32,7 +32,7 @@ public class Receptionist {
      *
      * @param port The socket port
      */
-    public void openDoors(int port) {
+    public static void openDoors(int port) {
         try {
             ServerSocket serverSocket = new ServerSocket(port);
             Socket socket = serverSocket.accept();
@@ -49,6 +49,9 @@ public class Receptionist {
                     requestType = RequestType.valueOf(input.getClass().getSimpleName());
                     switch (requestType) {
                         case AdvanceTimeRequest:
+                            System.out.println("Advance request received");
+                            System.out.println(input.toString());
+                            outputStream.writeObject(input.execute());
                             break;
                         case BeginVisitRequest:
                             break;
@@ -74,6 +77,7 @@ public class Receptionist {
                         case LibraryStatisticsReportRequest:
                             break;
                         case PartialRequest:
+                            System.out.println("Partial request received");
                             partials.append(((PartialRequest) input).getPartial());
                             outputStream.writeObject(input.execute());
                             break;

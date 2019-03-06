@@ -10,6 +10,7 @@ import Requests.Book.BookStoreSearchRequest;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,8 +37,8 @@ public class Library {
 
     private static ArrayList<Book> books = new ArrayList<>();
 
-    private static String currentDate;
-    private static Receptionist receptionist;
+    private static String currentDate = DATE_FORMAT.format(Calendar.getInstance().getTime());
+    private static String currentTime = TIME_FORMAT.format(Calendar.getInstance().getTime());
     private static BookCatalog bookCatalog;
     private static VisitorTracker visitorTracker;
 
@@ -47,12 +48,10 @@ public class Library {
      * @param args Runtime arguments
      */
     public static void main(String[] args) {
-        receptionist = new Receptionist();
-
         try {
             loadBooks();
             loadData();
-            receptionist.openDoors(SOCKET_PORT);
+            Receptionist.openDoors(SOCKET_PORT);
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
@@ -143,7 +142,7 @@ public class Library {
 //     * @param books list of books yielded from the book search
      * @throws Exception
      */
-    public static String loan(String visitorID, int bookID) throws Exception {
+    public static String loan(String visitorID, int bookID) throws ParseException {
         Book book = books.get(bookID - 1);
         Visitor visitor = visitorTracker.findVisitorByID(visitorID);
         Date date = DATE_FORMAT.parse(currentDate);
@@ -182,6 +181,14 @@ public class Library {
         }
     }
 
+    public static void advanceTime(int days, int hours) throws ParseException {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(DATE_FORMAT.parse(currentDate));
+        calendar.add(Calendar.DATE, days);
+        calendar.add(Calendar.HOUR, hours);
+        currentDate = DATE_FORMAT.format(calendar.getTime());
+        currentTime = TIME_FORMAT.format(calendar.getTime());
+    }
 
     public static void initiateSearchAndSort(BookStoreSearchRequest bookStoreSearchRequest){
         BookCatalog bookCatalog = new BookCatalog(books, bookStoreSearchRequest);

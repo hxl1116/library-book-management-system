@@ -1,6 +1,7 @@
 package Requests.Library;
 
 import Requests.LibraryRequest;
+import Responses.Library.AdvanceTimeResponse;
 import Responses.LibraryResponse;
 
 /**
@@ -25,6 +26,6 @@ public class AdvanceTimeRequest extends LibraryRequest {
 
     @Override
     public LibraryResponse execute() {
-        return null;
+        return new AdvanceTimeResponse();
     }
 }

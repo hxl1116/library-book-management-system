@@ -1,5 +1,7 @@
 package Responses.Visitor;
 
+import Responses.LibraryResponse;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -8,7 +10,7 @@ import java.util.Date;
  *
  * @author Henry Larson
  */
-public class BeginVisitResponse {
+public class BeginVisitResponse extends LibraryResponse {
     // YYYY/MM/DD format
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
     // HH:MM:SS
