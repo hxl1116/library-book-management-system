@@ -1,5 +1,6 @@
 package Requests.Library;
 
+import LibrarySystem.Library;
 import Requests.LibraryRequest;
 import Responses.Library.AdvanceTimeResponse;
 import Responses.LibraryResponse;
@@ -13,19 +14,20 @@ import Responses.LibraryResponse;
  */
 public class AdvanceTimeRequest extends LibraryRequest {
     private int numberOfDays;
-    private int numberOfHours;
+    private int numberOfHours = 0;
 
-    public AdvanceTimeRequest(int numberOfDays) {
-        this.numberOfDays = numberOfDays;
-    }
-
-    public AdvanceTimeRequest(int numberOfDays, int numberOfHours) {
-        this.numberOfDays = numberOfDays;
-        this.numberOfHours = numberOfHours;
+    public AdvanceTimeRequest(String parameters) {
+        if (parameters.contains(",")) numberOfDays = Integer.parseInt(parameters);
+        else {
+            String[] params = parameters.split(",");
+            numberOfDays = Integer.parseInt(params[0]);
+            numberOfHours = Integer.parseInt(params[1]);
+        }
     }
 
     @Override
     public LibraryResponse execute() {
+        Library.advanceTime(numberOfDays, numberOfHours);
         return new AdvanceTimeResponse();
     }
 }

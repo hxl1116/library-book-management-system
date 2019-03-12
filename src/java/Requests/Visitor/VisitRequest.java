@@ -8,13 +8,13 @@ import Requests.LibraryRequest;
  * @author Henry Larson
  */
 public abstract class VisitRequest extends LibraryRequest {
-    private int visitorID;
+    private String visitorID;
 
-    VisitRequest(int visitorID) {
-        this.visitorID = visitorID;
+    VisitRequest(String parameters) {
+        visitorID = parameters;
     }
 
-    public int getVisitorID() {
+    public String getVisitorID() {
         return visitorID;
     }
 }

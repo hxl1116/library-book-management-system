@@ -8,6 +8,7 @@ import Responses.LibraryResponse;
  *
  * @author Henry Larson
  */
+// TODO - Refactor for parameter parsing
 public class RegisterVisitorRequest extends LibraryRequest {
     private String firstName;
     private String lastName;

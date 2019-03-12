@@ -8,6 +8,7 @@ import Responses.LibraryResponse;
  *
  * @author Henry Larson
  */
+// TODO - Refactor for parameter parsing
 public class QueryBorrowedBooksRequest extends LibraryRequest {
     private int visitorID;
 

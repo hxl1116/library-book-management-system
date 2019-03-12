@@ -10,6 +10,7 @@ import java.util.List;
  *
  * @author Henry Larson
  */
+// TODO - Refactor for parameter parsing
 public class LibraryStatisticsReportRequest extends LibraryRequest {
     private int days;
 

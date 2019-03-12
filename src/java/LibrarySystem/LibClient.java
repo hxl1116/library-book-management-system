@@ -1,9 +1,6 @@
 package LibrarySystem;
 
-import Requests.Book.BookPurchaseRequest;
-import Requests.Book.BorrowBookRequest;
-import Requests.Book.QueryBorrowedBooksRequest;
-import Requests.Book.ReturnBookRequest;
+import Requests.Book.*;
 import Requests.Library.AdvanceTimeRequest;
 import Requests.Library.CurrentDateTimeRequest;
 import Requests.Library.LibraryStatisticsReportRequest;
@@ -48,122 +45,64 @@ public class LibClient {
     public static void main(String[] args) {
         try (Socket socket = new Socket(URL, PORT);
              ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())
-        ) {
+             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())) {
             String output;
             String command;
-            String[] params;
+            String params;
 
             while (socket.isConnected()) {
                 output = key.nextLine();
 
                 if (output.contains(";")) {
                     command = output.substring(0, output.indexOf(","));
-                    output = output.substring(0, output.length() - 1);
+                    params = output.substring(output.indexOf(","), output.length() - 1);
 
-                    if (output.contains(",")) {
-                        params = output.substring(output.indexOf(",") + 1).split(",");
-
-                        switch (command) {
-                            case "advance":
-                                if (params.length == 2) outputStream.writeObject(new AdvanceTimeRequest(
-                                        Integer.parseInt(params[0]), Integer.parseInt(params[1])
-                                ));
-                                else if (params.length == 1)
-                                    outputStream.writeObject(new AdvanceTimeRequest(
-                                            Integer.parseInt(params[0])
-                                    ));
-                                else invalidParams(params);
-                                break;
-                            case "arrive":
-                                if (params.length == 1) {
-                                    outputStream.writeObject(new BeginVisitRequest(
-                                            Integer.parseInt(params[0])
-                                    ));
-                                } else invalidParams(params);
-                                break;
-                            case "buy":
-                                if (params.length > 1) {
-                                    int quantity = Integer.parseInt(params[0]);
-                                    int[] ids = new int[params.length - 1];
-                                    for (int i = 0; i < ids.length; i++) {
-                                        ids[i] = Integer.parseInt(params[i + 1]);
-                                    }
-
-                                    outputStream.writeObject(new BookPurchaseRequest(quantity, ids));
-                                } else invalidParams(params);
-                                break;
-                            case "search":
-
-                                break;
-                            case "borrow":
-                                if (params.length > 1) {
-                                    String visitorID = params[0];
-                                    int[] ids = new int[params.length - 1];
-                                    for (int i = 0; i < ids.length; i++) {
-                                        ids[i] = Integer.parseInt(params[i + 1]);
-                                    }
-                                    outputStream.writeObject(new BorrowBookRequest(visitorID, ids));
-                                } else invalidParams(params);
-                                break;
-                            case "depart":
-                                if (params.length == 1) outputStream.writeObject(new EndVisitRequest(
-                                        Integer.parseInt(params[0])
-                                ));
-                                else invalidParams(params);
-                                break;
-                            case "info":
-                                break;
-                            case "report":
-                                if (params.length == 1) outputStream.writeObject(
-                                        new LibraryStatisticsReportRequest(Integer.parseInt(params[0]))
-                                );
-
-                                // TODO - check for no days listed
-                                break;
-                            case "pay":
-                                if (params.length == 2) outputStream.writeObject(new PayFineRequest(
-                                        Integer.parseInt(params[0]), Double.parseDouble(params[1]))
-                                );
-                                break;
-                            case "borrowed":
-                                if (params.length == 1) outputStream.writeObject(new QueryBorrowedBooksRequest(
-                                        Integer.parseInt(params[0]))
-                                );
-                                break;
-                            case "register":
-                                if (params.length == 4) outputStream.writeObject(new RegisterVisitorRequest(
-                                        params[0], params[1], params[2], params[3])
-                                );
-                                break;
-                            case "return":
-                                if (params.length > 1) {
-                                    int[] ids = new int[params.length - 1];
-                                    for (int i = 1; i < ids.length; i++) {
-                                        ids[i] = Integer.parseInt(params[i + 1]);
-                                    }
-                                    outputStream.writeObject(new ReturnBookRequest(params[0], ids));
-                                } else invalidParams(params);
-                                break;
-                            case "logout":
-                                outputStream.writeObject(new PartialRequest(command));
-                                break;
-                            default:
-                                invalidRequest(output);
-                                break;
-                        }
-                    } else {
-                        switch (command) {
-                            case "datetime":
-                                outputStream.writeObject(new CurrentDateTimeRequest());
-                                break;
-                            case "logout":
-                                outputStream.writeObject(new PartialRequest(command));
-                                break;
-                            default:
-                                invalidRequest(output);
-                                break;
-                        }
+                    switch (command) {
+                        case "advance":
+                            outputStream.writeObject(new AdvanceTimeRequest(params));
+                            break;
+                        case "arrive":
+                            outputStream.writeObject(new BeginVisitRequest(params));
+                            break;
+                        case "buy":
+//                            outputStream.writeObject(new BookPurchaseRequest(params));
+                            break;
+                        case "search":
+//                            outputStream.writeObject(new QueryBorrowedBooksRequest(params));
+                            break;
+                        case "borrow":
+                            outputStream.writeObject(new BorrowBookRequest(params));
+                            break;
+                        case "datetime":
+                            outputStream.writeObject(new CurrentDateTimeRequest());
+                            break;
+                        case "depart":
+                            outputStream.writeObject(new EndVisitRequest(params));
+                            break;
+                        case "info":
+//                            outputStream.writeObject(new BookStoreSearchRequest(params));
+                            break;
+                        case "report":
+//                            outputStream.writeObject(new LibraryStatisticsReportRequest(params));
+                            break;
+                        case "pay":
+//                            outputStream.writeObject(new PayFineRequest(params));
+                            break;
+                        case "borrowed":
+                            outputStream.writeObject(new BorrowBookRequest(params));
+                            break;
+                        case "register":
+//                            outputStream.writeObject(new RegisterVisitorRequest(params));
+                            break;
+                        case "return":
+                            outputStream.writeObject(new ReturnBookRequest(params));
+                            break;
+                        case "logout":
+                            outputStream.writeObject(new PartialRequest(command));
+                            break;
+                        default:
+                            invalidRequest(output);
+                            break;
                     }
                 } else {
                     outputStream.writeObject(new PartialRequest(output));
@@ -171,7 +110,7 @@ public class LibClient {
 
                 receiveResponse(inputStream);
             }
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -202,11 +141,13 @@ public class LibClient {
      * Receives and parses LibraryResponse objects from the server (Receptionist)
      *
      * @param inputStream Client socket object input stream
-     * @throws IOException
-     * @throws ClassNotFoundException
      */
-    private static void receiveResponse(ObjectInputStream inputStream) throws IOException, ClassNotFoundException {
-        LibraryResponse input;
-        if ((input = (LibraryResponse) inputStream.readObject()) != null) System.out.println(input.toString());
+    private static void receiveResponse(ObjectInputStream inputStream) {
+        try {
+            LibraryResponse input;
+            if ((input = (LibraryResponse) inputStream.readObject()) != null) System.out.println(input.toString());
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

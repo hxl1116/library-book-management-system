@@ -1,12 +1,9 @@
 package Requests.Book;
 
 import LibrarySystem.Library;
-import Model.Book;
 import Requests.LibraryRequest;
 import Responses.Book.BookPurchaseResponse;
 import Responses.LibraryResponse;
-
-import java.util.List;
 
 /**
  * Purchases one or more books returned from the last book store search. Purchased books are added to the library's
@@ -16,6 +13,7 @@ import java.util.List;
  *
  * @author Henry Larson
  */
+// TODO - Refactor for parameter parsing
 public class BookPurchaseRequest extends LibraryRequest {
     private int quantity;
     private int[] ids;
@@ -23,14 +21,6 @@ public class BookPurchaseRequest extends LibraryRequest {
     public BookPurchaseRequest(int quantity, int... ids) {
         this.quantity = quantity;
         this.ids = ids;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public int[] getIds() {
-        return ids;
     }
 
     @Override

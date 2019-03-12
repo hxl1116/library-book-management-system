@@ -138,24 +138,31 @@ public class Library {
      * Loans a book to a given Visitor, book list, and location of book
      *
      * @param visitorID Unique ID of the visitor being loaned to
-     * @param bookID location of the book in the list
-//     * @param books list of books yielded from the book search
-     * @throws Exception
+     * @param bookID    location of the book in the list
      */
-    public static String loan(String visitorID, int bookID) throws ParseException {
+    public static String loan(String visitorID, int bookID) {
         Book book = books.get(bookID - 1);
         Visitor visitor = visitorTracker.findVisitorByID(visitorID);
-        Date date = DATE_FORMAT.parse(currentDate);
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        c.add(Calendar.DATE, 7);
-        Date dueDate = c.getTime();
-        date = DATE_FORMAT.parse(currentDate);
-        if (!bookCatalog.isAvailable(book) || !visitor.canLoan()) {
-            System.out.println("Book unavailable or max loans reached.");
-        } else {
-            bookCatalog.makeUnavailable(book);
-            visitor.loan(book, date, dueDate);
+
+        Date date = null;
+        Date dueDate = null;
+
+        try {
+            Calendar c = Calendar.getInstance();
+            date = DATE_FORMAT.parse(currentDate);
+            c.setTime(date);
+            c.add(Calendar.DATE, 7);
+            dueDate = c.getTime();
+            date = DATE_FORMAT.parse(currentDate);
+
+            if (!bookCatalog.isAvailable(book) || !visitor.canLoan()) {
+                System.out.println("Book unavailable or max loans reached.");
+            } else {
+                bookCatalog.makeUnavailable(book);
+                visitor.loan(book, date, dueDate);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
         return DATE_FORMAT.format(dueDate);
@@ -165,7 +172,7 @@ public class Library {
      * Returns a book from a visitor to the library
      *
      * @param visitorID unique ID of the returning visitor
-     * @param bookID location of the loan in the visitor's loan list
+     * @param bookID    location of the loan in the visitor's loan list
      */
     public static void returnBook(String visitorID, int bookID) {
         Visitor visitor = visitorTracker.findVisitorByID(visitorID);
@@ -175,28 +182,34 @@ public class Library {
             Book book = loan.getBook();
             visitor.removeLoan(loan);
             bookCatalog.makeAvailable(book, 1);
-        }
-        catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid ID");
         }
     }
 
-    public static void advanceTime(int days, int hours) throws ParseException {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(DATE_FORMAT.parse(currentDate));
-        calendar.add(Calendar.DATE, days);
-        calendar.add(Calendar.HOUR, hours);
-        currentDate = DATE_FORMAT.format(calendar.getTime());
-        currentTime = TIME_FORMAT.format(calendar.getTime());
+    public static void advanceTime(int days, int hours) {
+        try {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(DATE_FORMAT.parse(currentDate));
+            calendar.add(Calendar.DATE, days);
+            calendar.add(Calendar.HOUR, hours);
+            currentDate = DATE_FORMAT.format(calendar.getTime());
+            currentTime = TIME_FORMAT.format(calendar.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void initiateSearchAndSort(BookStoreSearchRequest bookStoreSearchRequest){
+    public static void initiateSearchAndSort(BookStoreSearchRequest bookStoreSearchRequest) {
         BookCatalog bookCatalog = new BookCatalog(books, bookStoreSearchRequest);
         bookCatalog.executeSearchAndSortRequest();
     }
 
-    public static Object[] initiatePurchase(int quantity, int[] ids){
+    public static Object[] initiatePurchase(int quantity, int[] ids) {
         return bookCatalog.makePurchase(quantity, ids);
     }
 
+    public static String[] beginVisit() {
+        return new String[]{"", ""};
+    }
 }

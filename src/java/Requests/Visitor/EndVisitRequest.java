@@ -8,11 +8,11 @@ import Responses.LibraryResponse;
  * @author Henry Larson
  */
 public class EndVisitRequest extends VisitRequest {
-    public EndVisitRequest(int visitorID) {
+    public EndVisitRequest(String visitorID) {
         super(visitorID);
     }
 
-    public int getVisitorID() {
+    public String getVisitorID() {
         return super.getVisitorID();
     }
 

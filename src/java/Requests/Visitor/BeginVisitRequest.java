@@ -1,6 +1,8 @@
 package Requests.Visitor;
 
+import LibrarySystem.Library;
 import Responses.LibraryResponse;
+import Responses.Visitor.BeginVisitResponse;
 
 /**
  * Begins a new visit by a registered visitor.
@@ -8,16 +10,18 @@ import Responses.LibraryResponse;
  * @author Henry Larson
  */
 public class BeginVisitRequest extends VisitRequest {
-    public BeginVisitRequest(int visitorID) {
-        super(visitorID);
+    public BeginVisitRequest(String parameters) {
+        super(parameters);
     }
 
-    public int getVisitorID() {
+    @Override
+    public String getVisitorID() {
         return super.getVisitorID();
     }
 
     @Override
     public LibraryResponse execute() {
-        return null;
+        String[] dates = Library.beginVisit();
+        return new BeginVisitResponse(getVisitorID(), dates[0], dates[1]);
     }
 }

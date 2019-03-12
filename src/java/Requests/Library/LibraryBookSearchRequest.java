@@ -10,6 +10,7 @@ import Responses.LibraryResponse;
  *
  * @author Henry Larson
  */
+// TODO - Refactor for parameter parsing
 public class LibraryBookSearchRequest extends LibraryRequest {
     private String title;
     private String[] authors;
