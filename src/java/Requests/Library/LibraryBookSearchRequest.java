@@ -1,6 +1,7 @@
 package Requests.Library;
 
 import Requests.LibraryRequest;
+import Responses.Library.LibraryBookSearchResponse;
 import Responses.LibraryResponse;
 
 /**
@@ -18,16 +19,13 @@ public class LibraryBookSearchRequest extends LibraryRequest {
     private String publisher;
     private String sortOrder;
 
-    public LibraryBookSearchRequest(String title, String authors, int isbn, String publisher, String sortOrder) {
-        this.title = title;
-        this.authors = authors.split(",");
-        this.isbn = isbn;
-        this.publisher = publisher;
-        this.sortOrder = sortOrder;
+    public LibraryBookSearchRequest(String parameters) {
+
     }
 
     @Override
+    // TODO - Create method call for response data
     public LibraryResponse execute() {
-        return null;
+        return new LibraryBookSearchResponse(0, null);
     }
 }

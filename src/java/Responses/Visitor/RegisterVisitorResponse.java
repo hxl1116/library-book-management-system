@@ -1,5 +1,6 @@
 package Responses.Visitor;
 
+import LibrarySystem.Library;
 import Responses.LibraryResponse;
 
 import java.util.Date;
@@ -10,24 +11,15 @@ import java.util.Date;
  * @author Henry Larson
  */
 public class RegisterVisitorResponse extends LibraryResponse {
-    private int visitorID;
+    private String visitorID;
     private Date registrationDate;
 
-    public RegisterVisitorResponse(int visitorID, Date registrationDate) {
+    public RegisterVisitorResponse(String visitorID, Date registrationDate) {
         this.visitorID = visitorID;
         this.registrationDate = registrationDate;
     }
 
-    public int getVisitorID() {
-        return visitorID;
-    }
-
-    public Date getRegistrationDate() {
-        return registrationDate;
-    }
-
-    // TODO - create response format
     public String toString() {
-        return "";
+        return String.format("register,%s,%s", visitorID, Library.DATE_FORMAT.format(registrationDate));
     }
 }

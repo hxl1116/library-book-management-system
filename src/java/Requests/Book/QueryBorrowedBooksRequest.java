@@ -1,6 +1,7 @@
 package Requests.Book;
 
 import Requests.LibraryRequest;
+import Responses.Book.QueryBorrowedBooksResponse;
 import Responses.LibraryResponse;
 
 /**
@@ -8,20 +9,20 @@ import Responses.LibraryResponse;
  *
  * @author Henry Larson
  */
-// TODO - Refactor for parameter parsing
 public class QueryBorrowedBooksRequest extends LibraryRequest {
-    private int visitorID;
+    private String visitorID;
 
-    public QueryBorrowedBooksRequest(int visitorID) {
-        this.visitorID = visitorID;
+    public QueryBorrowedBooksRequest(String parameters) {
+        visitorID = parameters;
     }
 
-    public int getVisitorID() {
+    public String getVisitorID() {
         return visitorID;
     }
 
     @Override
+    // TODO - Create method call for response data
     public LibraryResponse execute() {
-        return null;
+        return new QueryBorrowedBooksResponse(null);
     }
 }

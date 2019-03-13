@@ -2,32 +2,26 @@ package Requests.Visitor;
 
 import Requests.LibraryRequest;
 import Responses.LibraryResponse;
+import Responses.Visitor.PayFineResponse;
 
 /**
  * Pays all or part of an outstanding fine.
  *
  * @author Henry Larson
  */
-// TODO - Refactor for parameter parsing
 public class PayFineRequest extends LibraryRequest {
-    private int visitorID;
+    private String visitorID;
     private double amount;
 
-    public PayFineRequest(int visitorID, double amount) {
-        this.visitorID = visitorID;
-        this.amount = amount;
-    }
-
-    public int getVisitorID() {
-        return visitorID;
-    }
-
-    public double getAmount() {
-        return amount;
+    public PayFineRequest(String parameters) {
+        String[] params = parameters.split(",");
+        visitorID = params[0];
+        amount = Double.parseDouble(params[1]);
     }
 
     @Override
+    // TODO - Create method call for response data
     public LibraryResponse execute() {
-        return null;
+        return new PayFineResponse(0.0);
     }
 }

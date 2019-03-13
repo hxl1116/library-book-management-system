@@ -36,36 +36,19 @@ public class LibraryStatisticsReportResponse extends LibraryResponse {
         this.finesOutstanding = finesOutstanding;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public int getNumberOfBooks() {
-        return numberOfBooks;
-    }
-
-    public int getNumberOfVisitors() {
-        return numberOfVisitors;
-    }
-
-    public double getAverageVisitLength() {
-        return averageVisitLength;
-    }
-
-    public int getNumberOfBooksPurchased() {
-        return numberOfBooksPurchased;
-    }
-
-    public double getFinesCollected() {
-        return finesCollected;
-    }
-
-    public double getFinesOutstanding() {
-        return finesOutstanding;
-    }
-
-    // TODO - create response format
     public String toString() {
-        return "";
+        return String.format("report,%s%n" +
+                "Number of Books:%d%n" +
+                "Number of Visitors: %d%n" +
+                "Average Length of Visit: %.2f%n" +
+                "Number of Books Purchased: %d%n" +
+                "Fines Collected: %.2f%n" +
+                "Fines Outstanding: %.2f%n",
+                numberOfBooks,
+                numberOfVisitors,
+                averageVisitLength,
+                numberOfBooksPurchased,
+                finesCollected,
+                finesOutstanding);
     }
 }

@@ -1,5 +1,6 @@
 package Responses.Visitor;
 
+import LibrarySystem.Library;
 import Responses.LibraryResponse;
 
 import java.text.SimpleDateFormat;
@@ -11,35 +12,21 @@ import java.util.Date;
  * @author Henry Larson
  */
 public class EndVisitResponse extends LibraryResponse {
-    // YYYY/MM/DD format
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
-    // HH:MM:SS
-    private static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm:ss");
-
-    private int visitorID;
+    private String visitorID;
     private Date visitEndTime;
     private Date visitDuration;
 
-    public EndVisitResponse(int visitorID, Date visitEndTime, Date visitDuration) {
+    public EndVisitResponse(String visitorID, Date visitEndTime, Date visitDuration) {
         this.visitorID = visitorID;
         this.visitEndTime = visitEndTime;
         this.visitDuration = visitDuration;
     }
 
-    public int getVisitorID() {
-        return visitorID;
-    }
-
-    public Date getVisitEndTime() {
-        return visitEndTime;
-    }
-
-    public Date getVisitDuration() {
-        return visitDuration;
-    }
-
-    // TODO - create response format
     public String toString() {
-        return "";
+        return String.format("depart,%s,%s,%s",
+                visitorID,
+                Library.DATE_FORMAT.format(visitEndTime),
+                Library.TIME_FORMAT.format(visitDuration)
+        );
     }
 }

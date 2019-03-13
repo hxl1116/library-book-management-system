@@ -13,14 +13,17 @@ import Responses.LibraryResponse;
  *
  * @author Henry Larson
  */
-// TODO - Refactor for parameter parsing
 public class BookPurchaseRequest extends LibraryRequest {
     private int quantity;
     private int[] ids;
 
-    public BookPurchaseRequest(int quantity, int... ids) {
-        this.quantity = quantity;
-        this.ids = ids;
+    public BookPurchaseRequest(String parameters) {
+        String[] params = parameters.split(",");
+        quantity = Integer.parseInt(params[0]);
+        ids = new int[params.length - 1];
+        for (int i = 1; i < ids.length; i++) {
+            ids[i] = Integer.parseInt(params[i + 1]);
+        }
     }
 
     @Override

@@ -4,6 +4,7 @@ import Model.Book;
 import Responses.LibraryResponse;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Searches for books owned by the library and available for borrowing by visitors. A "*" may be specified in place of
@@ -21,16 +22,16 @@ public class LibraryBookSearchResponse extends LibraryResponse {
         this.books = books;
     }
 
-    public int getNumberOfBooks() {
-        return numberOfBooks;
-    }
-
-    public HashMap<Book, Integer> getBooks() {
-        return books;
-    }
-
-    // TODO - create response format
+    @SuppressWarnings("Duplicates")
     public String toString() {
-        return "";
+        StringBuilder searchedBooks = new StringBuilder();
+        for (Map.Entry<Book, Integer> book : books.entrySet()) {
+            searchedBooks.append(book.getValue())
+                    .append(",")
+                    .append(book.getKey().libraryBookSearchFormat())
+                    .append("\n");
+        }
+
+        return String.format("search,%d,\n%s", books.size(), searchedBooks.toString());
     }
 }

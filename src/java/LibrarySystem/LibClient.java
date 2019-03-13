@@ -67,10 +67,10 @@ public class LibClient {
                         case "buy":
 //                            outputStream.writeObject(new BookPurchaseRequest(params));
                             break;
-                        case "search":
-//                            outputStream.writeObject(new QueryBorrowedBooksRequest(params));
-                            break;
                         case "borrow":
+                            outputStream.writeObject(new BorrowBookRequest(params));
+                            break;
+                        case "borrowed":
                             outputStream.writeObject(new BorrowBookRequest(params));
                             break;
                         case "datetime":
@@ -80,22 +80,22 @@ public class LibClient {
                             outputStream.writeObject(new EndVisitRequest(params));
                             break;
                         case "info":
-//                            outputStream.writeObject(new BookStoreSearchRequest(params));
-                            break;
-                        case "report":
-//                            outputStream.writeObject(new LibraryStatisticsReportRequest(params));
+//                            outputStream.writeObject(new LibraryBookSearchRequest(params));
                             break;
                         case "pay":
 //                            outputStream.writeObject(new PayFineRequest(params));
                             break;
-                        case "borrowed":
-                            outputStream.writeObject(new BorrowBookRequest(params));
-                            break;
                         case "register":
 //                            outputStream.writeObject(new RegisterVisitorRequest(params));
                             break;
+                        case "report":
+//                            outputStream.writeObject(new LibraryStatisticsReportRequest(params));
+                            break;
                         case "return":
                             outputStream.writeObject(new ReturnBookRequest(params));
+                            break;
+                        case "search":
+//                            outputStream.writeObject(new QueryBorrowedBooksRequest(params));
                             break;
                         case "logout":
                             outputStream.writeObject(new PartialRequest(command));

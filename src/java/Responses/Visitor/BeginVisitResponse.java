@@ -21,7 +21,6 @@ public class BeginVisitResponse extends LibraryResponse {
         this.visitStartTime = visitStartTime;
     }
 
-    // TODO - create response format
     public String toString() {
         return String.format("%s,%s,%s", visitorID, visitDate, visitStartTime);
     }

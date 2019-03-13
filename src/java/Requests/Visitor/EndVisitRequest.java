@@ -1,6 +1,7 @@
 package Requests.Visitor;
 
 import Responses.LibraryResponse;
+import Responses.Visitor.EndVisitResponse;
 
 /**
  * Ends a visit in progress.
@@ -17,7 +18,8 @@ public class EndVisitRequest extends VisitRequest {
     }
 
     @Override
+    // TODO - Create method call for response data
     public LibraryResponse execute() {
-        return null;
+        return new EndVisitResponse("", null, null);
     }
 }

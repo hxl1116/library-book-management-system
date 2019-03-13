@@ -25,7 +25,6 @@ public class BookPurchaseResponse extends LibraryResponse {
         quantity = (int) purchaseData[1];
     }
 
-    // TODO - Fix toString()
     public String toString() {
         StringBuilder purchasedBooks = new StringBuilder();
         for (Book book : books) {

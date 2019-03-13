@@ -18,8 +18,7 @@ public class PayFineResponse extends LibraryResponse {
         return balance;
     }
 
-    // TODO - create response format
     public String toString() {
-        return "";
+        return String.format("pay,success,%.2f", balance);
     }
 }

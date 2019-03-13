@@ -1,6 +1,7 @@
 package Requests.Library;
 
 import Requests.LibraryRequest;
+import Responses.Library.LibraryStatisticsReportResponse;
 import Responses.LibraryResponse;
 
 import java.util.List;
@@ -10,16 +11,23 @@ import java.util.List;
  *
  * @author Henry Larson
  */
-// TODO - Refactor for parameter parsing
 public class LibraryStatisticsReportRequest extends LibraryRequest {
     private int days;
 
-    public LibraryStatisticsReportRequest(int days) {
-        this.days = days;
+    public LibraryStatisticsReportRequest(String parameters) {
+        days = Integer.parseInt(parameters);
     }
 
     @Override
+    // TODO - Create method call for response data
     public LibraryResponse execute() {
-        return null;
+        return new LibraryStatisticsReportResponse(null,
+                0,
+                0,
+                0.0,
+                0,
+                0.0,
+                0.0
+        );
     }
 }

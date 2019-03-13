@@ -20,6 +20,7 @@ public class BookStoreSearchResponse extends LibraryResponse {
         this.books = books;
     }
 
+    @SuppressWarnings("Duplicates")
     public String toString() {
         StringBuilder searchedBooks = new StringBuilder();
         for (Book book : books) {

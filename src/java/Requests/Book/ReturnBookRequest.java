@@ -1,6 +1,7 @@
 package Requests.Book;
 
 import Requests.LibraryRequest;
+import Responses.Book.ReturnBookResponse;
 import Responses.LibraryResponse;
 
 /**
@@ -22,7 +23,8 @@ public class ReturnBookRequest extends LibraryRequest {
     }
 
     @Override
+    // TODO - Create method call for response data
     public LibraryResponse execute() {
-        return null;
+        return new ReturnBookResponse(0.0, 0);
     }
 }

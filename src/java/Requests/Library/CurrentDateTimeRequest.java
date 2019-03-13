@@ -1,6 +1,7 @@
 package Requests.Library;
 
 import Requests.LibraryRequest;
+import Responses.Library.CurrentTimeDateResponse;
 import Responses.LibraryResponse;
 
 /**
@@ -12,7 +13,8 @@ import Responses.LibraryResponse;
 public class CurrentDateTimeRequest extends LibraryRequest {
 
     @Override
+    // TODO - Create method call for response data
     public LibraryResponse execute() {
-        return null;
+        return new CurrentTimeDateResponse("", "");
     }
 }

@@ -99,6 +99,10 @@ public class Book implements Serializable {
                 Library.DATE_FORMAT.format(datePublished));
     }
 
+    public String libraryBookSearchFormat() {
+        return String.format("%d,\"%s\",{%s},%s,%d", isbn, title, authors, publisher, datePublished, pageCount);
+    }
+
     /**
      * format of a query
      * @return

@@ -16,15 +16,6 @@ public class CurrentTimeDateResponse extends LibraryResponse {
         this.time = time;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    // TODO - create response format
     public String toString() {
         return String.format("datetime,%s,%s", date, time);
     }
