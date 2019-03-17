@@ -8,7 +8,17 @@ public class Visitor implements Serializable {
 
 
     /**
-     * unique visitor id
+     * username the user chooses
+     */
+    private String username;
+
+    /**
+     * the users password
+     */
+    private String password;
+
+    /**
+     * unique visitor id that the library assigns to the visitor
      */
     private String id;
 
