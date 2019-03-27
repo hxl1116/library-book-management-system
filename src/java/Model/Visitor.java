@@ -6,6 +6,10 @@ import java.util.Date;
 
 public class Visitor implements Serializable {
 
+    /**
+     * administrator or regular user
+     */
+    private boolean administrator;
 
     /**
      * username the user chooses
@@ -63,13 +67,14 @@ public class Visitor implements Serializable {
      * @param booksChecked
      */
     public Visitor(String id, String firstName, String lastName,
-                   String address, String phone, int booksChecked){
+                   String address, String phone, int booksChecked, boolean administrator){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.phone = phone;
         this.booksChecked = booksChecked;
+        this.administrator = administrator;
     }
 
 
