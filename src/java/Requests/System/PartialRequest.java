@@ -26,4 +26,10 @@ public class PartialRequest extends LibraryRequest {
     public LibraryResponse execute() {
         return new PartialResponse(partial);
     }
+
+    @Override
+    // TODO - Create method call for undoing request (not undoable)
+    public LibraryRequest undo() {
+        return null;
+    }
 }

@@ -1,4 +1,17 @@
 package Requests.System;
 
-public class UndoRequest {
+import Requests.LibraryRequest;
+import Responses.LibraryResponse;
+
+public class UndoRequest extends LibraryRequest {
+    @Override
+    public LibraryResponse execute() {
+        return null;
+    }
+
+    @Override
+    // TODO - Create method call for undoing request (not undoable?)
+    public LibraryRequest undo() {
+        return null;
+    }
 }

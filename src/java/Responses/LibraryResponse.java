@@ -10,5 +10,5 @@ import java.text.SimpleDateFormat;
  * @author Henry Larson
  */
 public abstract class LibraryResponse implements Serializable {
-
+    public abstract String toString();
 }

@@ -24,4 +24,10 @@ public class PayFineRequest extends LibraryRequest {
     public LibraryResponse execute() {
         return new PayFineResponse(0.0);
     }
+
+    @Override
+    // TODO - Create method call for undoing request
+    public LibraryRequest undo() {
+        return null;
+    }
 }

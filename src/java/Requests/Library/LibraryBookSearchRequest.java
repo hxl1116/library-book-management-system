@@ -28,4 +28,10 @@ public class LibraryBookSearchRequest extends LibraryRequest {
     public LibraryResponse execute() {
         return new LibraryBookSearchResponse(0, null);
     }
+
+    @Override
+    // TODO - Create method call for undoing request (not undoable)
+    public LibraryRequest undo() {
+        return null;
+    }
 }

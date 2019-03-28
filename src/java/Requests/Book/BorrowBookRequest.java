@@ -32,4 +32,10 @@ public class BorrowBookRequest extends LibraryRequest {
         Library.loan(visitorID, ids[0]);
         return new BorrowBookResponse("");
     }
+
+    @Override
+    // TODO - Create method call for undoing request
+    public LibraryRequest undo() {
+        return null;
+    }
 }

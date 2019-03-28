@@ -12,4 +12,5 @@ import java.io.Serializable;
  */
 public abstract class LibraryRequest implements Serializable {
     public abstract LibraryResponse execute();
+    public abstract LibraryRequest undo();
 }

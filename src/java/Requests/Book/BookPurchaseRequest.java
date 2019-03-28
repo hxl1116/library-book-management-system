@@ -31,4 +31,10 @@ public class BookPurchaseRequest extends LibraryRequest {
         Object[] purchasedBooks = Library.initiatePurchase(quantity, ids);
         return new BookPurchaseResponse(purchasedBooks);
     }
+
+    @Override
+    // TODO - Create method call for undoing request
+    public LibraryRequest undo() {
+        return null;
+    }
 }

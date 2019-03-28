@@ -30,4 +30,10 @@ public class AdvanceTimeRequest extends LibraryRequest {
         Library.advanceTime(numberOfDays, numberOfHours);
         return new AdvanceTimeResponse();
     }
+
+    @Override
+    // TODO - Create method call for undoing request (not undoable)
+    public LibraryRequest undo() {
+        return null;
+    }
 }

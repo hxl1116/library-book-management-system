@@ -27,4 +27,10 @@ public class ReturnBookRequest extends LibraryRequest {
     public LibraryResponse execute() {
         return new ReturnBookResponse(0.0, 0);
     }
+
+    @Override
+    // TODO - Create method call for undoing request
+    public LibraryRequest undo() {
+        return null;
+    }
 }

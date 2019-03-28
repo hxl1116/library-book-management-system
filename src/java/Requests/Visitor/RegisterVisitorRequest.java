@@ -28,4 +28,10 @@ public class RegisterVisitorRequest extends LibraryRequest {
     public LibraryResponse execute() {
         return new RegisterVisitorResponse("", null);
     }
+
+    @Override
+    // TODO - Create method call for undoing request
+    public LibraryRequest undo() {
+        return null;
+    }
 }

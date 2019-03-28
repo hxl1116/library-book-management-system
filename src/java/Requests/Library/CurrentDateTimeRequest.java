@@ -17,4 +17,10 @@ public class CurrentDateTimeRequest extends LibraryRequest {
     public LibraryResponse execute() {
         return new CurrentTimeDateResponse("", "");
     }
+
+    @Override
+    // TODO - Create method call for undoing request (not undoable)
+    public LibraryRequest undo() {
+        return null;
+    }
 }

@@ -25,4 +25,10 @@ public class QueryBorrowedBooksRequest extends LibraryRequest {
     public LibraryResponse execute() {
         return new QueryBorrowedBooksResponse(null);
     }
+
+    @Override
+    // TODO - Create method call for undoing request
+    public LibraryRequest undo() {
+        return null;
+    }
 }
