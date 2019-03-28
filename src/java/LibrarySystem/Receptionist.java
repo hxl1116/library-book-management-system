@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Stack;
 
 /**
  * Server for the LBMS.
@@ -16,6 +17,9 @@ import java.net.Socket;
  * @author Henry Larson
  */
 public class Receptionist {
+    private static final Stack<LibraryRequest> requestHistory = new Stack<>();
+    private static LibraryRequest previousRequest;
+    private static LibraryRequest undoneRequest;
     private static StringBuilder partials = new StringBuilder();
 
     /**
@@ -38,8 +42,18 @@ public class Receptionist {
             while (socket.isConnected()) {
                 if ((input = (LibraryRequest) inputStream.readObject()) != null) {
                     requestType = RequestType.valueOf(input.getClass().getSimpleName());
-                    if (requestType == RequestType.PartialRequest) partials.append(input.toString());
-                    else processRequest(input, outputStream);
+                    if (requestType == RequestType.UndoRequest && !requestHistory.empty()) {
+                        previousRequest = requestHistory.peek();
+                        undoneRequest = requestHistory.pop();
+                        // TODO - Execute opposite of previous request
+                    } else if (requestType == RequestType.RedoRequest && undoneRequest != null) {
+                        processRequest(undoneRequest, outputStream);
+                        requestHistory.push(undoneRequest);
+                    } else if (requestType == RequestType.PartialRequest) partials.append(input.toString());
+                    else {
+                        processRequest(input, outputStream);
+                        requestHistory.push(input);
+                    }
                 }
             }
         } catch (Exception e) {

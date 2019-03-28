@@ -3,25 +3,15 @@ package LibrarySystem;
 import Requests.Book.*;
 import Requests.Library.AdvanceTimeRequest;
 import Requests.Library.CurrentDateTimeRequest;
-import Requests.Library.LibraryStatisticsReportRequest;
 import Requests.System.PartialRequest;
 import Requests.Visitor.BeginVisitRequest;
 import Requests.Visitor.EndVisitRequest;
-import Requests.Visitor.PayFineRequest;
-import Requests.Visitor.RegisterVisitorRequest;
-import Responses.Book.BorrowBookResponse;
-import Responses.Book.ReturnBookResponse;
 import Responses.LibraryResponse;
-import Responses.ResponseType;
-import Responses.System.PartialResponse;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 /**
