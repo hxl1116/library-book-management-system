@@ -5,10 +5,19 @@ import Model.Visit;
 import Model.Visitor;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class VisitorTracker implements Serializable {
+
+
+    /**
+     * sets the date and time format
+     */
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    public static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm:ss");
 
     /**
      * HashMap to hold visitors
@@ -76,7 +85,8 @@ public class VisitorTracker implements Serializable {
     public boolean logIn(HashMap visitorAccounts, String id) {
         if (visitorAccounts.containsKey(id)) {
             System.out.println("Login successful");
-            Visit visit = new Visit((Visitor)visitorAccounts.get(id), 00, 00, "date");
+            Visit visit = new Visit((Visitor)visitorAccounts.get(id), DATE_FORMAT.format(Calendar.getInstance().getTime()),
+                    null, DATE_FORMAT.format(Calendar.getInstance().getTime()));
             visitList.add(visit);
             return true;
         } else {
@@ -97,8 +107,9 @@ public class VisitorTracker implements Serializable {
      * @param visit
      * @param endDate
      */
-    public void endVisit(Visit visit, int endDate) {
-        visit.setTimeOut(endDate);
+    public void endVisit(Visit visit) {
+        String endTime = DATE_FORMAT.format(Calendar.getInstance().getTime());
+        visit.setTimeOut(endTime);
 
     }
 
@@ -107,9 +118,9 @@ public class VisitorTracker implements Serializable {
      * @param visit
      * @param startDate
      */
-    public void startVisit(Visit visit, int startDate) {
-        visit.setTimeIn(startDate);
-    }
+   // public void startVisit(Visit visit) {
+   //     visit.setTimeIn(startDate);
+    //}
 
     /**
      * Generates a random string of 10 digits for unique visitor id
