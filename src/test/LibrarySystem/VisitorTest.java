@@ -4,8 +4,8 @@ import Model.Visitor;
 
 public class VisitorTest {
 
-    Visitor visitor1 = new Visitor("Ryan11", "Ryan", "Doe",
-            "Global Village", "000000000", 0);
+    private Visitor visitor1 = new Visitor("Ryan11", "Ryan", "Doe",
+            "Global Village", "000000000", 0, false);
 
 
     //    @org.junit.Before

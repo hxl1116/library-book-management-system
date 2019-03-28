@@ -200,6 +200,7 @@ public class Library {
         }
     }
 
+    // TODO - refactor so that the data from the request is given as parameters
     public static void initiateSearchAndSort(BookStoreSearchRequest bookStoreSearchRequest) {
         BookCatalog bookCatalog = new BookCatalog(books, bookStoreSearchRequest);
         bookCatalog.executeSearchAndSortRequest();
