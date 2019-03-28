@@ -32,4 +32,24 @@ public class BookStoreSearchRequest extends LibraryRequest {
     public LibraryResponse execute() {
         return new BookStoreSearchResponse(null);
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String[] getAuthors() {
+        return authors;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public int getIsbn() {
+        return isbn;
+    }
+
+    public String getSortOrder() {
+        return sortOrder;
+    }
 }

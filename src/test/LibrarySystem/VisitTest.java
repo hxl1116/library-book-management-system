@@ -8,10 +8,10 @@ import Model.Visitor;
 public class VisitTest {
 
     Visitor visitor1 = new Visitor("Ryan11", "Ryan", "Doe",
-            "Global Village", "000000000", 0);
+            "Global Village", "000000000", 0,false, "");
 
     Visitor visitor2 = new Visitor("Ryan11", "John", "Apple",
-            "UC", "111111111", 2);
+            "UC", "111111111", 2, false, "");
 
 
     private Visit visit = new Visit(visitor1, 1, 2, "02/28/2019");
