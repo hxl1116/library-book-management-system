@@ -88,24 +88,19 @@ public class VisitorTracker implements Serializable {
             Visit visit = new Visit((Visitor)visitorAccounts.get(id), DATE_FORMAT.format(Calendar.getInstance().getTime()),
                     null, DATE_FORMAT.format(Calendar.getInstance().getTime()));
             visitList.add(visit);
+            System.out.println("Visit started");
             return true;
+
         } else {
             System.out.println("Login failed");
             return false;
         }
     }
 
-    /**
-     * logs out the vitor
-     */
-    public void logOut() {
-
-    }
 
     /**
      * ends the visitor visit
      * @param visit
-     * @param endDate
      */
     public void endVisit(Visit visit) {
         String endTime = DATE_FORMAT.format(Calendar.getInstance().getTime());
@@ -113,14 +108,6 @@ public class VisitorTracker implements Serializable {
 
     }
 
-    /**
-     * starts the visitor viit
-     * @param visit
-     * @param startDate
-     */
-   // public void startVisit(Visit visit) {
-   //     visit.setTimeIn(startDate);
-    //}
 
     /**
      * Generates a random string of 10 digits for unique visitor id
