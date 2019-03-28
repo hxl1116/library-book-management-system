@@ -45,12 +45,12 @@ public class VisitorTracker implements Serializable {
      * @param id
      */
     public void newAccount(HashMap visitorAccounts, String id, String firstName, String lastName, String address,
-                           String phone, boolean False) {
+                           String phone, boolean False, String password) {
         if (visitorAccounts.containsKey(id)) {
             System.out.println("That username is already being used");
         } else {
             //String visitorObj = id + "Visitor";
-            Visitor visitorObj = new Visitor(id, firstName, lastName, address, phone, 0, False);
+            Visitor visitorObj = new Visitor(id, firstName, lastName, address, phone, 0, False, password);
             visitorAccounts.put(id, visitorObj);
             System.out.println("You successfully created an account");
         }

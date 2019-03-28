@@ -67,7 +67,7 @@ public class Visitor implements Serializable {
      * @param booksChecked
      */
     public Visitor(String id, String firstName, String lastName,
-                   String address, String phone, int booksChecked, boolean administrator){
+                   String address, String phone, int booksChecked, boolean administrator, String password){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -75,6 +75,7 @@ public class Visitor implements Serializable {
         this.phone = phone;
         this.booksChecked = booksChecked;
         this.administrator = administrator;
+        this.password = password;
     }
 
 
