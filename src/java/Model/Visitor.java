@@ -210,4 +210,52 @@ public class Visitor implements Serializable {
         this.booksChecked++;
         this.loanList.add(new Loan(this, book, currentDate, dueDate));
     }
+
+    /**
+     * getter for admin or regular user
+     * @return
+     */
+    public boolean isAdministrator() {
+        return administrator;
+    }
+
+    /**
+     * sets admin
+     * @param administrator
+     */
+    public void setAdministrator(boolean administrator) {
+        this.administrator = administrator;
+    }
+
+    /**
+     * gets the username
+     * @return
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * sets the username
+     * @param username
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * gets the password
+     * @return
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * sets the password
+     * @param password
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
