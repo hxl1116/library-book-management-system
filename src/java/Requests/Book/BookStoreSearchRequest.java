@@ -28,26 +28,6 @@ public class BookStoreSearchRequest extends LibraryRequest {
         this.sortOrder = sortOrder;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String[] getAuthors() {
-        return authors;
-    }
-
-    public int getIsbn() {
-        return isbn;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public String getSortOrder() {
-        return sortOrder;
-    }
-
     @Override
     public LibraryResponse execute() {
         return new BookStoreSearchResponse(Library.searchAndSort(title, authors, isbn, publisher, sortOrder));

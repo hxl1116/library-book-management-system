@@ -8,4 +8,9 @@ public class ConnectRequest extends LibraryRequest {
     public LibraryResponse execute() {
         return null;
     }
+
+    @Override
+    public LibraryRequest undo() {
+        return null;
+    }
 }

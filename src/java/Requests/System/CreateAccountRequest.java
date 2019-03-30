@@ -23,4 +23,9 @@ public class CreateAccountRequest extends LibraryRequest {
     public LibraryResponse execute() {
         return null;
     }
+
+    @Override
+    public LibraryRequest undo() {
+        return null;
+    }
 }

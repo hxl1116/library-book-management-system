@@ -1,6 +1,6 @@
 package Sort;
 
-public class SortException extends Throwable {
+public class SortException extends Exception {
     private String message;
 
     public SortException(String message) {
