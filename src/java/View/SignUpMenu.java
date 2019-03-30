@@ -1,9 +1,9 @@
-package view;
+package View;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class SignupMenu extends JPanel {
+public class SignUpMenu extends JPanel {
     private BufferMenu bufferMenu;
     private JTextField firstNameField;
     private JTextField lastNameField;
@@ -21,7 +21,7 @@ public class SignupMenu extends JPanel {
     private JLabel usernameLabel = new JLabel("Username");
 
 
-    public SignupMenu(BufferMenu bufferMenu)
+    public SignUpMenu(BufferMenu bufferMenu)
     {
         super();
         this.bufferMenu = bufferMenu;

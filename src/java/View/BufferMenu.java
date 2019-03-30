@@ -1,4 +1,4 @@
-package view;
+package View;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -14,7 +14,7 @@ public class BufferMenu extends JPanel
     public static String lastPanel = "MAIN_MENU";
     private MainMenu mainMenu;
     private LoginMenu loginMenu;
-    private SignupMenu signupMenu;
+    private SignUpMenu signupMenu;
 
     public BufferMenu()
     {
@@ -53,7 +53,7 @@ public class BufferMenu extends JPanel
         loginMenu = new LoginMenu(this);
         mapPanels.put("LOGIN_MENU", loginMenu);
 
-        signupMenu = new SignupMenu(this);
+        signupMenu = new SignUpMenu(this);
         mapPanels.put("SIGNUP_MENU", signupMenu);
     }
 
