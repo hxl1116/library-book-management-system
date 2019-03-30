@@ -24,7 +24,7 @@ public class VisitorTrackerTest {
 
 //    VisitorTracker visTrack = new VisitorTracker(visitList, visitor1, visAccounts);
 
-    Visit visit = new Visit(visitor1, 10, 1, "02/28/2019");
+    Visit visit = new Visit(visitor1, "10", "11", "02/28/2019");
 
     //    @Before
     public void setUp() throws Exception {

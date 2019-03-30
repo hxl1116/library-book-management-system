@@ -1,5 +1,6 @@
 package Requests.Book;
 
+import LibrarySystem.Library;
 import Requests.LibraryRequest;
 import Responses.Book.BookStoreSearchResponse;
 import Responses.LibraryResponse;
@@ -15,11 +16,11 @@ import Responses.LibraryResponse;
 public class BookStoreSearchRequest extends LibraryRequest {
     private String title;
     private String[] authors;
-    private int isbn;
+    private long isbn;
     private String publisher;
     private String sortOrder;
 
-    public BookStoreSearchRequest(String title, String authors, int isbn, String publisher, String sortOrder) {
+    public BookStoreSearchRequest(String title, String authors, long isbn, String publisher, String sortOrder) {
         this.title = title;
         this.authors = authors.split(",");
         this.isbn = isbn;
@@ -28,28 +29,7 @@ public class BookStoreSearchRequest extends LibraryRequest {
     }
 
     @Override
-    // TODO - Create method call for response data
     public LibraryResponse execute() {
-        return new BookStoreSearchResponse(null);
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String[] getAuthors() {
-        return authors;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public int getIsbn() {
-        return isbn;
-    }
-
-    public String getSortOrder() {
-        return sortOrder;
+        return new BookStoreSearchResponse(Library.searchAndSort(title, authors, isbn, publisher, sortOrder));
     }
 }

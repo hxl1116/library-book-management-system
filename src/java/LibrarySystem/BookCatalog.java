@@ -1,26 +1,16 @@
 package LibrarySystem;
 
-//import temps.TempPurchaseRequest;
-
 import Model.Book;
 import Requests.Book.BookPurchaseRequest;
 import Requests.Book.BookStoreSearchRequest;
 import Search.*;
-import Search.Error;
-import Sort.AvailableSort;
-import Sort.PublishDateSort;
-import Sort.SortContext;
-import Sort.TitleSort;
-//import Sort.AvailableSort;
-//import temps.TempSearchRequest;
+import Sort.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
 
 /**
  * Responsible for searching and sorting through the books
@@ -163,59 +153,59 @@ public class BookCatalog implements Serializable {
 
 
     /**
-     * executes searching
+     * Executes searching
      *
      * @return
      */
-    public Object executeSearchAndSortRequest() {
+    public ArrayList<Book> executeSearchAndSortRequest(String title,
+                                                       String[] authors,
+                                                       long isbn,
+                                                       String publisher,
+                                                       String sortOrder) throws SortException {
         //Search context
         SearchContext context = new SearchContext();
         //Sort context
         SortContext sortContext = new SortContext();
 
-        ArrayList<Book> searchResults;
-        searchResults = books;
+        ArrayList<Book> searchResults = books;
 
-        if (!(bookStoreSearchRequest.getTitle().equals("*"))) {
+        if (!(title.equals("*"))) {
             context.setSearch(new TitleSearch());
-            searchResults = context.search(searchResults, bookStoreSearchRequest.getTitle());
+            searchResults = context.search(searchResults, title);
         }
 
-        if (!(bookStoreSearchRequest.getAuthors()[0].equals("*"))) {
+        if (!(authors[0].equals("*"))) {
             context.setSearch(new AuthorsSearch());
-            searchResults = context.search(searchResults, Arrays.toString(bookStoreSearchRequest.getAuthors()));
+            searchResults = context.search(searchResults, Arrays.toString(authors));
         }
-        String requestIsbn = Long.toString(bookStoreSearchRequest.getIsbn());
+        String requestIsbn = Long.toString(isbn);
         if (!(requestIsbn.equals("*"))) {
             context.setSearch(new IsbnSearch());
             searchResults = context.search(searchResults, requestIsbn);
         }
-        if (!(bookStoreSearchRequest.getPublisher().equals("*"))) {
+        if (!(publisher.equals("*"))) {
             context.setSearch(new PublishDateSearch());
-            searchResults = context.search(searchResults, bookStoreSearchRequest.getPublisher());
+            searchResults = context.search(searchResults, publisher);
         }
 
-        if (!bookStoreSearchRequest.getSortOrder().equals("title") || !bookStoreSearchRequest.getSortOrder().equals("publish-date") || !bookStoreSearchRequest.getSortOrder().equals("book-status")) {
-            //returns an error is user enters invalid Sort type
-            return Error.InvalidSortOrder;
-        } else {
-
-            switch (bookStoreSearchRequest.getSortOrder()) {
-
-                case "title":
-                    sortContext.setBookSort(new TitleSort());
-                    sortContext.makeSort(searchResults);
-                case "publish-date":
-                    sortContext.setBookSort(new PublishDateSort());
-                    sortContext.makeSort(searchResults);
-                case "book-status":
-                    sortContext.setBookSort(new AvailableSort());
-                    sortContext.makeSort(searchResults);
-
-            }
-            //returns a list of searched and sorted books (if any)
-            return searchResults;
+        switch (sortOrder) {
+            case "title":
+                sortContext.setBookSort(new TitleSort());
+                sortContext.makeSort(searchResults);
+                break;
+            case "publish-date":
+                sortContext.setBookSort(new PublishDateSort());
+                sortContext.makeSort(searchResults);
+                break;
+            case "book-status":
+                sortContext.setBookSort(new AvailableSort());
+                sortContext.makeSort(searchResults);
+                break;
+            default:
+                throw new SortException("Invalid Sort Order");
         }
+
+        return searchResults;
     }
 
     /**
