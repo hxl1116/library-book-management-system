@@ -27,10 +27,8 @@ public class BorrowBookRequest extends LibraryRequest {
     }
 
     @Override
-    // TODO - Create method call for response data
     public LibraryResponse execute() {
-        Library.loan(visitorID, ids[0]);
-        return new BorrowBookResponse("");
+        return new BorrowBookResponse(Library.loan(visitorID, ids[0]));
     }
 
     @Override

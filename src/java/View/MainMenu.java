@@ -1,66 +1,32 @@
 package View;
 
-public class MainMenu extends MenuAbstract {
-    private static MainMenu mainMenu = new MainMenu();
-    private static LoginMenu loginMenu = new LoginMenu();
+import javax.swing.*;
+import java.awt.*;
 
-    public static void main(String[] args) {
-        mainMenu = new MainMenu();
-        loginMenu = new LoginMenu();
-        mainMenu.displayMenu();
+public class MainMenu extends JPanel {
+
+    private BufferMenu bufferMenu; // Bufferpanel object
+
+    public MainMenu(BufferMenu bufferMenu) {
+        super();
+        this.bufferMenu = bufferMenu; // inharet object.
+
+        initialize();
+        layoutComponents();
+        addListeners();
     }
 
-    @Override
-    public void displayMenu() {
-        int menuSelection = -60;
 
-        while (menuSelection != 3) {
-            setMenu();
-            switch (getCurrentmenu()) {
-                case MAIN_LOGIN:
-                    showLoginMenu();
-                    switch (getSelection("Enter Menu Selection")) {
-                        case 1:
-                            setCurrentMenu(MenuAbstract.MenuOptions.LOGIN);
-                            loginMenu.displayMenu();
-                            break;
-                        case 3:
-                            menuSelection = 3;
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case MAIN:
-                    showMainMenu();
-                    break;
-                case ADMIN:
-                    showAdminMenu();
-                    break;
-                default:
-                    break;
-            }
-        }
+    public void initialize() {
+        setOpaque(false); // set panel see through
+        setLayout(new BoxLayout(this, 1));
     }
 
-    public static void showLoginMenu() {
-        System.out.println("\n1 - Login");
-        System.out.println("2 - Sign Up");
-        System.out.println("3 - Exit");
+    public void layoutComponents() {
+        add(Box.createRigidArea(new Dimension(0, 50)));
     }
 
-    public static void showMainMenu() {
-        System.out.println("\n1 - Library Book Search");
-        System.out.println("2 - Borrow Book");
-        System.out.println("3 - Find Borrowed Books");
-        System.out.println("4 - Return Book");
-        System.out.println("5 - Pay Fine");
-    }
+    public void addListeners() {
 
-    public static void showAdminMenu() {
-        System.out.println("\n1 - Book Store Search");
-        System.out.println("2 - Book Purchase");
-        System.out.println("3 - Library Statistics Report");
-        System.out.println("4 - Advance Time");
     }
 }

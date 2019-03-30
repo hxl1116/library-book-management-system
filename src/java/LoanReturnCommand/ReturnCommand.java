@@ -1,8 +1,8 @@
 package LoanReturnCommand;
 
 import LibrarySystem.Library;
-import LoanReturnCommand.Command;
 import Model.Book;
+
 import java.util.ArrayList;
 
 /**
@@ -10,14 +10,8 @@ import java.util.ArrayList;
  * library.
  */
 public class ReturnCommand implements Command {
-
-  private Library library;
-
-  public ReturnCommand(Library library) {
-    this.library = library;
-  }
-
   /**
+   * Executes the command to return a book to the Library.
    *
    * @param visitorID unique ID of visitor being loaned to or returning
    * @param bookID location of the book in the book list
@@ -25,7 +19,7 @@ public class ReturnCommand implements Command {
    */
   public void execute(String visitorID, int bookID, ArrayList<Book> books) {
     try {
-      library.returnBook(visitorID, bookID);
+      Library.returnBook(visitorID, bookID);
     } catch (Exception e) {
       e.printStackTrace();
     }

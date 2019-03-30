@@ -1,8 +1,8 @@
 package LoanReturnCommand;
 
 import LibrarySystem.Library;
-import LoanReturnCommand.Command;
 import Model.Book;
+
 import java.util.ArrayList;
 
 /**
@@ -10,6 +10,7 @@ import java.util.ArrayList;
  */
 public class LoanCommand implements Command {
   /**
+   * Executes command to loan a Book from the Library.
    *
    * @param visitorID unique ID of visitor being loaned to or returning
    * @param bookID location of the book in the book list

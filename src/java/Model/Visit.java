@@ -1,8 +1,17 @@
 package Model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class Visit implements Serializable {
+
+
+    /**
+     * sets the date and time format
+     */
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    public static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm:ss");
 
 
     /**
@@ -13,17 +22,18 @@ public class Visit implements Serializable {
     /**
      * time visitor checks in to library
      */
-    private int timeIn;
+
+    private static String timeIn;
 
     /**
      * time visitor checks out of the library
      */
-    private int timeOut;
+    private static String timeOut;
 
     /**
      * date the visitor checked into library
      */
-    private String date;
+    private static String date;
 
 
     /**
@@ -34,8 +44,8 @@ public class Visit implements Serializable {
      * @param timeOut
      * @param date
      */
-    public Visit(Visitor visitor,int timeIn,
-                  int timeOut, String date){
+    public Visit(Visitor visitor,String timeIn,
+                  String timeOut, String date){
         this.visitor = visitor;
         this.timeIn = timeIn;
         this.timeOut = timeOut;
@@ -64,7 +74,7 @@ public class Visit implements Serializable {
      * gets the time visitor checked in
      * @return
      */
-    public int getTimeIn() {
+    public String getTimeIn() {
         return timeIn;
     }
 
@@ -72,15 +82,15 @@ public class Visit implements Serializable {
      * sets the time the visitor checked in
      * @param timeIn
      */
-    public void setTimeIn(int timeIn) {
-        this.timeIn = timeIn;
+    public void setTimeIn(String timeIn) {
+        this.timeIn = TIME_FORMAT.format(Calendar.getInstance().getTime());
     }
 
     /**
      * gets the time visitor checked out
      * @return
      */
-    public int getTimeOut() {
+    public String getTimeOut() {
         return timeOut;
     }
 
@@ -88,8 +98,8 @@ public class Visit implements Serializable {
      * sets the time visitor checked out
      * @param timeOut
      */
-    public void setTimeOut(int timeOut) {
-        this.timeOut = timeOut;
+    public void setTimeOut(String timeOut) {
+        this.timeOut = TIME_FORMAT.format(Calendar.getInstance().getTime());
     }
 
     /**
@@ -105,7 +115,7 @@ public class Visit implements Serializable {
      * @param date
      */
     public void setDate(String date) {
-        this.date = date;
+        this.date = DATE_FORMAT.format(Calendar.getInstance().getTime());
     }
 
 }
