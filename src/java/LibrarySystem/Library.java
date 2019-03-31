@@ -202,7 +202,7 @@ public class Library {
 
     public static void initiateSearchAndSort(BookStoreSearchRequest bookStoreSearchRequest) {
         BookCatalog bookCatalog = new BookCatalog(books, bookStoreSearchRequest);
-        bookCatalog.executeSearchAndSortRequest();
+        bookCatalog.search(bookStoreSearchRequest);
     }
 
     public static Object[] initiatePurchase(int quantity, int[] ids) {

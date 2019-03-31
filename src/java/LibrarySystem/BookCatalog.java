@@ -27,7 +27,7 @@ import java.util.List;
  *
  * @author Jimmy Dugan
  */
-public class BookCatalog implements Serializable {
+public class BookCatalog implements Serializable, SearchProxy {
 
     /**
      * HashMap of available books
@@ -162,61 +162,7 @@ public class BookCatalog implements Serializable {
     }
 
 
-    /**
-     * executes searching
-     *
-     * @return
-     */
-    public Object executeSearchAndSortRequest() {
-        //Search context
-        SearchContext context = new SearchContext();
-        //Sort context
-        SortContext sortContext = new SortContext();
 
-        ArrayList<Book> searchResults;
-        searchResults = books;
-
-        if (!(bookStoreSearchRequest.getTitle().equals("*"))) {
-            context.setSearch(new TitleSearch());
-            searchResults = context.search(searchResults, bookStoreSearchRequest.getTitle());
-        }
-
-        if (!(bookStoreSearchRequest.getAuthors()[0].equals("*"))) {
-            context.setSearch(new AuthorsSearch());
-            searchResults = context.search(searchResults, Arrays.toString(bookStoreSearchRequest.getAuthors()));
-        }
-        String requestIsbn = Long.toString(bookStoreSearchRequest.getIsbn());
-        if (!(requestIsbn.equals("*"))) {
-            context.setSearch(new IsbnSearch());
-            searchResults = context.search(searchResults, requestIsbn);
-        }
-        if (!(bookStoreSearchRequest.getPublisher().equals("*"))) {
-            context.setSearch(new PublishDateSearch());
-            searchResults = context.search(searchResults, bookStoreSearchRequest.getPublisher());
-        }
-
-        if (!bookStoreSearchRequest.getSortOrder().equals("title") || !bookStoreSearchRequest.getSortOrder().equals("publish-date") || !bookStoreSearchRequest.getSortOrder().equals("book-status")) {
-            //returns an error is user enters invalid Sort type
-            return Error.InvalidSortOrder;
-        } else {
-
-            switch (bookStoreSearchRequest.getSortOrder()) {
-
-                case "title":
-                    sortContext.setBookSort(new TitleSort());
-                    sortContext.makeSort(searchResults);
-                case "publish-date":
-                    sortContext.setBookSort(new PublishDateSort());
-                    sortContext.makeSort(searchResults);
-                case "book-status":
-                    sortContext.setBookSort(new AvailableSort());
-                    sortContext.makeSort(searchResults);
-
-            }
-            //returns a list of searched and sorted books (if any)
-            return searchResults;
-        }
-    }
 
     /**
      * Makes a book purchase
@@ -241,5 +187,19 @@ public class BookCatalog implements Serializable {
         purchaseData[1] = quantity;
 
         return purchaseData;
+    }
+
+    @Override
+    public ArrayList<Book> search(BookStoreSearchRequest bookStoreSearchRequest) {
+
+        SearchStateContext searchStateContext = new SearchStateContext();
+
+        if(bookStoreSearchRequest.getSearchType().equals("FILE")){
+            searchStateContext.setSearchState(new FileState());
+        }else{
+            searchStateContext.setSearchState(new APIState());
+        }
+        return searchStateContext.searchWithState(books,bookStoreSearchRequest);
+
     }
 }

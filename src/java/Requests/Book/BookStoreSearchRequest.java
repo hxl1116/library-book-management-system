@@ -18,18 +18,43 @@ public class BookStoreSearchRequest extends LibraryRequest {
     private int isbn;
     private String publisher;
     private String sortOrder;
+    private String searchType;
 
-    public BookStoreSearchRequest(String title, String authors, int isbn, String publisher, String sortOrder) {
+    public BookStoreSearchRequest(String title, String authors, int isbn, String publisher, String sortOrder, String searchType) {
         this.title = title;
         this.authors = authors.split(",");
         this.isbn = isbn;
         this.publisher = publisher;
         this.sortOrder = sortOrder;
+        this.searchType = searchType;
     }
 
     @Override
     // TODO - Create method call for response data
     public LibraryResponse execute() {
         return new BookStoreSearchResponse(null);
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String[] getAuthors() {
+        return authors;
+    }
+
+    public int getIsbn() {
+        return isbn;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public String getSortOrder() {
+        return sortOrder;
+    }
+    public String getSearchType(){
+        return searchType;
     }
 }
