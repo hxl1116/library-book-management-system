@@ -1,5 +1,6 @@
 package Requests.Visitor;
 
+import Requests.LibraryRequest;
 import Responses.LibraryResponse;
 import Responses.Visitor.EndVisitResponse;
 
@@ -21,5 +22,11 @@ public class EndVisitRequest extends VisitRequest {
     // TODO - Create method call for response data
     public LibraryResponse execute() {
         return new EndVisitResponse("", null, null);
+    }
+
+    @Override
+    // TODO - Create method call for undoing request (not undoable)
+    public LibraryRequest undo() {
+        return null;
     }
 }

@@ -1,6 +1,7 @@
 package Requests.Visitor;
 
 import LibrarySystem.Library;
+import Requests.LibraryRequest;
 import Responses.LibraryResponse;
 import Responses.Visitor.BeginVisitResponse;
 
@@ -23,5 +24,11 @@ public class BeginVisitRequest extends VisitRequest {
     public LibraryResponse execute() {
         String[] dates = Library.beginVisit();
         return new BeginVisitResponse(getVisitorID(), dates[0], dates[1]);
+    }
+
+    @Override
+    // TODO - Create method call for undoing request (not undoable)
+    public LibraryRequest undo() {
+        return null;
     }
 }

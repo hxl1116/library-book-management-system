@@ -1,5 +1,6 @@
 package Requests.Book;
 
+import LibrarySystem.Library;
 import Requests.LibraryRequest;
 import Responses.Book.BookStoreSearchResponse;
 import Responses.LibraryResponse;
@@ -15,12 +16,14 @@ import Responses.LibraryResponse;
 public class BookStoreSearchRequest extends LibraryRequest {
     private String title;
     private String[] authors;
-    private int isbn;
+    private long isbn;
     private String publisher;
     private String sortOrder;
     private String searchType;
 
+
     public BookStoreSearchRequest(String title, String authors, int isbn, String publisher, String sortOrder, String searchType) {
+
         this.title = title;
         this.authors = authors.split(",");
         this.isbn = isbn;
@@ -30,9 +33,14 @@ public class BookStoreSearchRequest extends LibraryRequest {
     }
 
     @Override
-    // TODO - Create method call for response data
     public LibraryResponse execute() {
-        return new BookStoreSearchResponse(null);
+        return new BookStoreSearchResponse(Library.searchAndSort(title, authors, isbn, publisher, sortOrder));
+    }
+
+    @Override
+    // TODO - Create method call for undoing request (not undoable)
+    public LibraryRequest undo() {
+        return null;
     }
 
     public String getTitle() {

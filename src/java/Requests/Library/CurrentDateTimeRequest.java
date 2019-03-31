@@ -1,5 +1,6 @@
 package Requests.Library;
 
+import LibrarySystem.Library;
 import Requests.LibraryRequest;
 import Responses.Library.CurrentTimeDateResponse;
 import Responses.LibraryResponse;
@@ -13,8 +14,14 @@ import Responses.LibraryResponse;
 public class CurrentDateTimeRequest extends LibraryRequest {
 
     @Override
-    // TODO - Create method call for response data
     public LibraryResponse execute() {
-        return new CurrentTimeDateResponse("", "");
+        String[] date = Library.getCurrentDate();
+        return new CurrentTimeDateResponse(date[0], date[1]);
+    }
+
+    @Override
+    // TODO - Create method call for undoing request (not undoable)
+    public LibraryRequest undo() {
+        return null;
     }
 }

@@ -1,26 +1,16 @@
 package LibrarySystem;
 
-//import temps.TempPurchaseRequest;
-
 import Model.Book;
 import Requests.Book.BookPurchaseRequest;
 import Requests.Book.BookStoreSearchRequest;
 import Search.*;
-import Search.Error;
-import Sort.AvailableSort;
-import Sort.PublishDateSort;
-import Sort.SortContext;
-import Sort.TitleSort;
-//import Sort.AvailableSort;
-//import temps.TempSearchRequest;
+import Sort.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
 
 /**
  * Responsible for searching and sorting through the books
@@ -160,7 +150,6 @@ public class BookCatalog implements Serializable, SearchProxy {
         return unavailable;
 
     }
-
 
 
 

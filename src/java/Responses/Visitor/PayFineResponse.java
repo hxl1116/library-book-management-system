@@ -14,10 +14,6 @@ public class PayFineResponse extends LibraryResponse {
         this.balance = balance;
     }
 
-    public double getBalance() {
-        return balance;
-    }
-
     public String toString() {
         return String.format("pay,success,%.2f", balance);
     }

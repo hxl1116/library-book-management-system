@@ -6,6 +6,7 @@ import Model.Loan;
 import Model.Visitor;
 import Requests.Book.BookPurchaseRequest;
 import Requests.Book.BookStoreSearchRequest;
+import Sort.SortException;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -131,7 +132,7 @@ public class Library {
     }
 
     public static String[] getCurrentDate() {
-        return new String[]{DATE_FORMAT.format(currentDate), TIME_FORMAT.format(currentDate)};
+        return new String[]{currentDate, currentTime};
     }
 
     /**
@@ -203,6 +204,7 @@ public class Library {
     public static void initiateSearchAndSort(BookStoreSearchRequest bookStoreSearchRequest) {
         BookCatalog bookCatalog = new BookCatalog(books, bookStoreSearchRequest);
         bookCatalog.search(bookStoreSearchRequest);
+
     }
 
     public static Object[] initiatePurchase(int quantity, int[] ids) {

@@ -1,35 +1,60 @@
 package View;
 
-public class LoginMenu extends MenuAbstract {
+import javax.swing.*;
+import java.awt.*;
 
-    @Override
-    public void displayMenu() {
-        setMenu();
+public class LoginMenu extends JPanel
+{
+    private BufferMenu bufferMenu;
+    private JTextField usernameField;
+    private JButton signinButton;
+    private JButton signupButton;
 
-        switch (getCurrentmenu()) {
-            case LOGIN:
-                showLoginMenu();
 
-                System.out.println("");
+    public LoginMenu(BufferMenu bufferMenu)
+    {
+        super();
+        this.bufferMenu = bufferMenu;
 
-                break;
-            case SIGNUP:
-                signUpMenu();
-                break;
-            default:
-                displayMenu();
-                break;
-        }
+        initialize();
+        layoutComponents();
+        addListeners();
+    }
+
+    public void initialize()
+    {
+        setLayout(new BoxLayout(this,1));
+
+        usernameField = new JTextField();
+        usernameField.setPreferredSize(new Dimension(200,20));
+        usernameField.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        signinButton = new JButton("Sign In");
+        signinButton.setPreferredSize(new Dimension(100,20));
+        signinButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        signupButton = new JButton("Sign Up");
+        signupButton.setPreferredSize(new Dimension(200,20));
+        signupButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+    }
+
+    public void layoutComponents()
+    {
+        add(Box.createRigidArea(new Dimension(0,50)));
+        add(usernameField);
+        add(Box.createRigidArea(new Dimension(0,10)));
+        add(signinButton);
+        add(Box.createRigidArea(new Dimension(0,50)));
+        add(signupButton);
 
     }
 
-    public static void showLoginMenu() {
-        System.err.println("\tPress 0 to exit\n");
-    }
+    public void addListeners()
+    {
+        // add action listener to button
+        signinButton.addActionListener(arg0 -> bufferMenu.showPanel("MAIN_MENU"));
 
-    public static void signUpMenu() {
-        System.err.print("\tPress 0 to exit\n");
-        System.out.print("Enter a Username: ");
-
+        signupButton.addActionListener(e -> bufferMenu.showPanel("SIGNUP_MENU"));
     }
 }
+

@@ -1,27 +1,19 @@
 package LibrarySystem;
 
-import Requests.Book.*;
+import Requests.Book.BookPurchaseRequest;
+import Requests.Book.BorrowBookRequest;
+import Requests.Book.ReturnBookRequest;
 import Requests.Library.AdvanceTimeRequest;
 import Requests.Library.CurrentDateTimeRequest;
-import Requests.Library.LibraryStatisticsReportRequest;
 import Requests.System.PartialRequest;
 import Requests.Visitor.BeginVisitRequest;
 import Requests.Visitor.EndVisitRequest;
-import Requests.Visitor.PayFineRequest;
-import Requests.Visitor.RegisterVisitorRequest;
-import Responses.Book.BorrowBookResponse;
-import Responses.Book.ReturnBookResponse;
 import Responses.LibraryResponse;
-import Responses.ResponseType;
-import Responses.System.PartialResponse;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -54,55 +46,57 @@ public class LibClient {
                 output = key.nextLine();
 
                 if (output.contains(";")) {
-                    command = output.substring(0, output.indexOf(","));
-                    params = output.substring(output.indexOf(","), output.length() - 1);
+                    if (output.contains(",")) {
+                        command = output.substring(0, output.indexOf(","));
+                        params = output.substring(output.indexOf(","), output.length() - 1);
 
-                    switch (command) {
-                        case "advance":
-                            outputStream.writeObject(new AdvanceTimeRequest(params));
-                            break;
-                        case "arrive":
-                            outputStream.writeObject(new BeginVisitRequest(params));
-                            break;
-                        case "buy":
-//                            outputStream.writeObject(new BookPurchaseRequest(params));
-                            break;
-                        case "borrow":
-                            outputStream.writeObject(new BorrowBookRequest(params));
-                            break;
-                        case "borrowed":
-                            outputStream.writeObject(new BorrowBookRequest(params));
-                            break;
-                        case "datetime":
-                            outputStream.writeObject(new CurrentDateTimeRequest());
-                            break;
-                        case "depart":
-                            outputStream.writeObject(new EndVisitRequest(params));
-                            break;
-                        case "info":
+                        switch (command) {
+                            case "advance":
+                                outputStream.writeObject(new AdvanceTimeRequest(params));
+                                break;
+                            case "arrive":
+                                outputStream.writeObject(new BeginVisitRequest(params));
+                                break;
+                            case "buy":
+                            outputStream.writeObject(new BookPurchaseRequest(params));
+                                break;
+                            case "borrow":
+                                outputStream.writeObject(new BorrowBookRequest(params));
+                                break;
+                            case "borrowed":
+//                                outputStream.writeObject(new QueryBorrowedBooksRequest(params));
+                                break;
+                            case "depart":
+                                outputStream.writeObject(new EndVisitRequest(params));
+                                break;
+                            case "info":
 //                            outputStream.writeObject(new LibraryBookSearchRequest(params));
-                            break;
-                        case "pay":
+                                break;
+                            case "pay":
 //                            outputStream.writeObject(new PayFineRequest(params));
-                            break;
-                        case "register":
+                                break;
+                            case "register":
 //                            outputStream.writeObject(new RegisterVisitorRequest(params));
-                            break;
-                        case "report":
+                                break;
+                            case "report":
 //                            outputStream.writeObject(new LibraryStatisticsReportRequest(params));
-                            break;
-                        case "return":
-                            outputStream.writeObject(new ReturnBookRequest(params));
-                            break;
-                        case "search":
+                                break;
+                            case "return":
+                                outputStream.writeObject(new ReturnBookRequest(params));
+                                break;
+                            case "search":
 //                            outputStream.writeObject(new QueryBorrowedBooksRequest(params));
-                            break;
-                        case "logout":
-                            outputStream.writeObject(new PartialRequest(command));
-                            break;
-                        default:
-                            invalidRequest(output);
-                            break;
+                                break;
+                            case "logout":
+                                outputStream.writeObject(new PartialRequest(command));
+                                break;
+                            default:
+                                invalidRequest(output);
+                                break;
+                        }
+                    } else {
+                        if (output.equals("datetime;")) outputStream.writeObject(new CurrentDateTimeRequest());
+                        else invalidRequest(output);
                     }
                 } else {
                     outputStream.writeObject(new PartialRequest(output));

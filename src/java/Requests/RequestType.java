@@ -19,5 +19,7 @@ public enum RequestType {
     EndVisitRequest,
     PayFineRequest,
     RegisterVisitorRequest,
-    PartialRequest;
+    PartialRequest,
+    UndoRequest,
+    RedoRequest;
 }

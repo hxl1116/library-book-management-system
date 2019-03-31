@@ -2,12 +2,14 @@ package LibrarySystem;
 
 import Requests.LibraryRequest;
 import Requests.RequestType;
+import Responses.LibraryResponse;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Stack;
 
 /**
  * Server for the LBMS.
@@ -16,6 +18,9 @@ import java.net.Socket;
  * @author Henry Larson
  */
 public class Receptionist {
+    private static final Stack<LibraryRequest> requestHistory = new Stack<>();
+    private static LibraryRequest previousRequest;
+    private static LibraryRequest undoneRequest;
     private static StringBuilder partials = new StringBuilder();
 
     /**
@@ -38,8 +43,14 @@ public class Receptionist {
             while (socket.isConnected()) {
                 if ((input = (LibraryRequest) inputStream.readObject()) != null) {
                     requestType = RequestType.valueOf(input.getClass().getSimpleName());
-                    if (requestType == RequestType.PartialRequest) partials.append(input.toString());
-                    else processRequest(input, outputStream);
+                    if (requestType == RequestType.UndoRequest && !requestHistory.empty())
+                        undoRequest();
+                    else if (requestType == RequestType.RedoRequest && undoneRequest != null)
+                        outputStream.writeObject(redoRequest());
+                    else if (requestType == RequestType.PartialRequest)
+                        partials.append(input.toString());
+                    else
+                        outputStream.writeObject(processRequest(input));
                 }
             }
         } catch (Exception e) {
@@ -47,8 +58,19 @@ public class Receptionist {
         }
     }
 
-    private static void processRequest(LibraryRequest request, ObjectOutputStream outputStream) throws IOException {
-        System.out.println(request.toString());
-        outputStream.writeObject(request.execute());
+    private static LibraryResponse processRequest(LibraryRequest request) throws IOException {
+        requestHistory.push(request);
+        return request.execute();
+    }
+
+    private static void undoRequest() {
+        previousRequest = requestHistory.peek();
+        undoneRequest = requestHistory.pop();
+        previousRequest.undo();
+    }
+
+    private static LibraryResponse redoRequest() throws IOException {
+        requestHistory.push(undoneRequest);
+        return processRequest(undoneRequest);
     }
 }
