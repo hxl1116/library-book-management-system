@@ -2,6 +2,10 @@ package LibrarySystem;
 
 import Model.Book;
 import Requests.Book.BookStoreSearchRequest;
+import Sort.AvailableSort;
+import Sort.PublishDateSort;
+import Sort.SortContext;
+import Sort.TitleSort;
 import org.json.simple.parser.ParseException;
 
 import java.util.ArrayList;
@@ -27,6 +31,23 @@ public class APISearch implements SearchProxy{
             googleBooks.addAll(google.booksFromAPI(retrieveJson(url)));
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+
+        SortContext sortContext = new SortContext();
+
+
+        switch (bookStoreSearchRequest.getSortOrder()) {
+
+            case "title":
+                sortContext.setBookSort(new TitleSort());
+                sortContext.makeSort(googleBooks);
+            case "publish-date":
+                sortContext.setBookSort(new PublishDateSort());
+                sortContext.makeSort(googleBooks);
+            case "book-status":
+                sortContext.setBookSort(new AvailableSort());
+                sortContext.makeSort(googleBooks);
+
         }
 
         return googleBooks;
