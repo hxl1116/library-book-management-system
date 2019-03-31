@@ -56,7 +56,7 @@ public class Visitor implements Serializable {
      */
     private ArrayList<Loan> loanList;
 
-    /*
+    /**
      * Constructor to create visitor object
      *
      * @param id

@@ -201,20 +201,10 @@ public class Library {
         }
     }
 
-    public static ArrayList<Book> searchAndSort(String title,
-                                                        String[] authors,
-                                                        long isbn,
-                                                        String publisher,
-                                                        String sortOrder) {
-        ArrayList<Book> queriedBooks = new ArrayList<>();
+    public static void initiateSearchAndSort(BookStoreSearchRequest bookStoreSearchRequest) {
+        BookCatalog bookCatalog = new BookCatalog(books, bookStoreSearchRequest);
+        bookCatalog.search(bookStoreSearchRequest);
 
-        try {
-            queriedBooks = bookCatalog.executeSearchAndSortRequest(title, authors, isbn, publisher, sortOrder);
-        } catch (SortException e) {
-            e.printStackTrace();
-        }
-
-        return queriedBooks;
     }
 
     public static Object[] initiatePurchase(int quantity, int[] ids) {

@@ -19,13 +19,17 @@ public class BookStoreSearchRequest extends LibraryRequest {
     private long isbn;
     private String publisher;
     private String sortOrder;
+    private String searchType;
 
-    public BookStoreSearchRequest(String title, String authors, long isbn, String publisher, String sortOrder) {
+
+    public BookStoreSearchRequest(String title, String authors, int isbn, String publisher, String sortOrder, String searchType) {
+
         this.title = title;
         this.authors = authors.split(",");
         this.isbn = isbn;
         this.publisher = publisher;
         this.sortOrder = sortOrder;
+        this.searchType = searchType;
     }
 
     @Override
@@ -37,5 +41,28 @@ public class BookStoreSearchRequest extends LibraryRequest {
     // TODO - Create method call for undoing request (not undoable)
     public LibraryRequest undo() {
         return null;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String[] getAuthors() {
+        return authors;
+    }
+
+    public int getIsbn() {
+        return isbn;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public String getSortOrder() {
+        return sortOrder;
+    }
+    public String getSearchType(){
+        return searchType;
     }
 }
